@@ -1,15 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+/** @type {import('tailwindcss').Config} */
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-    
-    </>
+    <div className="">
+      <div className="desktop">
+        
+      </div>
+      <div className="mobile">
+
+      </div>
+    </div>
   )
 }
 
