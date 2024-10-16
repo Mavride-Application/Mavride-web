@@ -1,17 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 
+import EnterPhoneNumber from "./components/EnterPhoneNumber";
+
 function App() {
-
   return (
-    <div className="">
-      <div className="desktop">
-        
-      </div>
-      <div className="mobile">
-
-      </div>
+    <div>
+      <EnterPhoneNumber />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -2,11 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-html *,
-html *::before,
-html *::after {
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-  margin: 0;
-  padding: 0;
+@layer base {
+  body {
+    font-family: Outfit;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+}
+
+@layer utilities {
+  .padding-inline {
+    @apply px-5;
+  }
+}
+
+/* Swiper Styles for Onboarding Layoyt */
+#onboarding-layout .swiper {
+  @apply pb-[2.94rem];
+}
+
+#onboarding-layout .swiper-pagination {
+  @apply bottom-0;
+}
+
+#onboarding-layout .swiper-pagination-bullet {
+  @apply bg-white;
+}
+
+#onboarding-layout .swiper-pagination-bullet-active {
+  @apply w-6 rounded-[0.625rem] transition-all duration-300;
 }
