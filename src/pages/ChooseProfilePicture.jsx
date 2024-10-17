@@ -1,4 +1,4 @@
-import OnboardingLayoutLite from "./OnboardingLayoutLite";
+import OnboardingLayoutLite from "../layouts/OnboardingLayoutLite";
 import camera from "../assets/camera.svg";
 import { useEffect, useState } from "react";
 
