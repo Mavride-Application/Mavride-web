@@ -1,11 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 
-import EnterPhoneNumber from "./components/EnterPhoneNumber";
+import ChooseProfilePicture from "./pages/ChooseProfilePicture";
+import EnterPhoneNumber from "./pages/EnterPhoneNumber";
+import PersonalInfo from "./pages/PersonalInfo";
 
 function App() {
   return (
     <div>
-      <EnterPhoneNumber />
+      {/* <EnterPhoneNumber /> */}
+      {/* <ChooseProfilePicture /> */}
+      <PersonalInfo />
     </div>
   );
 }
