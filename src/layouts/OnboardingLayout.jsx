@@ -56,7 +56,10 @@ const OnboardingLayout = ({ children }) => {
 
         {/* Right Column */}
         <div className="flex flex-col">
+          {/* Child Component */}
           {children}
+
+          {/* Small Text Below */}
           <div className="mx-auto mb-[0.81rem] mt-auto hidden max-w-fit text-center text-xs md:block">
             <p className="text-[#9C9AA5]">
               By signing up to create an account I accept Company’s

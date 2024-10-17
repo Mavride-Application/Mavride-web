@@ -18,6 +18,7 @@ export default {
         "mavride-deep-blue": "#26203B",
       },
       backgroundImage: {
+        profile: "url(/src/assets/profile.svg)",
         signupBg: "url(/src/assets/bg_desktop.png)",
       },
     },
