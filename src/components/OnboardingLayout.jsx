@@ -20,7 +20,7 @@ const OnboardingLayout = ({ children }) => {
     <section id="onboarding-layout" className="padding-inline py-8 sm:~px-5/8">
       <div className="w-full md:grid md:grid-cols-2">
         {/* Left Column */}
-        <div className="hidden min-h-[50rem] w-full flex-col justify-between rounded-3xl bg-signupBg bg-cover bg-no-repeat py-[6.75rem] md:flex">
+        <div className="hidden h-[60rem] w-full flex-col justify-between rounded-3xl bg-signupBg bg-cover bg-no-repeat py-[6.75rem] md:flex">
           {/* Image Logo */}
           <div className="mx-auto max-w-[7.38rem]">
             <img
@@ -56,10 +56,7 @@ const OnboardingLayout = ({ children }) => {
 
         {/* Right Column */}
         <div className="flex flex-col">
-          {/* Child Component */}
           {children}
-
-          {/* Small Text Below */}
           <div className="mx-auto mb-[0.81rem] mt-auto hidden max-w-fit text-center text-xs md:block">
             <p className="text-[#9C9AA5]">
               By signing up to create an account I accept Company’s

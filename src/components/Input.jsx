@@ -23,7 +23,7 @@ const Input = ({
       </label>
       <input
         id={id}
-        className={`block w-full rounded-[0.625rem] border-mavride-blue bg-[#EFEFEF] py-4 pe-5 ps-[1.56rem] text-base outline-none transition duration-300 focus:border ${errors?.[name]?.message ? "border-[#F32121]" : ""} ${className}`}
+        className={`block w-full rounded-[0.625rem] bg-[#EFEFEF] py-4 ps-[1.56rem] text-base outline-mavride-blue ${className}`}
         type={type}
         placeholder={placeholder}
         {...register(name, {
