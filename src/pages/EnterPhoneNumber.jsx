@@ -1,6 +1,6 @@
 import { FormProvider, useForm } from "react-hook-form";
-import OnboardingLayout from "./OnboardingLayout";
-import Input from "./Input";
+import OnboardingLayout from "../Layout/OnboardingLayout";
+import Input from "../components/Input";
 
 const EnterPhoneNumber = () => {
   const methods = useForm();
@@ -38,7 +38,7 @@ const EnterPhoneNumber = () => {
               //     value.toString().startsWith("+") ||
               //     "Phone number must include area code",
               // }}
-              className={`md:placeholder:invisible`}
+              // className={`md:placeholder:invisible`}
             />
 
             <button className="w-full rounded-[0.625rem] bg-mavride-blue py-4 font-semibold text-white ~text-base/lg ~mt-[3.12rem]/[6.63rem]">

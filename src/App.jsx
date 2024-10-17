@@ -1,11 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 
-import EnterPhoneNumber from "./components/EnterPhoneNumber";
+import EnterPhoneNumber from "./pages/EnterPhoneNumber";
+import PhoneOtp from "./pages/PhoneOtp";
 
 function App() {
   return (
     <div>
-      <EnterPhoneNumber />
+      {/* <EnterPhoneNumber /> */}
+      <PhoneOtp/>
     </div>
   );
 }
