@@ -1,5 +1,5 @@
 import React from 'react'
-import OnboardingLayout from '../Layout/OnboardingLayout'
+import OnboardingLayout from '../layouts/OnboardingLayout'
 import { useForm } from 'react-hook-form'
 
 const PhoneOtp = () => {
