@@ -18,7 +18,7 @@ const leftSlides = [
 const OnboardingLayout = ({ children }) => {
   return (
     <section id="onboarding-layout" className="padding-inline py-8 sm:~px-5/8">
-      <div className="w-full md:grid md:grid-cols-2">
+      <div className="w-full gap-5 md:grid md:grid-cols-2">
         {/* Left Column */}
         <div className="hidden min-h-[50rem] w-full flex-col justify-between rounded-3xl bg-signupBg bg-cover bg-no-repeat py-[6.75rem] md:flex">
           {/* Image Logo */}
@@ -36,7 +36,9 @@ const OnboardingLayout = ({ children }) => {
               modules={[Pagination, Autoplay]}
               pagination={{ clickable: true }}
               autoplay={{ delay: 3000 }}
+              speed={1000}
               centeredSlides={true}
+              loop={true}
               spaceBetween={160}
               className="max-w-[90%]"
             >

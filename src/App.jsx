@@ -2,14 +2,14 @@
 
 import ChooseProfilePicture from "./pages/ChooseProfilePicture";
 import EnterPhoneNumber from "./pages/EnterPhoneNumber";
-import PersonalInfo from "./pages/PersonalInfo";
+import PersonalInfoSteps from "./pages/PersonalInfoSteps";
 
 function App() {
   return (
     <div>
       {/* <EnterPhoneNumber /> */}
       {/* <ChooseProfilePicture /> */}
-      <PersonalInfo />
+      <PersonalInfoSteps />
     </div>
   );
 }

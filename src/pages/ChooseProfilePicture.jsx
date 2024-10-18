@@ -38,7 +38,7 @@ const ChooseProfilePicture = () => {
         <form onSubmit={handleSubmit} className="~mt-8/10">
           <label
             htmlFor="profile-pic"
-            className="bg-profile relative mx-auto block cursor-pointer rounded-full bg-[#E7E9FB] bg-center bg-no-repeat ~size-32/[9.5rem]"
+            className="relative mx-auto block cursor-pointer rounded-full bg-[#E7E9FB] bg-profile bg-center bg-no-repeat ~size-32/[9.5rem]"
           >
             {/* Profile Image Toggle Icon */}
             <label
@@ -77,9 +77,11 @@ const ChooseProfilePicture = () => {
             </p>
           </div>
 
+          {/* Form Submit Button */}
           <button
+          type="submit"
             disabled={disabled}
-            className="w-full rounded-[0.625rem] bg-mavride-blue py-4 font-semibold text-white ~text-base/lg ~mt-32/20 disabled:bg-[#D3D3D3]"
+            className="w-full rounded-[0.625rem] bg-mavride-blue py-4 font-semibold text-white ~text-base/lg ~mt-20/32 disabled:bg-[#D3D3D3]"
           >
             Proceed
           </button>

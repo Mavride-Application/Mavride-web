@@ -8,6 +8,7 @@ const Input = ({
   placeholder,
   required,
   errorMsg,
+  pattern,
   validations,
   className,
 }) => {
@@ -18,8 +19,8 @@ const Input = ({
 
   return (
     <div>
-      <label className="mb-2 hidden md:block" htmlFor={id}>
-        {label} {required && <span className="text-[#E45270]">*</span>}
+      <label className="mb-2" htmlFor={id}>
+        {label} {required && label && <span className="text-[#E45270]">*</span>}
       </label>
       <input
         id={id}
@@ -29,8 +30,9 @@ const Input = ({
         {...register(name, {
           required: {
             value: required,
-            message: errorMsg,
+            message: errorMsg || "This field is required",
           },
+          pattern: pattern || false,
           validate: validations,
         })}
       />
