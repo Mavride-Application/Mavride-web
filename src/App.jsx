@@ -26,11 +26,6 @@ function App() {
           </Routes>
         </ScrollToTop>
       </Router>
-      {/*  */}
-      {/* <ChooseProfilePicture /> */}
-      {/* <PersonalInfoSteps /> */}
-      {/* <PhoneOtp/> */}
-      {/*  */}
     </div>
   );
 }
