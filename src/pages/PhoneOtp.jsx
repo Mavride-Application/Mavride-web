@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import OnboardingLayout from '../layouts/OnboardingLayout'
 import { useForm } from 'react-hook-form'
+import { NavLink } from 'react-router-dom'
 
 const PhoneOtp = () => {
   const [otpSent, setOtpSent] = useState(true)
@@ -97,14 +98,17 @@ const PhoneOtp = () => {
             </div>
 
             {otpSent && <p className='font-medium font-outfit'>Resend code in <span className='color-mav text-mavride-blue font-medium'>30sec</span></p>}
+            
+            <NavLink to='/choosephoto' className="w-[100%] text-center">
 
-            <button
-              type="submit"
-              className={`w-[70%] p-3 py-4 rounded-[.5em] bg-button-gray text-xl ${isValid ? 'bg-mavride-blue text-white' : 'bg-button-gray text-gray-500'}`}
-              disabled={!isValid}
-            >
-              Verify
-            </button>
+              <button
+                type="submit"
+                className={`w-[70%] p-3 py-4 rounded-[.5em] bg-button-gray text-xl ${isValid ? 'bg-mavride-blue text-white' : 'bg-button-gray text-gray-500'}`}
+                disabled={!isValid}
+              >
+                Verify
+              </button>
+            </NavLink>
           </form>
         </div>
       </div>

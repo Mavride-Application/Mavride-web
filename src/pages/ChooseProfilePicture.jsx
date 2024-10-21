@@ -1,6 +1,7 @@
 import OnboardingLayoutLite from "../layouts/OnboardingLayoutLite";
 import camera from "../assets/camera.svg";
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const ChooseProfilePicture = () => {
   const [image, setImage] = useState({
@@ -78,13 +79,15 @@ const ChooseProfilePicture = () => {
           </div>
 
           {/* Form Submit Button */}
-          <button
-          type="submit"
-            disabled={disabled}
-            className="w-full rounded-[0.625rem] bg-mavride-blue py-4 font-semibold text-white ~text-base/lg ~mt-20/32 disabled:bg-[#D3D3D3]"
-          >
-            Proceed
-          </button>
+          <NavLink to='/personalInfo'>
+            <button
+              type="submit"
+              disabled={disabled}
+              className="w-full rounded-[0.625rem] bg-mavride-blue py-4 font-semibold text-white ~text-base/lg ~mt-20/32 disabled:bg-[#D3D3D3]"
+            >
+              Proceed
+            </button>
+          </NavLink>
         </form>
       </div>
     </OnboardingLayoutLite>
