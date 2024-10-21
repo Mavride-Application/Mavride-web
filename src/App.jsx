@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-import Signup from "../src/components/Signup"
+import Signup from "./pages/Signup"
 
 import EnterPhoneNumber from "./pages/EnterPhoneNumber";
 import PhoneOtp from "./pages/PhoneOtp";
@@ -12,6 +12,7 @@ function App() {
     <div>
       {/* <EnterPhoneNumber /> */}
       <PhoneOtp/>
+      {/* <Signup/> */}
     </div>
   );
 }
