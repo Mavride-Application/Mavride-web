@@ -11,7 +11,7 @@ const EnterPhoneNumber = () => {
 
   return (
     <OnboardingLayout>
-      <div className="mx-auto w-full max-w-[27.63rem] ~pt-[4.31rem]/[13.06rem]">
+      <div className="mx-auto w-full max-w-[27.63rem] ~pt-[4.31rem]/40">
         <div className="text-center">
           <h2 className="mb-1 font-medium text-mavride-deep-blue ~text-[1.8125rem]/[2rem]">
             Enter Your Phone Number
@@ -35,6 +35,8 @@ const EnterPhoneNumber = () => {
               errorMsg="Please enter the full number including the area code"
               // add validation for area code
             />
+
+
 
             <button className="w-full rounded-[0.625rem] bg-mavride-blue py-4 font-semibold text-white ~text-base/lg ~mt-[3.12rem]/[6.63rem]">
               Proceed

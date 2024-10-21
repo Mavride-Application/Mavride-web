@@ -2,6 +2,7 @@
 import Signup from "./pages/Signup"
 
 import EnterPhoneNumber from "./pages/EnterPhoneNumber";
+import PersonalInfoSteps from "./pages/PersonalInfoSteps";
 import PhoneOtp from "./pages/PhoneOtp";
 
 // import ChooseProfilePicture from "./pages/ChooseProfilePicture";
@@ -11,7 +12,9 @@ function App() {
   return (
     <div>
       {/* <EnterPhoneNumber /> */}
-      <PhoneOtp/>
+      {/* <ChooseProfilePicture /> */}
+      <PersonalInfoSteps />
+      {/* <PhoneOtp/> */}
       {/* <Signup/> */}
     </div>
   );
