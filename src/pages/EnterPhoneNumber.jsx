@@ -1,6 +1,7 @@
 import { FormProvider, useForm } from "react-hook-form";
 import OnboardingLayout from "../layouts/OnboardingLayout";
 import Input from "../components/Input";
+import { NavLink } from 'react-router-dom';
 
 const EnterPhoneNumber = () => {
   const methods = useForm();
@@ -37,10 +38,11 @@ const EnterPhoneNumber = () => {
             />
 
 
-
-            <button className="w-full rounded-[0.625rem] bg-mavride-blue py-4 font-semibold text-white ~text-base/lg ~mt-[3.12rem]/[6.63rem]">
-              Proceed
-            </button>
+            <NavLink to='/phoneotp'>
+              <button className="w-full rounded-[0.625rem] bg-mavride-blue py-4 font-semibold text-white ~text-base/lg ~mt-[3.12rem]/[6.63rem]">
+                Proceed
+              </button>
+            </NavLink>
           </form>
         </FormProvider>
       </div>

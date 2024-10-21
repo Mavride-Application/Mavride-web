@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { NavLink } from 'react-router-dom';
 import { gsap } from 'gsap';
 import logo from '../assets/logo_desktop.png'; // Update with the actual path to your logo
 import backgroundImage from '../assets/bg_desktop.png'; // Update with the actual path to your background image
@@ -42,7 +43,7 @@ const Onboarding = () => {
   }, []);
 
   return (
-    <div className="flex h-screen bg-white p-4">
+    <div className="flex h-screen bg-white p-4 overflow-hidden">
       {/* Background section with image */}
       <div
         ref={bgRef}
@@ -71,9 +72,11 @@ const Onboarding = () => {
         <div className="text-center">
           <h2 className="text-[2.5rem] font-semibold text-[#26203b]">Let’s Get You Started</h2>
           <p className="text-gray-500 mb-[4rem]">Create an Account with Us</p>
-          <button className="bg-blue-800 text-white py-2 px-4 w-[20rem] rounded-md hover:bg-blue-900">
-            Sign Up
-          </button>
+          <NavLink to='/Phonenumber'>
+            <button className="bg-blue-800 text-white py-2 px-4 w-[20rem] rounded-md hover:bg-blue-900">
+              Sign Up
+            </button>
+          </NavLink>
           <p className="mt-4 text-gray-600">
             Already have an Account?{' '}
             <a href="#" className="text-blue-600 hover:underline">
