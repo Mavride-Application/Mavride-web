@@ -72,7 +72,7 @@ const Onboarding = () => {
         <div className="text-center">
           <h2 className="text-[2.5rem] font-semibold text-[#26203b]">Let’s Get You Started</h2>
           <p className="text-gray-500 mb-[4rem]">Create an Account with Us</p>
-          <NavLink to='/Phonenumber'>
+          <NavLink to='/signup'>
             <button className="bg-blue-800 text-white py-2 px-4 w-[20rem] rounded-md hover:bg-blue-900">
               Sign Up
             </button>

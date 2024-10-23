@@ -2,17 +2,13 @@ import React, { useEffect, useState } from 'react'
 import OnboardingLayout from '../layouts/OnboardingLayout'
 import { useForm } from 'react-hook-form'
 import { NavLink } from 'react-router-dom'
+import { useFormContext } from 'react-hook-form'
 
 const PhoneOtp = () => {
   const [otpSent, setOtpSent] = useState(true)
   const [isOtpComplete, setIsOtpComplete] = useState(false); // State to track OTP completeness
 
-  const { register, handleSubmit, setValue, getValues, watch, formState: {isValid} } = useForm({
-    defaultValues: {
-      otp: ['', '', '', ''], // Assuming a 4-digit OTP
-    },
-    mode: 'onChange'
-  });
+  const { register, setValue, formState: {isValid}, watch } = useFormContext();
 
 
   const onSubmit = (data) => {
@@ -72,7 +68,6 @@ const PhoneOtp = () => {
   }, [watch('otp')]); // Re-run the effect every time the OTP values change
 
   return (
-    <OnboardingLayout>
       <div className="otp-container flex justify-center items-center">
         <div className="opt-wrapper w-[90%] flex justify-center items-center min-h-[50rem] font-outfit flex-col gap-4">
           <div className="p-h flex flex-col items-center gap-2">
@@ -80,7 +75,7 @@ const PhoneOtp = () => {
             <p className='text-lg text-gray-400'>We will send an OTP to the number</p>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col justify-center items-center gap-[5em] w-[100%]'>
+          
             <div className="otp-container flex gap-2">
               {Array.from({ length: 4 }).map((_, index) => (
                 <input
@@ -99,7 +94,7 @@ const PhoneOtp = () => {
 
             {otpSent && <p className='font-medium font-outfit'>Resend code in <span className='color-mav text-mavride-blue font-medium'>30sec</span></p>}
             
-            <NavLink to='/choosephoto' className="w-[100%] text-center">
+           
 
               <button
                 type="submit"
@@ -108,11 +103,11 @@ const PhoneOtp = () => {
               >
                 Verify
               </button>
-            </NavLink>
-          </form>
+           
+         
         </div>
       </div>
-    </OnboardingLayout>
+   
   )
 }
 
