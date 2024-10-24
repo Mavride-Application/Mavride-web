@@ -14,25 +14,21 @@ const steps = [
     title: "Personal Information",
     subTitle:
       "Create an account with us and complete verification to get started",
-    fields: ["fullName", "email", "gender"],
   },
   {
     id: "Step 2",
     title: "Enter Location Details",
     subTitle: "Enter valid location details to complete registration",
-    fields: ["state", "city", "address"],
   },
   {
     id: "Step 3",
     title: "Company Details",
     subTitle: "Enter valid company details to complete registration",
-    fields: ["companyName", "companyAddress", "companyPhoneNumber"],
   },
   {
     id: "Step 4",
     title: "Upload Valid Certification",
     subTitle: "Upload valid certifications for verification",
-    fields: ["driverLicense", "transportLicense"],
   },
 ];
 
@@ -48,8 +44,8 @@ const PersonalInfoSteps = () => {
       companyName: "",
       companyAddress: "",
       companyPhoneNumber: "",
-      driverLicense: undefined,
-      transportLicense: undefined,
+      driverLicense: "",
+      transportLicense: "",
     },
   });
   const {
@@ -64,8 +60,6 @@ const PersonalInfoSteps = () => {
 
   const forwards = currentStep > previousStep;
 
-  const previousFields = steps[Math.max(previousStep, 0)].fields;
-
   // Control current form step
   const next = () => {
     if (currentStep < steps.length - 1) {
@@ -76,7 +70,7 @@ const PersonalInfoSteps = () => {
 
   const previous = async () => {
     if (currentStep > 0) {
-      setTimeout(async () => await trigger(previousFields), 600);
+      setTimeout(async () => trigger(), 1000);
       setPreviousStep(currentStep);
       setCurrentStep((step) => step - 1);
     }
@@ -88,7 +82,7 @@ const PersonalInfoSteps = () => {
 
   // Reset form after successful submission
   useEffect(() => {
-    reset();
+    // reset();
     setCurrentStep(0);
   }, [isSubmitSuccessful]);
 

@@ -1,3 +1,4 @@
+import { useFormContext } from "react-hook-form";
 import { swiperSlides } from "../lib/variants";
 import Input from "./Input";
 import Select from "./Select";
@@ -5,6 +6,9 @@ import Select from "./Select";
 import { motion } from "framer-motion";
 
 const PersonalInfo = ({ forwards }) => {
+  const { watch } = useFormContext();
+  const passwordValue = watch("password");
+
   return (
     <motion.div
       variants={swiperSlides}
@@ -23,6 +27,16 @@ const PersonalInfo = ({ forwards }) => {
         required={true}
         errorMsg="Please enter your full name"
       />
+
+      <Select
+        label="Gender"
+        id="gender"
+        name="gender"
+        placeholder="Gender"
+        required={true}
+        errorMsg="Please state your gender"
+        options={["Male", "Female", "Others"]}
+      />
       <Input
         label="Email"
         id="email"
@@ -32,14 +46,22 @@ const PersonalInfo = ({ forwards }) => {
         required={true}
         errorMsg="Please enter your email"
       />
-      <Select
-        label="Gender"
-        id="gender"
-        name="gender"
-        placeholder="Gender"
+      <Input
+        label="Password"
+        id="password"
+        name="password"
+        type="password"
         required={true}
-        errorMsg="Please state your gender"
-        options={["Male", "Female", "Others"]}
+      />
+      <Input
+        label="Confirm Password"
+        id="confirmPassword"
+        name="confirmPassword"
+        type="password"
+        required={true}
+        validations={{
+          sameAsPassword: (value) => value === passwordValue || 'Password is not the same'
+        }}
       />
     </motion.div>
   );
