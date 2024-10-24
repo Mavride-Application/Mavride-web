@@ -1,10 +1,10 @@
-import PhoneOtp from "./pages/PhoneOtp"
+import PhoneOtp from "./components/PhoneOtp"
 import Onboarding from "./pages/Onboarding"
 import ChooseProfilePhoto from "./pages/ChooseProfilePicture"
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ScrollToTop from "./ScrollToTop";
-import EnterPhoneNumber from "./pages/EnterPhoneNumber";
+import EnterPhoneNumber from "./components/EnterPhoneNumber";
 import PersonalInfoSteps from './pages/PersonalInfoSteps'
 import PhoneVerificationSteps from "./pages/PhoneVerificationSteps";
 
