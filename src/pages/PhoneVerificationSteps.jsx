@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form';
 import OnboardingLayout from '../layouts/OnboardingLayout'
-import EnterPhoneNumber from './EnterPhoneNumber'
-import PhoneOtp from './PhoneOtp'
+import EnterPhoneNumber from '../components/EnterPhoneNumber'
+import PhoneOtp from '../components/PhoneOtp'
 
 const PhoneVerificationSteps = () => {
     const [currentStep, setCurrentStep] = useState('phone'); // Tracks the current step ('phone' or 'otp')
