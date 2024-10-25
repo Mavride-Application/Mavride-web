@@ -4,27 +4,13 @@ import upload_icon from "../assets/upload_file_icon.svg";
 import { motion } from "framer-motion";
 import { swiperSlides } from "../lib/variants";
 import { useFormContext } from "react-hook-form";
-import { useEffect } from "react";
 
 const Card = ({ label, subtext, name }) => {
   const {
     register,
-    setValue,
-    trigger,
     watch,
     formState: { errors },
   } = useFormContext();
-
-  // console.log(watch());
-
-  const handleChange = async (event) => {
-    setValue(name, event.target.files[0]);
-    await trigger(["transportLicense", "driverLicense"], { shouldFocus: true });
-  };
-
-  useEffect(() => {
-    register(name);
-  }, []);
 
   return (
     <label
@@ -46,14 +32,7 @@ const Card = ({ label, subtext, name }) => {
           <img src={upload_icon} alt="upload" />
         </div>
       </div>
-      <input
-        hidden
-        onClick={(event) => {
-          event.stopPropagation();
-        }}
-        type="file"
-        onChange={handleChange}
-      />
+      <input hidden type="file" {...register(name, { required: true })} />
     </label>
   );
 };
