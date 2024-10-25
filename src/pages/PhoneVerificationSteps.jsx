@@ -31,9 +31,6 @@ const PhoneVerificationSteps = () => {
         }
         
     }
-
-
-
     
 
     return (
