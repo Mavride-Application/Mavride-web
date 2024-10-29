@@ -30,13 +30,13 @@ const ChooseProfilePicture = () => {
   }, [image]);
   return (
     <OnboardingLayoutLite>
-      <div className="mx-auto w-full max-w-[27.63rem] pt-20 text-center ~pb-20/48">
+      <div className="mx-auto w-full max-w-[27.63rem] pt-8 pb-12 text-center">
         <h1 className="mb-2 font-medium ~text-xl/[1.81rem]">Choose Photo</h1>
         <p className="mx-auto max-w-64 text-sm text-[#8C8C8C]">
           Upload a photo for your profile picture. it can be changed later.
         </p>
 
-        <form onSubmit={handleSubmit} className="~mt-8/10">
+        <form onSubmit={handleSubmit} className="~mt-6/8">
           <label
             htmlFor="profile-pic"
             className="relative mx-auto block cursor-pointer rounded-full bg-[#E7E9FB] bg-profile bg-center bg-no-repeat ~size-32/[9.5rem]"
@@ -69,7 +69,7 @@ const ChooseProfilePicture = () => {
             )}
           </label>
 
-          <div className="~mt-5/[1.88rem]">
+          <div className="mt-5">
             <h2 className="mb-2 font-medium ~text-base/lg">
               Choose profile picture
             </h2>
@@ -83,7 +83,7 @@ const ChooseProfilePicture = () => {
             <button
               type="submit"
               disabled={disabled}
-              className="w-full rounded-[0.625rem] bg-mavride-blue py-4 font-semibold text-white ~text-base/lg ~mt-20/32 disabled:bg-[#D3D3D3]"
+              className="w-full rounded-[0.625rem] bg-mavride-blue py-4 font-semibold text-white ~text-base/lg ~mt-5/8 disabled:bg-[#D3D3D3]"
             >
               Proceed
             </button>

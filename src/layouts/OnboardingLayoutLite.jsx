@@ -3,7 +3,7 @@ import logo_blue from "../assets/logo_blue.svg";
 const OnboardingLayoutLite = ({ className, children }) => {
   return (
     <div
-      className={`padding-inline flex min-h-screen w-full flex-col items-stretch pb-[2.81rem] pt-[4.69rem] ${className} transition-colors duration-500`}
+      className={`padding-inline flex min-h-screen w-full flex-col items-stretch py-8 ${className} transition-colors duration-500`}
     >
       {/* Image Logo */}
       <div className="mx-auto max-w-[7.38rem]">
