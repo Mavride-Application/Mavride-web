@@ -35,7 +35,7 @@ const PhoneVerificationSteps = () => {
 
     return (
         <OnboardingLayout>
-            <div className="mx-auto w-full max-w-[27.63rem]">
+            <div className="mx-auto w-full max-w-[27.63rem] ">
                 <FormProvider {...methods}>
                     <form onSubmit={handleSubmit(onSubmit)} >
                         {currentStep === 'phone' && (
