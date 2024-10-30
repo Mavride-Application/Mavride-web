@@ -68,14 +68,14 @@ const PhoneOtp = () => {
   }, [watch('otp')]); // Re-run the effect every time the OTP values change
 
   return (
-    <div className="otp-container flex justify-center items-center">
-      <div className="opt-wrapper w-[90%] flex justify-center items-center min-h-[50rem] font-outfit flex-col gap-4">
+    <div className="otp-container flex justify-center items-center ~pt-[2rem]/40">
+      <div className="opt-wrapper w-[90%] flex justify-center items-center font-outfit flex-col gap-4">
         <div className="p-h flex flex-col items-center gap-2">
           <h1 className='text-2xl font-outfit font-medium'>Enter OTP</h1>
           <p className='text-lg text-gray-400'>We will send an OTP to the number</p>
         </div>
 
-        <div className="form-wrapper flex flex-col justify-center items-center gap-20 w-[100%]">
+        <div className="form-wrapper flex flex-col justify-center items-center gap-10 w-[100%]">
           <div className="otp-container flex gap-2">
             {Array.from({ length: 4 }).map((_, index) => (
               <input
