@@ -75,7 +75,7 @@ const PhoneOtp = () => {
           <p className='text-lg text-gray-400'>We will send an OTP to the number</p>
         </div>
 
-        <div className="form-wrapper flex flex-col justify-center items-center gap-[5em] w-[100%]">
+        <div className="form-wrapper flex flex-col justify-center items-center gap-20 w-[100%]">
           <div className="otp-container flex gap-2">
             {Array.from({ length: 4 }).map((_, index) => (
               <input

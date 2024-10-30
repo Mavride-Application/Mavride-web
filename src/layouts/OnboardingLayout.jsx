@@ -17,10 +17,13 @@ const leftSlides = [
 
 const OnboardingLayout = ({ children }) => {
   return (
-    <section id="onboarding-layout" className="padding-inline py-8 sm:~px-5/8">
-      <div className="w-full gap-5 md:grid md:grid-cols-2 ">
+    <section
+      id="onboarding-layout"
+      className="padding-inline min-h-screen grid py-8 sm:~px-5/8"
+    >
+      <div className="w-full gap-5 md:grid md:grid-cols-2">
         {/* Left Column */}
-        <div className="hidden min-h-[50rem] w-full flex-col justify-between rounded-3xl bg-signupBg bg-cover bg-no-repeat py-[6.75rem] md:flex">
+        <div className="hidden w-full flex-col justify-between rounded-3xl bg-signupBg bg-cover bg-no-repeat py-[6.75rem] md:flex">
           {/* Image Logo */}
           <div className="mx-auto max-w-[7.38rem]">
             <img
