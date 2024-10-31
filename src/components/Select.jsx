@@ -99,7 +99,7 @@ const Select = ({
         {/* Dropdown with the different options */}
 
         <motion.div
-          className={`absolute inset-x-0 top-[calc(100%+0.44rem)] z-10 max-h-[15rem] divide-y overflow-y-auto rounded-[0.625rem] bg-white px-6 py-2 shadow ${selectOpen ? "block" : "hidden"} scrollbar-thin scrollbar-thumb-gray-400`}
+          className={`absolute inset-x-0 top-[calc(100%+0.44rem)] z-10 max-h-[15rem] divide-y overflow-y-auto rounded-[0.625rem] bg-white px-6 py-2 shadow ${selectOpen ? "block" : "hidden"} scrollbar-thin scrollbar-thumb-gray-400 scrollbar-thumb-rounded-3xl`}
         >
           {options.map((option, index) => (
             <label

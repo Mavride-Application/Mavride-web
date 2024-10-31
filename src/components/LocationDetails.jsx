@@ -1,12 +1,12 @@
 import { swiperSlides } from "../lib/variants";
 import Input from "./Input";
-import Select from "./Select";
 
 import { motion } from "framer-motion";
 
 import { City, State } from "country-state-city";
 import { nonStates } from "../lib/data";
 import { useFormContext } from "react-hook-form";
+import SearchDropdown from "./SearchDropdown";
 
 const LocationDetails = ({ forwards }) => {
   const statesUS = State.getStatesOfCountry("US");
@@ -34,7 +34,8 @@ const LocationDetails = ({ forwards }) => {
       custom={forwards}
       className="space-y-5"
     >
-      <Select
+      <SearchDropdown
+        key={"state"}
         label="State"
         id="state"
         name="state"
@@ -42,16 +43,22 @@ const LocationDetails = ({ forwards }) => {
         required={true}
         errorMsg="Please state your state"
         options={states}
+        validations={{
+          stateNotInUS: (state) => states.includes(state) || "State not found",
+        }}
       />
-      <Select
+      <SearchDropdown
+        key={"city"}
         label="City"
         id="city"
         name="city"
         placeholder="Enter City"
         required={true}
-        errorMsg="Please state your city"
         options={cities}
-        disabled={!isoCode}
+        errorMsg={" "}
+        validations={{
+          cityNotInState: (city) => cities.includes(city) || "City not found",
+        }}
       />
       <Input
         label="Address"
@@ -60,7 +67,7 @@ const LocationDetails = ({ forwards }) => {
         type="text"
         placeholder="Enter Address"
         required={true}
-        errorMsg="Please enter your address"
+        errorMsg={" "}
       />
     </motion.div>
   );

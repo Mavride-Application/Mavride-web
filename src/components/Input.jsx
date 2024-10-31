@@ -7,10 +7,12 @@ const Input = ({
   type,
   placeholder,
   required,
+  disabled,
   errorMsg,
   pattern,
   validations,
   className,
+  onChange
 }) => {
   const {
     register,
@@ -34,6 +36,8 @@ const Input = ({
           },
           pattern: pattern || false,
           validate: validations,
+          disabled,
+          onChange
         })}
       />
       {errors?.[name]?.message && (
