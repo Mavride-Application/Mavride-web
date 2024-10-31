@@ -55,8 +55,8 @@ const PersonalInfoSteps = () => {
     formState: { isValid, isSubmitSuccessful },
   } = methods;
 
-  const [previousStep, setPreviousStep] = useState(-1);
-  const [currentStep, setCurrentStep] = useState(0);
+  const [previousStep, setPreviousStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(1);
 
   const forwards = currentStep > previousStep;
 
@@ -83,7 +83,7 @@ const PersonalInfoSteps = () => {
   // Reset form after successful submission
   useEffect(() => {
     // reset();
-    setCurrentStep(0);
+    // setCurrentStep(0);
   }, [isSubmitSuccessful]);
 
   return (
