@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+html *,
+html *::before,
+html *::after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
 @layer base {
   body {
     font-family: Outfit;
@@ -20,7 +29,15 @@
   .padding-inline {
     @apply px-5;
   }
+
 }
+
+@layer components {
+  .card {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Custom shadow */
+  }
+}
+
 
 /* Swiper Styles for Onboarding Layoyt */
 #onboarding-layout .swiper {
