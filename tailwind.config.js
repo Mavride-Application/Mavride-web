@@ -12,12 +12,14 @@ export default {
     extend: {
       fontFamily: {
         outfit: ['"Outfit"', "sans-serif"],
+        inter: ['"Inter"', "sans-serif"],
       },
       colors: {
         "mavride-blue": "#0A1ED9",
         "mavride-deep-blue": "#26203B",
         'custom-gray': '#EFEFEF',
-        "button-gray": '#D3D3D3'
+        "button-gray": '#D3D3D3',
+        customGray: '#FEFEFE',
       },
       backgroundImage: {
         profile: "url(/src/assets/profile.svg)",
