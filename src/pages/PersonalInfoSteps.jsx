@@ -55,8 +55,8 @@ const PersonalInfoSteps = () => {
     formState: { isValid, isSubmitSuccessful },
   } = methods;
 
-  const [previousStep, setPreviousStep] = useState(0);
-  const [currentStep, setCurrentStep] = useState(1);
+  const [previousStep, setPreviousStep] = useState(-1);
+  const [currentStep, setCurrentStep] = useState(0);
 
   const forwards = currentStep > previousStep;
 
