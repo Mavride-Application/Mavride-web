@@ -45,7 +45,7 @@ const UserManagementLayout = () => {
   return (
     <div className="management_container">
       <div className="management_wrapper flex">
-        <div className="management_left_nav card flex h-[100dvh] basis-[20%] justify-center bg-[#FEFEFE]">
+        <div className="management_left_nav card sticky left-0 top-0 flex h-[100dvh] basis-[20%] justify-center bg-[#FEFEFE]">
           <div className="management-center w-[80%]">
             <div className="mb-[70px] flex h-[70px] items-center">
               <img src={logo_black} alt="Logo" className="w-[150px]" />
@@ -130,9 +130,9 @@ const UserManagementLayout = () => {
         </div>
 
         <div className="management_right basis-[80%]">
-          <div className="flex justify-center">
-            <div className="w-[90%]">
-              <div className="management_right_top flex h-[70px] items-center justify-end">
+          <div className="flex justify-center w-full">
+            <div className="w-full">
+              <div className="management_right_top px-8 sticky top-0 flex h-[70px] w-full items-center justify-end bg-white shadow-sm">
                 <div className="flex items-center gap-5">
                   <img src={notification} alt="Notification" />
                   <div className="profile flex items-center gap-3">
@@ -148,7 +148,7 @@ const UserManagementLayout = () => {
                 </div>
               </div>
 
-              <div className="management_right_bottom_children">
+              <div className="management_right_bottom_children px-8">
                 <Outlet />
               </div>
             </div>

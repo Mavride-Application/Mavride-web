@@ -12,7 +12,7 @@ const Input = ({
   pattern,
   validations,
   className,
-  onChange
+  onChange,
 }) => {
   const {
     register,
@@ -21,13 +21,13 @@ const Input = ({
 
   return (
     <div>
-      <label className="mb-2" htmlFor={id}>
+      <label className="mb-2 block" htmlFor={id}>
         {label} {required && label && <span className="text-[#E45270]">*</span>}
       </label>
       <input
         id={id}
         className={`block w-full rounded-[0.625rem] border-mavride-blue bg-[#EFEFEF] py-4 pe-5 ps-[1.56rem] text-base outline-none transition duration-300 focus:border ${errors?.[name]?.message ? "border-[#F32121]" : ""} ${className}`}
-        type={type}
+        type={type || "text"}
         placeholder={placeholder}
         {...register(name, {
           required: {
@@ -37,7 +37,7 @@ const Input = ({
           pattern: pattern || false,
           validate: validations,
           disabled,
-          onChange
+          onChange,
         })}
       />
       {errors?.[name]?.message && (
