@@ -8,6 +8,7 @@ import EnterPhoneNumber from "./components/EnterPhoneNumber";
 import PersonalInfoSteps from './pages/PersonalInfoSteps'
 import PhoneVerificationSteps from "./pages/PhoneVerificationSteps";
 import UserManagementLayout from "./layouts/UserManagementLayout";
+import CreateProfile from "./pages/CreateProfile";
 
 
 
@@ -25,7 +26,7 @@ function App() {
             {/* <Route path="phoneotp" element={<PhoneOtp/>} /> */}
             <Route path="choosephoto" element={<ChooseProfilePhoto/>} />
             <Route path="personalInfo" element={<PersonalInfoSteps/>} />
-            <Route path="userManagement" element={<UserManagementLayout/>} />
+            <Route path="createprofile" element={<CreateProfile/>} />
             
             
           </Routes>

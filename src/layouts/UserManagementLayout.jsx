@@ -135,25 +135,29 @@ const UserManagementLayout = ({ children }) => {
                     </div>
                 </div>
 
-                <div className="management_right basis-[80%]">
-                    <div className='flex justify-center'>
-                        <div className='w-[90%]'>
-                            <div className="management_right_top h-[70px] flex items-center justify-end">
-                                <div className='flex items-center gap-5'>
-                                    <img src={notification} alt="Notification" />
-                                    <div className="profile flex items-center gap-3">
-                                        <img src={profile} alt="Profile" />
-                                        <div className="profile_name font-inter">
-                                            <p className='text-[#70757D] text-[0.861rem]'>Kingsley Francis</p>
-                                            <p className='text-[#A4A7AA] text-[0.70625rem]'>Admin</p>
+                <div className="management_right basis-[80%]  bg-[#FAFAFA]">
+                    <div className='flex justify-center '>
+                        <div className='w-[100%] '>
+                            <div className="management_right_top w-[100%] h-[70px] justify-center flex items-center  bg-white">
+                                <div className='flex items-center gap-5 w-[95%] justify-end '>
+                                    <div className='flex items-center justify-center gap-5'>
+                                        <img src={notification} alt="Notification" />
+                                        <div className="profile flex items-center gap-3">
+                                            <img src={profile} alt="Profile" />
+                                            <div className="profile_name font-inter">
+                                                <p className='text-[#70757D] text-[0.861rem]'>Kingsley Francis</p>
+                                                <p className='text-[#A4A7AA] text-[0.70625rem]'>Admin</p>
+                                            </div>
+                                            <img src={arrow_down} alt="" />
                                         </div>
-                                        <img src={arrow_down} alt="" />
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="management_right_bottom_children">
-                                {children}
+                            <div className='flex  justify-center items-center h-[88dvh]'>
+                                <div className="management_right_bottom_children flex  w-[95%] h-[90%] bg-white">
+                                    {children}
+                                </div>
                             </div>
                         </div>
                     </div>
