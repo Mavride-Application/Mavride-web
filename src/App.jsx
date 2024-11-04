@@ -10,6 +10,7 @@ import PhoneVerificationSteps from "./pages/PhoneVerificationSteps";
 import UserManagementLayout from "./layouts/UserManagementLayout";
 import Drivers from "./pages/Drivers";
 import DriverProfile from "./pages/DriverProfile";
+import CreateProfile from "./pages/CreateProfile";
 
 // import ChooseProfilePicture from "./pages/ChooseProfilePicture";
 // import PersonalInfo from "./pages/PersonalInfo";
@@ -28,6 +29,8 @@ function App() {
             <Route path="userManagement" element={<UserManagementLayout />}>
               <Route path="drivers" element={<Drivers />} />
               <Route path="drivers/new-profile" element={<DriverProfile />} />
+              <Route path="createprofile" element={<CreateProfile/>} />
+              
             </Route>
           </Routes>
         </ScrollToTop>
