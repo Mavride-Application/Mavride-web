@@ -3,11 +3,10 @@ import UserManagementLayout from '../layouts/UserManagementLayout'
 
 const CreateProfile = () => {
   return (
-    <UserManagementLayout>
-        <div className=''>
-            love
-        </div>
-    </UserManagementLayout>
+    <div className=''>
+      love
+    </div>
+
   )
 }
 
