@@ -19,7 +19,7 @@ const EnterPhoneNumber = () => {
             label="Phone Number"
             id="phoneNumber"
             name="phoneNumber"
-            type="number"
+            type="tel"
             placeholder="Enter Phone Number"
             required={true}
             errorMsg="Please enter the full number including the area code"

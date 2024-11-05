@@ -1,172 +1,210 @@
+// Asset Imports
+import { BackArrowIcon, StepHR, SuccessIcon } from "../components/SvgIcons";
+
+// Component Imports
+import DriverImage from "../components/Drivers/DriverImage";
+import StepIcon from "../components/Drivers/StepIcon";
+import FormStepOne from "../components/Drivers/FormStepOne";
+import FormStepTwo from "../components/Drivers/FormStepTwo";
+import FormStepThree from "../components/Drivers/FormStepThree";
+
+//Library Imports
 import { Link } from "react-router-dom";
-import {
-  ActiveStepIcon,
-  BackArrowIcon,
-  IncompleteStepIcon,
-  StepHR,
-} from "../components/SvgIcons";
-import camera from "../assets/camera.svg";
-import Input from "../components/Input";
 import { FormProvider, useForm } from "react-hook-form";
-import { nonStates } from "../lib/data";
-import { City, State } from "country-state-city";
-import Select from "../components/Select";
-import SearchDropdown from "../components/SearchDropdown";
+import { useEffect, useState } from "react";
 
 const DriverProfile = () => {
+  //Array of all Form Steps
+  const steps = [
+    {
+      title: "Personal Information & Location Details",
+      subtitle: "Fill in the details below to complete driver profile",
+      steps: [
+        "fullName",
+        "phone",
+        "email",
+        "state",
+        "gender",
+        "city",
+        "driverLicense",
+        "address",
+      ],
+    },
+    {
+      title: "Vehicle Details & Service",
+      subtitle: "Fill in the details below to complete driver profile",
+      steps: [
+        "licensePlate",
+        "vehicleType",
+        "vehicleModel",
+        "vehicleColor",
+        "serviceOffering",
+      ],
+    },
+    {
+      title: "Upload Document",
+      subtitle:
+        "Kindly upload thee required documents to complete driver profile",
+      steps: [
+        "vehicleInsurance",
+        "proofOfCarOwnership",
+        "vehiclePhotoExterior",
+        "roadWorthiness",
+        "vehiclePhotoInterior",
+      ],
+    },
+  ];
+  const [previousStep, setPreviousStep] = useState(-1);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [modal, setModal] = useState(false);
+  const forwards = currentStep > previousStep; //unused for now
+
   const methods = useForm();
-  const { watch, handleSubmit } = methods;
+  const { handleSubmit, trigger } = methods;
 
-  const statesUS = State.getStatesOfCountry("US");
+  //handle next step function
+  const next = async () => {
+    const isComplete = await trigger(steps[currentStep].steps);
+    if (isComplete) {
+      setPreviousStep(currentStep);
+      setCurrentStep((step) => Math.min(step + 1, 2));
+    }
+  };
+  //handle next step function
+  const prev = () => {
+    setPreviousStep(currentStep);
+    setCurrentStep((step) => Math.max(step - 1, 0));
+  };
 
-  //Get all the valid states from csc
-  const states = statesUS
-    .map((state) => state.name)
-    .filter((state) => !nonStates.includes(state));
+  //handle form submission
+  const onSubmit = (data) => {
+    for (const key in data) {
+      if (data[key] instanceof FileList) {
+        // replace the fileList with the actual file, or null if the fileList is empty
+        data[key] = data[key].length > 0 ? data[key][0] : null;
+      }
+    }
+    console.log(data);
+    setModal(true);
+  };
 
-  const chosenState = watch("state");
-  const isoCode = statesUS.find((state) => state.name === chosenState)?.isoCode;
-
-  //Get the cities for the particular state chosen
-  const cities = City.getCitiesOfState("US", isoCode).map(
-    (city) => city.name,
-  ) || ["Select a state"];
-
-  const onSubmit = (data) => console.log(data);
+  //hide body overflow when modal is shown
+  useEffect(() => {
+    if (modal) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [modal]);
 
   return (
     <div className="px-5 pb-[2.38rem] pt-[1.69rem]">
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <div className="flex w-full justify-between gap-4 px-5">
-            <section className="flex w-full max-w-[20.8125rem] flex-col">
-              <Link className="mt-2 flex items-center gap-2">
+            {/* Left Column */}
+            <section className="flex w-full max-w-[20.8125rem] flex-col gap-24">
+              {/* Back or Previous Button */}
+              <Link
+                onClick={() => prev()}
+                to={currentStep === 0 ? "/userManagement/drivers" : ""}
+                className="mt-2 flex items-center gap-2"
+              >
                 <BackArrowIcon className="w-4" />
                 Back
               </Link>
 
-              <div className="mt-auto rounded-[0.625rem] border-[0.5px] border-[#E8E8E8] px-5 pb-32 pt-20">
-                <div className="relative mx-auto size-[10.5rem] rounded-full bg-[#E7E9FB] bg-profile bg-center bg-no-repeat">
-                  <label
-                    htmlFor="profile-pic"
-                    className="absolute bottom-1 right-1 z-[5] grid size-[2.45rem] cursor-pointer place-items-center rounded-full bg-white"
-                  >
-                    <img
-                      className="object-contain"
-                      src={camera}
-                      alt="camera-icon"
-                    />
-                  </label>
-                </div>
-
-                <div className="mt-12 text-center text-sm">
-                  <p className="text-[#777]">Allowed format</p>
-                  <p>JPG, JPEG, and PNG</p>
-
-                  <p className="mt-6 text-[#777]">Max file size</p>
-                  <p>2MB</p>
-                </div>
-              </div>
+              {/* Driver Image */}
+              <DriverImage />
             </section>
 
+            {/* Right Column */}
             <section className="w-full max-w-[43.5rem]">
               <h1 className="mb-7 text-center text-2xl font-bold">
                 Create A New Driver Profile
               </h1>
 
+              {/* Current Form Step Indicators / Icons */}
               <div className="flex items-center justify-center gap-4">
-                <ActiveStepIcon />
+                <StepIcon step={0} currentStep={currentStep} />
                 <StepHR className="w-[3.625rem]" />
-                <IncompleteStepIcon />
+                <StepIcon step={1} currentStep={currentStep} />
                 <StepHR className="w-[3.625rem]" />
-                <IncompleteStepIcon />
+                <StepIcon step={2} currentStep={currentStep} />
               </div>
 
+              {/* Form Step Heading */}
               <div className="mt-[2.69rem] text-center">
-                <h2 className="mb-2 text-lg">
-                  Personal Information & Location Details
-                </h2>
+                <h2 className="mb-2 text-lg">{steps[currentStep].title}</h2>
 
-                <p className="text-lg text-[#8C8C8C]">
-                  Fill in the details below to complete driver profile
-                </p>
+                <h3 className="text-lg text-[#8C8C8C]">
+                  {steps[currentStep].subtitle}
+                </h3>
               </div>
 
+              {/* Form Steps */}
               <div className="mt-[3.75rem]">
                 <div className="grid grid-cols-2 gap-x-[0.88rem] gap-y-5">
-                  <Input label="Full Name" name="fullName" required={true} />
-                  <Input
-                    label="Phone"
-                    name="phone"
-                    type="tel"
-                    required={true}
-                  />
-                  <Input
-                    label="Email"
-                    name="email"
-                    type="email"
-                    required={true}
-                  />
-                  <SearchDropdown
-                    key={"state"}
-                    label="State"
-                    id="state"
-                    name="state"
-                    placeholder="Enter State"
-                    required={true}
-                    errorMsg="Please state your state"
-                    options={states}
-                    validations={{
-                      stateNotInUS: (state) =>
-                        states.includes(state) || "State not found",
-                    }}
-                  />
-                  <Select
-                    label="Gender"
-                    id="gender"
-                    name="gender"
-                    placeholder="Gender"
-                    required={true}
-                    errorMsg="Please state your gender"
-                    options={["Male", "Female", "Others"]}
-                  />
-                  <SearchDropdown
-                    key={"city"}
-                    label="City"
-                    id="city"
-                    name="city"
-                    placeholder="Enter City"
-                    required={true}
-                    options={cities}
-                    errorMsg={" "}
-                    validations={{
-                      cityNotInState: (city) =>
-                        cities.includes(city) || "City not found",
-                    }}
-                  />
-                  <Input
-                    label="Driver License"
-                    name="driverLicense"
-                    required={true}
-                  />
-                  <Input label="Address" name="address" required={true} />
+                  {currentStep === 0 && <FormStepOne key="step1" />}
+                  {currentStep === 1 && <FormStepTwo key="step2" />}
+                  {currentStep === 2 && <FormStepThree key="step2" />}
+
+                  {/* Submission Success Modal */}
+                  {modal && (
+                    <div className="fixed inset-0 z-20 flex w-full flex-col content-end items-center justify-end bg-white p-5 pb-36 text-center">
+                      <SuccessIcon className="size-[15.375rem]" />
+
+                      <p className="mt-10 text-2xl">
+                        You have successfully Created a Driver’s Profile
+                      </p>
+
+                      {/* Link in modal to view new profile */}
+                      <Link
+                        onClick={() => {
+                          setModal(false);
+                          setCurrentStep(0);
+                          setPreviousStep(-1);
+                        }}
+                        to=""
+                        className="mt-14 inline-block w-full max-w-[20.8125rem] rounded-[0.625rem] bg-mavride-blue p-5 font-semibold text-white"
+                      >
+                        View Profile
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </section>
           </div>
-          <div className="mt-[10.31rem] flex items-center justify-end gap-4">
-            <button
-              className="inline-block w-full max-w-[20.8125rem] rounded-[0.625rem] bg-[#E7E9FB] text-black p-5 font-semibold text-opacity-35"
-              type="button"
-            >
-              Save as Draft
-            </button>
-            <button
-              type="submit"
-              className="inline-block w-full max-w-[20.8125rem] rounded-[0.625rem] bg-mavride-blue p-5 font-semibold text-white"
-            >
-              Next
-            </button>
+
+          {/* Form Action Buttons */}
+          <div className="ms-auto mt-20 flex max-w-[43.5rem] items-center justify-center gap-4 px-5">
+            {currentStep < 2 ? (
+              <>
+                <button
+                  disabled
+                  className="inline-block w-full max-w-[20.8125rem] rounded-[0.625rem] bg-mavride-blue p-5 font-semibold text-white disabled:bg-[#E7E9FB] disabled:text-black disabled:text-opacity-35"
+                  type="button"
+                >
+                  Save as Draft
+                </button>
+                <button
+                  onClick={() => next()}
+                  type="button"
+                  className="inline-block w-full max-w-[20.8125rem] rounded-[0.625rem] bg-mavride-blue p-5 font-semibold text-white"
+                >
+                  Next
+                </button>
+              </>
+            ) : (
+              // Actual form submit button
+              <button
+                type="submit"
+                className="inline-block w-full max-w-[20.8125rem] rounded-[0.625rem] bg-mavride-blue p-5 font-semibold text-white"
+              >
+                Create Profile{" "}
+              </button>
+            )}
           </div>
         </form>
       </FormProvider>

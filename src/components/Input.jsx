@@ -19,6 +19,8 @@ const Input = ({
     formState: { errors },
   } = useFormContext();
 
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
   return (
     <div>
       <label className="mb-2 block" htmlFor={id}>
@@ -34,7 +36,10 @@ const Input = ({
             value: required,
             message: errorMsg || "This field is required",
           },
-          pattern: pattern || false,
+          pattern:
+            type === "email"
+              ? { value: emailPattern, message: "Please enter a valid email" }
+              : pattern || false,
           validate: validations,
           disabled,
           onChange,
