@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form";
-import { swiperSlides } from "../lib/variants";
-import Input from "./Input";
-import Select from "./Select";
+import { swiperSlides } from "../../lib/variants";
+import Input from "../Input";
+import Select from "../Select";
 
 import { motion } from "framer-motion";
 
@@ -52,6 +52,11 @@ const PersonalInfo = ({ forwards }) => {
         name="password"
         type="password"
         required={true}
+        pattern={{
+          value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+          message:
+            "Password should combination of letters, numbers, and special characters e.g. a1@",
+        }}
       />
       <Input
         label="Confirm Password"
@@ -60,7 +65,8 @@ const PersonalInfo = ({ forwards }) => {
         type="password"
         required={true}
         validations={{
-          sameAsPassword: (value) => value === passwordValue || 'Password is not the same'
+          sameAsPassword: (value) =>
+            value === passwordValue || "Password does not match",
         }}
       />
     </motion.div>

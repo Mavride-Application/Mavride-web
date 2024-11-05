@@ -1,11 +1,9 @@
 import file_icon from "../assets/file_icon.svg";
 import upload_icon from "../assets/upload_file_icon.svg";
-
-import { motion } from "framer-motion";
-import { swiperSlides } from "../lib/variants";
 import { useFormContext } from "react-hook-form";
+import { BinIcon } from "./SvgIcons";
 
-const Card = ({ label, subtext, name }) => {
+const FileInput = ({ label, subtext, name }) => {
   const {
     register,
     watch,
@@ -38,13 +36,13 @@ const Card = ({ label, subtext, name }) => {
         {uploaded ? (
           <button
             type="button"
-            className="absolute inset-y-0 right-6 z-10 content-center"
+            className="absolute inset-y-0 right-4 z-10 content-center"
             onClick={(event) => {
               event.preventDefault();
               setValue(name, "");
             }}
           >
-            del
+            <BinIcon className="w-5 fill-[#0E0E0E]" />
           </button>
         ) : (
           <div className="ml-auto w-4">
@@ -56,28 +54,4 @@ const Card = ({ label, subtext, name }) => {
     </label>
   );
 };
-
-const UploadCertification = ({ forwards }) => {
-  return (
-    <motion.div
-      variants={swiperSlides}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      custom={forwards}
-      className="space-y-[1.62rem]"
-    >
-      <Card
-        label="Driver’s license"
-        subtext="Upload your driver’s license"
-        name="driverLicense"
-      />
-      <Card
-        label="Transport license"
-        subtext="Upload your transport license"
-        name="transportLicense"
-      />
-    </motion.div>
-  );
-};
-export default UploadCertification;
+export default FileInput;

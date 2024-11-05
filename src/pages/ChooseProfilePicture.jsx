@@ -30,7 +30,7 @@ const ChooseProfilePicture = () => {
   }, [image]);
   return (
     <OnboardingLayoutLite>
-      <div className="mx-auto w-full max-w-[27.63rem] pt-8 pb-12 text-center">
+      <div className="mx-auto w-full max-w-[27.63rem] pb-12 pt-8 text-center">
         <h1 className="mb-2 font-medium ~text-xl/[1.81rem]">Choose Photo</h1>
         <p className="mx-auto max-w-64 text-sm text-[#8C8C8C]">
           Upload a photo for your profile picture. it can be changed later.
@@ -79,7 +79,7 @@ const ChooseProfilePicture = () => {
           </div>
 
           {/* Form Submit Button */}
-          <NavLink to='/personalInfo'>
+          <NavLink to="/personalInfo">
             <button
               type="submit"
               disabled={disabled}
