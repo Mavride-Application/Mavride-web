@@ -2,10 +2,10 @@ import { FormProvider, useForm } from "react-hook-form";
 import OnboardingLayoutLite from "../layouts/OnboardingLayoutLite";
 import { useEffect, useState } from "react";
 import arrow_left from "../assets/arrow_left.svg";
-import PersonalInfo from "../components/Personalinfo";
-import LocationDetails from "../components/LocationDetails";
-import CompanyDetails from "../components/CompanyDetails";
-import UploadCertification from "../components/UploadCertification";
+import PersonalInfo from "../components/PersonalInfo/PersonalInfo";
+import LocationDetails from "../components/PersonalInfo/LocationDetails";
+import CompanyDetails from "../components/PersonalInfo/CompanyDetails";
+import UploadCertification from "../components/PersonalInfo/UploadCertification";
 import { AnimatePresence } from "framer-motion";
 
 const steps = [
