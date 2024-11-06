@@ -30,7 +30,6 @@ function App() {
               <Route path="drivers" element={<Drivers />} />
               <Route path="drivers/new-profile" element={<DriverProfile />} />
               <Route path="createprofile" element={<CreateProfile/>} />
-              
             </Route>
           </Routes>
         </ScrollToTop>
