@@ -152,10 +152,10 @@ const DriverProfile = () => {
                   {/* Submission Success Modal */}
                   {modal && (
                     <div className="fixed inset-0 z-20 flex w-full flex-col content-end items-center justify-end bg-white p-5 pb-36 text-center">
-                      <SuccessIcon className="size-[15.375rem]" />
+                      <SuccessIcon className="size-[15.375rem]" animated />
 
-                      <p className="mt-10 text-2xl">
-                        You have successfully Created a Driver’s Profile
+                      <p className="mx-auto my-[2.31rem] max-w-[20rem] text-2xl">
+                        Your ticket has been submitted successfully
                       </p>
 
                       {/* Link in modal to view new profile */}
@@ -166,9 +166,9 @@ const DriverProfile = () => {
                           setPreviousStep(-1);
                         }}
                         to=""
-                        className="mt-14 inline-block w-full max-w-[20.8125rem] rounded-[0.625rem] bg-mavride-blue p-5 font-semibold text-white"
+                        className="inline-block w-full max-w-[20.8125rem] rounded-[0.625rem] bg-mavride-blue p-5 font-semibold text-white"
                       >
-                        View Profile
+                        Done
                       </Link>
                     </div>
                   )}
