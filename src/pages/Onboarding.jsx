@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { gsap } from 'gsap';
-import logo from '../assets/logo_desktop.png'; // Update with the actual path to your logo
-import backgroundImage from '../assets/bg_desktop.png'; // Update with the actual path to your background image
+import logo from '../assets/logo_desktop.png';
+import backgroundImage from '../assets/bg_desktop.png'; 
 
 const Onboarding = () => {
   const bgRef = useRef(null);
@@ -12,42 +12,33 @@ const Onboarding = () => {
   useEffect(() => {
     const timeline = gsap.timeline();
 
-    // Step 1: Expand the blue background to full screen
+   
     timeline
       .to(bgRef.current, {
         duration: 1.5,
-        scaleX: 4, // Adjusting for a more dramatic pop
+        scaleX: 4, 
         scaleY: 2,
         ease: "power2.inOut",
       })
-      // Step 2: Move the background left and then fade in the logo
+     
       .to(bgRef.current, {
         duration: 1.5,
         scaleX: 1,
         scaleY: 1,
-        x: "0%", // Moves the background to the left
-        ease: "power2.inOut",
+        x: '0%', 
+        ease: 'power2.inOut',
       })
-      .to(
-        logoRef.current,
-        {
-          duration: 1,
-          opacity: 1,
-          ease: "power2.inOut",
-        },
-        "-=0.5",
-      ) // Start the logo fade-in after background animation finishes
-      // Step 3: Show the form
-      .to(
-        formRef.current,
-        {
-          duration: 1,
-          opacity: 1,
-          x: "0%", // Ensure form comes into view
-          ease: "power2.inOut",
-        },
-        "-=0.5",
-      ); // Fade in form elements after the logo appears
+      .to(logoRef.current, {
+        duration: 1,
+        opacity: 1,
+        ease: 'power2.inOut',
+      }, '-=0.5') 
+      .to(formRef.current, {
+        duration: 1,
+        opacity: 1,
+        x: '0%', 
+        ease: 'power2.inOut',
+      }, '-=0.5');
   }, []);
 
   return (
@@ -65,8 +56,8 @@ const Onboarding = () => {
         <div className="flex h-full items-center justify-center">
           <img
             ref={logoRef}
-            className="opacity-0" // Hidden initially
-            src={logo} // Use the provided logo path
+            className="opacity-0" 
+            src={logo} 
             alt="Mavride Logo"
           />
         </div>
@@ -75,7 +66,7 @@ const Onboarding = () => {
       {/* Sign-up section */}
       <div
         ref={formRef}
-        className="flex h-full flex-1 translate-x-12 transform flex-col items-center justify-center opacity-0" // Center and adjust position
+        className="flex-1 h-full flex flex-col justify-center items-center opacity-0 transform translate-x-12 " 
       >
         <div className="text-center">
           <h2 className="text-[2.5rem] font-semibold text-[#26203b]">Let’s Get You Started</h2>
