@@ -16,7 +16,12 @@ const SearchDropdown = ({
   validations,
 }) => {
   // Get RHF functions from form context
-  const { watch, setValue, trigger } = useFormContext();
+  const {
+    watch,
+    setValue,
+    trigger,
+    formState: { errors },
+  } = useFormContext();
 
   // Create state to handle selected option and dropdown state
   const [selectOpen, setSelectOpen] = useState(false);
@@ -56,7 +61,7 @@ const SearchDropdown = ({
       {/* Dropdown with the different options */}
       <motion.div
         key={name}
-        className={`absolute inset-x-0 top-[calc(100%+0.44rem)] z-10 max-h-[15rem] divide-y overflow-y-auto rounded-[0.625rem] bg-white px-6 py-2 shadow ${selectOpen && filteredOptions.length > 0 ? "block" : "hidden"} scrollbar-thin scrollbar-thumb-gray-400 scrollbar-thumb-rounded-3xl`}
+        className={`absolute inset-x-0 ${errors[name]?.message ? "top-[calc(100%-1.5rem)]" : "top-[calc(100%+0.44rem)]"} z-10 max-h-[15rem] divide-y overflow-y-auto rounded-[0.625rem] bg-white px-6 py-2 shadow ${selectOpen && filteredOptions.length > 0 ? "block" : "hidden"} scrollbar-thin scrollbar-thumb-gray-400 scrollbar-thumb-rounded-3xl`}
       >
         {filteredOptions.map((option, index) => (
           <div

@@ -35,7 +35,6 @@ function App() {
               <Route path="Success" element={<SuccessPage />} />
               <Route path="Registered" element={<Registered />} />
 
-              
             </Route>
           </Routes>
         </ScrollToTop>

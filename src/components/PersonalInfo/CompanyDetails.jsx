@@ -1,5 +1,5 @@
-import { swiperSlides } from "../lib/variants";
-import Input from "./Input";
+import { swiperSlides } from "../../lib/variants";
+import Input from "../Input";
 
 import { motion } from "framer-motion";
 

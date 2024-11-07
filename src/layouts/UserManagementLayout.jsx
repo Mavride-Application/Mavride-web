@@ -45,7 +45,7 @@ const UserManagementLayout = () => {
   return (
     <div className="management_container">
       <div className="management_wrapper flex">
-        <div className="management_left_nav card flex h-[100dvh] basis-[20%] justify-center bg-[#FEFEFE]">
+        <div className="management_left_nav card sticky left-0 top-0 flex h-[100dvh] basis-[20%] justify-center">
           <div className="management-center w-[80%]">
             <div className="mb-[70px] flex h-[70px] items-center">
               <img src={logo_black} alt="Logo" className="w-[150px]" />
@@ -129,33 +129,31 @@ const UserManagementLayout = () => {
           </div>
         </div>
 
-        <div className="management_right basis-[80%]  bg-[#FAFAFA]">
-                    <div className='flex justify-center '>
-                        <div className='w-[100%] '>
-                            <div className="management_right_top w-[100%] h-[70px] justify-center flex items-center  bg-white">
-                                <div className='flex items-center gap-5 w-[95%] justify-end '>
-                                    <div className='flex items-center justify-center gap-5'>
-                                        <img src={notification} alt="Notification" />
-                                        <div className="profile flex items-center gap-3">
-                                            <img src={profile} alt="Profile" />
-                                            <div className="profile_name font-inter">
-                                                <p className='text-[#70757D] text-[0.861rem]'>Kingsley Francis</p>
-                                                <p className='text-[#A4A7AA] text-[0.70625rem]'>Admin</p>
-                                            </div>
-                                            <img src={arrow_down} alt="" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className='flex  justify-center items-center h-[88dvh]'>
-                                <div className="management_right_bottom_children flex  w-[95%] h-[90%] bg-white">
-                                    <Outlet/>
-                                </div>
-                            </div>
-                        </div>
+        <div className="management_right basis-[80%]">
+          <div className="flex justify-center w-full">
+            <div className="w-full">
+              <div className="management_right_top px-8 z-30 sticky top-0 flex h-[70px] w-full items-center justify-end bg-white shadow-sm">
+                <div className="flex items-center gap-5">
+                  <img src={notification} alt="Notification" />
+                  <div className="profile flex items-center gap-3">
+                    <img src={profile} alt="Profile" />
+                    <div className="profile_name font-inter">
+                      <p className="text-[0.861rem] text-[#70757D]">
+                        Kingsley Francis
+                      </p>
+                      <p className="text-[0.70625rem] text-[#A4A7AA]">Admin</p>
                     </div>
+                    <img src={arrow_down} alt="" />
+                  </div>
                 </div>
+              </div>
+
+              <div className="management_right_bottom_children px-8">
+                <Outlet />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

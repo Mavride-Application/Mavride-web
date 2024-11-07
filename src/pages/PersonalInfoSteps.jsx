@@ -2,33 +2,33 @@ import { FormProvider, useForm } from "react-hook-form";
 import OnboardingLayoutLite from "../layouts/OnboardingLayoutLite";
 import { useEffect, useState } from "react";
 import arrow_left from "../assets/arrow_left.svg";
-import PersonalInfo from "../components/Personalinfo";
-import LocationDetails from "../components/LocationDetails";
-import CompanyDetails from "../components/CompanyDetails";
-import UploadCertification from "../components/UploadCertification";
+import PersonalInfo from "../components/PersonalInfo/PersonalInfo";
+import LocationDetails from "../components/PersonalInfo/LocationDetails";
+import CompanyDetails from "../components/PersonalInfo/CompanyDetails";
+import UploadCertification from "../components/PersonalInfo/UploadCertification";
 import { AnimatePresence } from "framer-motion";
 
 const steps = [
   {
     id: "Step 1",
     title: "Personal Information",
-    subTitle:
+    subtitle:
       "Create an account with us and complete verification to get started",
   },
   {
     id: "Step 2",
     title: "Enter Location Details",
-    subTitle: "Enter valid location details to complete registration",
+    subtitle: "Enter valid location details to complete registration",
   },
   {
     id: "Step 3",
     title: "Company Details",
-    subTitle: "Enter valid company details to complete registration",
+    subtitle: "Enter valid company details to complete registration",
   },
   {
     id: "Step 4",
     title: "Upload Valid Certification",
-    subTitle: "Upload valid certifications for verification",
+    subtitle: "Upload valid certifications for verification",
   },
 ];
 
@@ -106,7 +106,7 @@ const PersonalInfoSteps = () => {
             {steps[currentStep].title}
           </h1>
           <p className="mx-auto max-w-[26.81rem] text-[#8C8C8C] ~text-xl/2xl">
-            {steps[currentStep].subTitle}
+            {steps[currentStep].subtitle}
           </p>
         </div>
 
@@ -121,16 +121,16 @@ const PersonalInfoSteps = () => {
             {/* Form Steps */}
             <AnimatePresence initial={false} custom={forwards}>
               {currentStep === 0 && (
-                <PersonalInfo key={"step1"} forwards={forwards} />
+                <PersonalInfo key="step1" forwards={forwards} />
               )}
               {currentStep === 1 && (
-                <LocationDetails key={"step2"} forwards={forwards} />
+                <LocationDetails key="step2" forwards={forwards} />
               )}
               {currentStep === 2 && (
-                <CompanyDetails key={"step3"} forwards={forwards} />
+                <CompanyDetails key="step3" forwards={forwards} />
               )}
               {currentStep === 3 && (
-                <UploadCertification key={"step4"} forwards={forwards} />
+                <UploadCertification key="step4" forwards={forwards} />
               )}
             </AnimatePresence>
 
