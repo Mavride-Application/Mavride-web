@@ -34,7 +34,6 @@ function App() {
               <Route path="createprofile" element={<CreateProfile/>} />
               <Route path="Success" element={<SuccessPage />} />
               <Route path="Registered" element={<Registered />} />
-
             </Route>
           </Routes>
         </ScrollToTop>
