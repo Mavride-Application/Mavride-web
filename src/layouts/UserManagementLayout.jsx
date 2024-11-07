@@ -85,25 +85,30 @@ const UserManagementLayout = () => {
                 ["Support", "/dashboard/Support", <SvgIcons number="6" />],
               ].map(([title, link, icon, arrowIcon, subItems]) => (
                 <li key={title} className="w-[85%] cursor-pointer">
-                  <NavLink to={link}>
+                  {subItems ? (
                     <div
                       className="flex items-center justify-between"
-                      onClick={() => subItems && toggleDropdown(title)}
+                      onClick={() => toggleDropdown(title)}
                     >
                       <div className="flex items-center gap-2">
                         {icon}
                         <p className="font-outfit text-[#A6AAB7]">{title}</p>
                       </div>
-                      {subItems && (
-                        <span
-                          ref={(el) => (arrowRefs.current[title] = el)}
-                          className="inline-block transition-transform"
-                        >
-                          {arrowIcon}
-                        </span>
-                      )}
+                      <span
+                        ref={(el) => (arrowRefs.current[title] = el)}
+                        className="inline-block transition-transform"
+                      >
+                        {arrowIcon}
+                      </span>
                     </div>
-                  </NavLink>
+                  ) : (
+                    <NavLink to={link}>
+                      <div className="flex items-center gap-2">
+                        {icon}
+                        <p className="font-outfit text-[#A6AAB7]">{title}</p>
+                      </div>
+                    </NavLink>
+                  )}
 
                   {/* Dropdown menu */}
                   {subItems && (
