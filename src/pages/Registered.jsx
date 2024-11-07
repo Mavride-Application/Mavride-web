@@ -1,14 +1,19 @@
 import React from 'react'
 import vector from '../assets/Vector.png'
+import plus from '../assets/plus.png'
+import { NavLink } from 'react-router-dom';
 
 const Registered = () => {
     return (
-      <div className="flex w-full flex-col">
+      <div className="flex w-full h-[80vh] flex-col pt-5">
         <header className="flex w-full items-center justify-between">
           <h1 className="text-xl font-bold">Registered Drivers</h1>
-  
-          <button>Create New Profile</button>
+
+          <NavLink to="/userManagement/drivers/new-profile">
+            <button className="items-center flex justify-center  px-4 py-2 bg-[#0A1ED9] text-white font-semibold rounded gap-1.5"><img src={plus} alt="" />Create New Profile</button>
+          </NavLink>
         </header>
+
 
         <div className="justify-center align-center m-auto">
             <img src={vector} style={{alignItems: 'center', justifyContent: 'center', width: '25%', margin: 'auto', paddingBottom: '100'}} alt="vector" />
