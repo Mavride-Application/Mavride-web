@@ -62,7 +62,10 @@ const UserManagementLayout = () => {
                   "",
                   <SvgIcons number="1" fill="#8C8C8C" />,
                   <SvgIcons number="7" fill="#8C8C8C" />,
-                  ["Drivers", "Members"],
+                  ["Drivers", 
+                    "Members"
+
+                  ],
                 ],
                 [
                   "Trips",
@@ -85,25 +88,30 @@ const UserManagementLayout = () => {
                 ["Support", "/dashboard/Support", <SvgIcons number="6" />],
               ].map(([title, link, icon, arrowIcon, subItems]) => (
                 <li key={title} className="w-[85%] cursor-pointer">
-                  <NavLink to={link}>
+                  {subItems ? (
                     <div
                       className="flex items-center justify-between"
-                      onClick={() => subItems && toggleDropdown(title)}
+                      onClick={() => toggleDropdown(title)}
                     >
                       <div className="flex items-center gap-2">
                         {icon}
                         <p className="font-outfit text-[#A6AAB7]">{title}</p>
                       </div>
-                      {subItems && (
-                        <span
-                          ref={(el) => (arrowRefs.current[title] = el)}
-                          className="inline-block transition-transform"
-                        >
-                          {arrowIcon}
-                        </span>
-                      )}
+                      <span
+                        ref={(el) => (arrowRefs.current[title] = el)}
+                        className="inline-block transition-transform"
+                      >
+                        {arrowIcon}
+                      </span>
                     </div>
-                  </NavLink>
+                  ) : (
+                    <NavLink to={link}>
+                      <div className="flex items-center gap-2">
+                        {icon}
+                        <p className="font-outfit text-[#A6AAB7]">{title}</p>
+                      </div>
+                    </NavLink>
+                  )}
 
                   {/* Dropdown menu */}
                   {subItems && (
@@ -114,7 +122,7 @@ const UserManagementLayout = () => {
                       {subItems.map((subItem) => (
                         <li key={subItem} className="py-1 font-outfit">
                           <NavLink
-                            to={`/dashboard/${subItem.toLowerCase()}`}
+                            to={`${subItem.toLowerCase()}`}
                             className="block text-[0.881rem] text-[#A6AAB7] hover:text-black"
                           >
                             {subItem}
