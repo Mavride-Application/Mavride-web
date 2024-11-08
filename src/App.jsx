@@ -29,11 +29,10 @@ function App() {
             <Route path="choosephoto" element={<ChooseProfilePhoto />} />
             <Route path="personalInfo" element={<PersonalInfoSteps />} />
             <Route path="userManagement" element={<UserManagementLayout />}>
-              <Route path="drivers" element={<Drivers />} />
               <Route path="drivers/new-profile" element={<DriverProfile />} />
               <Route path="createprofile" element={<CreateProfile/>} />
               <Route path="Success" element={<SuccessPage />} />
-              <Route path="Registered" element={<Registered />} />
+              <Route path="drivers" element={<Registered />} />
             </Route>
           </Routes>
         </ScrollToTop>

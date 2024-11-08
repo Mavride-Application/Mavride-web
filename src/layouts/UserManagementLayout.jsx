@@ -62,7 +62,10 @@ const UserManagementLayout = () => {
                   "",
                   <SvgIcons number="1" fill="#8C8C8C" />,
                   <SvgIcons number="7" fill="#8C8C8C" />,
-                  ["Drivers", "Members"],
+                  ["Drivers", 
+                    "Members"
+
+                  ],
                 ],
                 [
                   "Trips",
@@ -119,7 +122,7 @@ const UserManagementLayout = () => {
                       {subItems.map((subItem) => (
                         <li key={subItem} className="py-1 font-outfit">
                           <NavLink
-                            to={`/dashboard/${subItem.toLowerCase()}`}
+                            to={`${subItem.toLowerCase()}`}
                             className="block text-[0.881rem] text-[#A6AAB7] hover:text-black"
                           >
                             {subItem}
