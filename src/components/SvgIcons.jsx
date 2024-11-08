@@ -368,4 +368,4 @@ export const SuccessIcon = ({ className, animated }) => {
   );
 };
 
-export default SvgIcons;
+export default SvgIcons;top

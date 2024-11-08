@@ -13,7 +13,9 @@ import DriverProfile from "./pages/DriverProfile";
 import CreateProfile from "./pages/CreateProfile";
 
 // import ChooseProfilePicture from "./pages/ChooseProfilePicture";
-// import PersonalInfo from "./pages/PersonalInfo";
+// import Personalinfo from "./pages/Personalinfo";
+import SuccessPage from "./pages/Success";
+import Registered from "./pages/Registered";
 
 function App() {
   return (
@@ -30,7 +32,9 @@ function App() {
               <Route path="drivers" element={<Drivers />} />
               <Route path="drivers/new-profile" element={<DriverProfile />} />
               <Route path="createprofile" element={<CreateProfile/>} />
-              
+              <Route path="Success" element={<SuccessPage />} />
+              <Route path="Registered" element={<Registered />} />
+
             </Route>
           </Routes>
         </ScrollToTop>

@@ -132,7 +132,7 @@ const UserManagementLayout = () => {
         <div className="management_right basis-[80%]">
           <div className="flex justify-center w-full">
             <div className="w-full">
-              <div className="management_right_top px-8 sticky top-0 flex h-[70px] w-full items-center justify-end bg-white shadow-sm">
+              <div className="management_right_top px-8 z-30 sticky top-0 flex h-[70px] w-full items-center justify-end bg-white shadow-sm">
                 <div className="flex items-center gap-5">
                   <img src={notification} alt="Notification" />
                   <div className="profile flex items-center gap-3">
