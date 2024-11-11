@@ -1,5 +1,5 @@
 // Asset Imports
-import { BackArrowIcon, StepHR, SuccessIcon } from "../components/SvgIcons";
+import { BackArrowIcon, StepHR } from "../components/SvgIcons";
 
 // Component Imports
 import DriverImage from "../components/Drivers/DriverImage";
@@ -12,6 +12,7 @@ import FormStepThree from "../components/Drivers/FormStepThree";
 import { Link } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import SuccessModal from "../components/UI/SuccessModal";
 
 const DriverProfile = () => {
   //Array of all Form Steps
@@ -60,7 +61,10 @@ const DriverProfile = () => {
   const forwards = currentStep > previousStep; //unused for now
 
   const methods = useForm();
-  const { handleSubmit, trigger } = methods;
+  const { handleSubmit, trigger, watch } = methods;
+
+  //Form data
+  const formData = watch();
 
   //handle next step function
   const next = async () => {
@@ -95,6 +99,10 @@ const DriverProfile = () => {
     } else {
       document.body.classList.remove("overflow-hidden");
     }
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
   }, [modal]);
 
   return (
@@ -115,7 +123,7 @@ const DriverProfile = () => {
               </Link>
 
               {/* Driver Image */}
-              <DriverImage />
+              <DriverImage className="pb-32 pt-20" />
             </section>
 
             {/* Right Column */}
@@ -151,26 +159,13 @@ const DriverProfile = () => {
 
                   {/* Submission Success Modal */}
                   {modal && (
-                    <div className="fixed inset-0 z-30 flex w-full flex-col content-end items-center justify-center  bg-white p-5  text-center">
-                      <SuccessIcon className="size-[15.375rem]" animated />
-
-                      <p className="mx-auto my-[2.31rem] max-w-[20rem] text-2xl">
-                        Your ticket has been submitted successfully
-                      </p>
-
-                      {/* Link in modal to view new profile */}
-                      <Link
-                        onClick={() => {
-                          setModal(false);
-                          setCurrentStep(0);
-                          setPreviousStep(-1);
-                        }}
-                        to=""
-                        className="inline-block w-full max-w-[20.8125rem] rounded-[0.625rem] bg-mavride-blue p-5 font-semibold text-white"
-                      >
-                        Done
-                      </Link>
-                    </div>
+                    <SuccessModal
+                      message="Your ticket has been submitted successfully"
+                      href="/userManagement/drivers/driver-profile"
+                      linkTextContent="Done"
+                      onClick={() => setModal(false)}
+                      state={formData}
+                    />
                   )}
                 </div>
               </div>

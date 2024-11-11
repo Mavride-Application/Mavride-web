@@ -1,4 +1,4 @@
-import Input from "./Input";
+import Input from "./UI/Input";
 // import { NavLink } from 'react-router-dom';
 
 const EnterPhoneNumber = () => {

@@ -1,7 +1,7 @@
 import camera from "../../assets/camera.svg";
 import { useFormContext } from "react-hook-form";
 
-const DriverImage = () => {
+const DriverImage = ({ className }) => {
   const { register, watch } = useFormContext();
 
   const image = watch("driverPic")?.[0];
@@ -9,7 +9,9 @@ const DriverImage = () => {
   if (image) preview = URL.createObjectURL(image);
 
   return (
-    <div className="mt-auto flex flex-1 flex-col justify-center rounded-[0.625rem] border-[0.5px] border-[#E8E8E8] px-5 pb-32 pt-20">
+    <div
+      className={`mt-auto flex flex-1 flex-col justify-center rounded-[0.625rem] border-[0.5px] border-[#E8E8E8] px-5 ${className}`}
+    >
       <label className="relative mx-auto block size-[10.5rem] rounded-full bg-[#E7E9FB] bg-profile bg-center bg-no-repeat">
         {/* Hidden Image File Input */}
         <input

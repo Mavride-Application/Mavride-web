@@ -1,9 +1,9 @@
-import file_icon from "../assets/file_icon.svg";
-import upload_icon from "../assets/upload_file_icon.svg";
+import file_icon from "../../assets/file_icon.svg";
+import upload_icon from "../../assets/upload_file_icon.svg";
 import { useFormContext } from "react-hook-form";
-import { BinIcon } from "./SvgIcons";
+import { BinIcon } from "../SvgIcons";
 
-const FileInput = ({ label, subtext, name }) => {
+const FileInput = ({ label, subtext, name, required = true }) => {
   const {
     register,
     watch,
@@ -11,7 +11,7 @@ const FileInput = ({ label, subtext, name }) => {
     formState: { errors },
   } = useFormContext();
 
-  const uploaded = watch(name)?.length;
+  const uploaded = watch(name)?.length > 0;
 
   return (
     <label
@@ -50,7 +50,17 @@ const FileInput = ({ label, subtext, name }) => {
           </div>
         )}
       </div>
-      <input hidden type="file" {...register(name, { required: true })} />
+      <input
+        hidden
+        type="file"
+        {...register(name, {
+          validate: {
+            empty: (value) => {
+              if (required) return value.length > 0;
+            },
+          },
+        })}
+      />
     </label>
   );
 };

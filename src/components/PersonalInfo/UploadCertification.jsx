@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { swiperSlides } from "../../lib/variants";
-import FileInput from "../FileInput";
+import FileInput from "../UI/FileInput";
 
 const UploadCertification = ({ forwards }) => {
   return (
