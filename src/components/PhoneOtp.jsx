@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import OnboardingLayout from '../layouts/OnboardingLayout'
-import { useForm } from 'react-hook-form'
-import { NavLink } from 'react-router-dom'
-import { useFormContext } from 'react-hook-form'
+import React, { useEffect, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
-const PhoneOtp = () => {
-  const [otpSent, setOtpSent] = useState(true)
-  const [isOtpComplete, setIsOtpComplete] = useState(false); // State to track OTP completeness
+const PhoneOtp = ({ phoneNumber, otpCode }) => {
+  const [otpSent, setOtpSent] = useState(true);
+  const [isOtpComplete, setIsOtpComplete] = useState(false);
+  const [resTrue, setResTrue] = useState(undefined)
+
 
   const { register, setValue, formState: { isValid }, watch } = useFormContext();
+  const otpValues = watch(['otp[0]', 'otp[1]', 'otp[2]', 'otp[3]']); // Watch all OTP fields individually
 
-
-  const onSubmit = (data) => {
-    const otp = data.otp.join(''); // Combine all input values
-    console.log('Submitted OTP:', otp);
-  };
-
-  const handleChange = (event, index) => {
+  //Backspace and next input functionality for otp field
+ const handleChange = (event, index) => {
     let value = event.target.value;
 
     value = value.slice(0, 1);
@@ -24,6 +19,7 @@ const PhoneOtp = () => {
     if (event.key === 'Backspace') {
       // Clear current value
       setValue(`otp[${index}]`, "", { shouldValidate: true, shouldDirty: true });
+      setResTrue(undefined)
 
       if (index > 0) {
         const prevInput = document.getElementById(`otp-${index - 1}`);
@@ -43,36 +39,65 @@ const PhoneOtp = () => {
     }
   };
 
+  // Paste of otp funtionality
   const handlePaste = (event) => {
-    const pasteData = event.clipboardData.getData('text').slice(0, 4); // Get the pasted data
-    if (pasteData.length === 4 && /^[0-9]+$/.test(pasteData)) { // Check if the pasted data is a 4-digit number
+    const pasteData = event.clipboardData.getData('text').slice(0, 4);
+    if (/^\d{4}$/.test(pasteData)) {
       pasteData.split('').forEach((char, index) => {
-        setValue(`otp[${index}]`, char, { shouldValidate: true, shouldDirty: true });
+        setValue(`otp[${index}]`, char, { shouldValidate: true });
       });
-
-      // After pasting, focus on the last input field
-      const lastInput = document.getElementById(`otp-${pasteData.length - 1}`);
-      if (lastInput) {
-        lastInput.focus();
-      }
+      document.getElementById(`otp-3`).focus();
     }
   };
 
+  const verifyOtp = async () => {
+    const otp = otpValues.join(''); // Combine OTP input values
+    try {
+        console.log('Sending OTP verification request with:', { phone_number: phoneNumber, otp });
+
+        const response = await fetch('http://13.53.133.131/api/v1/auth/verify-otp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                phone_number: phoneNumber,
+                otp
+            })
+        });
+
+        const responseData = await response.json();
+        console.log('Full response data:', responseData);
+
+        // Check for a specific status or message indicating success/failure
+        if (response.ok && responseData.status === "success" && responseData.message === "Phone number verified.") {
+            console.log('OTP verified with backend:', responseData.message);
+            setResTrue(true); // Indicate success for UI styling
+        } else {
+            console.error('OTP verification failed:', responseData.message || responseData);
+            setResTrue(false); // Indicate failure for UI styling
+        }
+    } catch (error) {
+        console.error('Error verifying OTP with backend:', error);
+        setResTrue(false); // Indicate failure for UI styling
+        alert("An error occurred while verifying OTP. Please try again later.");
+    }
+};
 
 
+
+
+  // Update isOtpComplete when any otpValues change
   useEffect(() => {
-    const otpValues = watch('otp'); // Watch for OTP changes
-
-    const isComplete = otpValues.every(val => val.length === 1); // Check if all OTP inputs are filled
-    setIsOtpComplete(isComplete); // Update state, which triggers re-render
-  }, [watch('otp')]); // Re-run the effect every time the OTP values change
+    setIsOtpComplete(otpValues.every(val => val && val.length === 1));
+  }, [otpValues]);
 
   return (
-    <div className="otp-container flex justify-center items-center ~pt-[2rem]/40">
-      <div className="opt-wrapper w-[90%] flex justify-center items-center font-outfit flex-col gap-4">
+    <div className="otp-container flex justify-center items-center ~pt-[10rem]/20">
+      <div className="otp-wrapper w-[90%] flex justify-center items-center font-outfit flex-col gap-4">
+        {resTrue === false && <p className="text-red-500">OTP verification failed. Please try again.</p>}
+
         <div className="p-h flex flex-col items-center gap-2">
-          <h1 className='text-2xl font-outfit font-medium'>Enter OTP</h1>
-          <p className='text-lg text-gray-400'>We will send an OTP to the number</p>
+          <h1 className="text-2xl font-outfit font-medium">Enter OTP</h1>
+          <p className="text-lg text-gray-400">We have sent an OTP to your number</p>
         </div>
 
         <div className="form-wrapper flex flex-col justify-center items-center gap-10 w-[100%]">
@@ -87,28 +112,28 @@ const PhoneOtp = () => {
                 onChange={(event) => handleChange(event, index)}
                 onKeyDown={(event) => handleChange(event, index)}
                 onPaste={handlePaste}
-                className="focus:outline-none focus:ring-2 focus:ring-mavride-blue otp-input border w-[50px] h-[50px] bg-custom-gray border-none text-center text-2xl rounded-[.3em]"
+                className={`focus:outline-none focus:ring-2 focus:ring-blue-500 otp-input border w-[50px] h-[50px] bg-gray-200 text-center text-2xl rounded-md ${resTrue === true ? 'border-mavride-blue' : resTrue === false ? 'border-red-500' : 'border-none'
+                  }`}
               />
             ))}
           </div>
 
-          {otpSent && <p className='font-medium font-outfit'>Resend code in <span className='color-mav text-mavride-blue font-medium'>30sec</span></p>}
+          {otpSent && <p className="font-medium font-outfit">Resend code in <span className="text-blue-500 font-medium">30 sec</span></p>}
 
 
-          <NavLink to="/choosephoto" className="w-[100%]">
-            <button
-              type="submit"
-              className={`w-[100%] p-3 py-4 rounded-[.5em] bg-button-gray text-xl ${isValid ? 'bg-mavride-blue text-white' : 'bg-button-gray text-gray-500'}`}
-              disabled={!isValid}
-            >
-              Verify
-            </button>
-          </NavLink>
+          <button
+            type="button"
+            className={`w-[100%] p-3 py-4 rounded-md text-xl ${isOtpComplete ? 'bg-mavride-blue text-white' : 'bg-gray-300 text-gray-500'}`}
+            disabled={!isOtpComplete}
+            onClick={verifyOtp}
+          >
+            Verify
+          </button>
+
         </div>
       </div>
     </div>
+  );
+};
 
-  )
-}
-
-export default PhoneOtp
+export default PhoneOtp;

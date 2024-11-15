@@ -32,7 +32,6 @@ function App() {
             <Route path="userManagement" element={<UserManagementLayout />}>
               <Route path="drivers/new-profile" element={<DriverProfile />} />
               <Route path="createprofile" element={<CreateProfile />} />
-
               <Route path="createprofile" element={<CreateProfile/>} />
               <Route path="drivers" element={<Registered />} />
               <Route path="drivers/driver-profile" element={<DriverProfileEdit />} />
