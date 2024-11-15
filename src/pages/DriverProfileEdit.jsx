@@ -82,7 +82,7 @@ const DriverProfileEdit = () => {
     carOwnershipProof,
     roadWorthiness,
   };
-  console.log(state);
+
   const methods = useForm({ defaultValues: profileData });
   const { handleSubmit } = methods;
 

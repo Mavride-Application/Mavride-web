@@ -15,8 +15,8 @@ const CompanyDetails = ({ forwards }) => {
     >
       <Input
         label="Name"
-        id="name"
-        name="companyName"
+        id="company_name"
+        name="company_name"
         type="text"
         placeholder="Enter Company’s Name"
         required={true}
@@ -24,8 +24,8 @@ const CompanyDetails = ({ forwards }) => {
       />
       <Input
         label="Address"
-        id="address"
-        name="companyAddress"
+        id="company_address"
+        name="company_address"
         type="text"
         placeholder="Enter Company’s Address"
         required={true}
@@ -33,8 +33,8 @@ const CompanyDetails = ({ forwards }) => {
       />
       <Input
         label="Phone Number"
-        id="phoneNumber"
-        name="companyPhoneNumber"
+        id="company_contacts"
+        name="company_contacts"
         type="number"
         placeholder="Enter Company Phone Number"
         required={true}

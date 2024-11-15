@@ -20,8 +20,8 @@ const PersonalInfo = ({ forwards }) => {
     >
       <Input
         label="Full name"
-        id="fullName"
-        name="fullName"
+        id="fullname"
+        name="fullname"
         type="text"
         placeholder="Enter Full Name"
         required={true}
@@ -51,6 +51,7 @@ const PersonalInfo = ({ forwards }) => {
         id="password"
         name="password"
         type="password"
+        placeholder="Enter Password"
         required={true}
         pattern={{
           value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
@@ -60,9 +61,10 @@ const PersonalInfo = ({ forwards }) => {
       />
       <Input
         label="Confirm Password"
-        id="confirmPassword"
-        name="confirmPassword"
+        id="confirm_password"
+        name="confirm_password"
         type="password"
+        placeholder="Confirm Password"
         required={true}
         validations={{
           sameAsPassword: (value) =>
