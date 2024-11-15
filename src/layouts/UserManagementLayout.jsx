@@ -6,11 +6,50 @@ import notification from "../assets/notification.jpg";
 import profile from "../assets/profile_img.png";
 import { NavLink, Outlet } from "react-router-dom";
 import arrow_down from "../assets/arrow_down.png";
+import manage_account from "../assets/manage_account.png"
+import change_password from "../assets/change_password.png"
+import logout from "../assets/logout.png"
+import useClickOutside from "../components/Hooks/onClickOutside"
+
 
 const UserManagementLayout = () => {
   const [openDropdowns, setOpenDropdowns] = useState({});
   const dropdownRefs = useRef({});
   const arrowRefs = useRef({});
+
+  let [userAccountPop, setUserAccountPop] = useState(false)
+  const dropdownRef = useRef(null);
+  const profileRef = useRef(null);
+
+
+  const userAccountToggle = () => {
+    setUserAccountPop(currentValue => !currentValue)
+    console.log(userAccountPop)
+  }
+
+  const handleClickOutside = (event) => {
+    // Close dropdown only if click is outside both dropdown and profile icon
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target) &&
+      profileRef.current &&
+      !profileRef.current.contains(event.target)
+    ) {
+      setUserAccountPop(false);
+    }
+  };
+
+  useEffect(() => {
+    // Add event listener to detect outside clicks
+    document.addEventListener("mousedown", handleClickOutside);
+    // Clean up the event listener on unmount
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  
+
+  useClickOutside(dropdownRef, handleClickOutside); 
+  
 
   const toggleDropdown = (title) => {
     setOpenDropdowns((prevState) => ({
@@ -40,6 +79,7 @@ const UserManagementLayout = () => {
     Object.keys(dropdownRefs.current).forEach((key) => {
       gsap.set(dropdownRefs.current[key], { height: 0, opacity: 0 });
     });
+
   }, []);
 
   return (
@@ -62,7 +102,7 @@ const UserManagementLayout = () => {
                   "",
                   <SvgIcons number="1" fill="#8C8C8C" />,
                   <SvgIcons number="7" fill="#8C8C8C" />,
-                  ["Drivers", 
+                  ["Drivers",
                     "Members"
 
                   ],
@@ -140,10 +180,10 @@ const UserManagementLayout = () => {
         <div className="management_right basis-[80%]">
           <div className="flex justify-center w-full">
             <div className="w-full">
-              <div className="management_right_top px-8 z-30 sticky top-0 flex h-[70px] w-full items-center justify-end bg-white shadow-sm">
-                <div className="flex items-center gap-5">
+              <div className="management_right_top flex-col px-8 z-30 sticky top-0 flex h-[70px] w-full justify-center items-end bg-white shadow-sm">
+                <div className="flex items-center gap-5 relative" >
                   <img src={notification} alt="Notification" />
-                  <div className="profile flex items-center gap-3">
+                  <div ref={profileRef} className="profile flex items-center gap-3 cursor-pointer" onClick={userAccountToggle} >
                     <img src={profile} alt="Profile" />
                     <div className="profile_name font-inter">
                       <p className="text-[0.861rem] text-[#70757D]">
@@ -153,6 +193,25 @@ const UserManagementLayout = () => {
                     </div>
                     <img src={arrow_down} alt="" />
                   </div>
+                  {
+                    userAccountPop ?
+
+                      <div ref={dropdownRef} className="user-account-nav w-full absolute left-0 top-10 bg-white shadow-lg rounded-lg" >
+                        <div className="manage-account flex items-center gap-3 px-3 py-5 border-b-2 border-custom-gray cursor-pointer">
+                          <img src={manage_account} alt="" className="w-[25px]" />
+                          <p>Manage Account</p>
+                        </div>
+                        <div className="manage-account flex items-center gap-3 px-3 py-5 border-b-2 border-custom-gray cursor-pointer">
+                          <img src={change_password} alt="" className="w-[25px]" />
+                          <p>Change Password</p>
+                        </div>
+                        <div className="manage-account flex items-center gap-3 px-3 pt-5 pb-10 cursor-pointer">
+                          <img src={logout} alt="" className="w-[25px]" />
+                          <p>Log out</p>
+                        </div>
+                      </div> : ""
+                  }
+
                 </div>
               </div>
 
