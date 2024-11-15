@@ -151,7 +151,7 @@ const DriverProfile = () => {
 
                   {/* Submission Success Modal */}
                   {modal && (
-                    <div className="fixed inset-0 z-20 flex w-full flex-col content-end items-center justify-end bg-white p-5 pb-36 text-center">
+                    <div className="fixed inset-0 z-30 flex w-full flex-col content-end items-center justify-center  bg-white p-5  text-center">
                       <SuccessIcon className="size-[15.375rem]" animated />
 
                       <p className="mx-auto my-[2.31rem] max-w-[20rem] text-2xl">

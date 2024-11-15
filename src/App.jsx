@@ -16,8 +16,7 @@ import CreateProfile from "./pages/CreateProfile";
 // import Personalinfo from "./pages/Personalinfo";
 import SuccessPage from "./pages/Success";
 import Registered from "./pages/Registered";
-import Sign from "./pages/Sign";
-import SignIn from "./pages/Sign";
+import SignIn from "./pages/SIgnin";
 
 function App() {
   return (
@@ -27,18 +26,15 @@ function App() {
           <Routes>
             <Route path="/" element={<Onboarding />} />
             <Route path="signup" element={<PhoneVerificationSteps />} />
-            <Route path="Sign" element={<Sign />} />
+            <Route path="Sign" element={<SignIn />} />
             
             {/* <Route path="phoneotp" element={<PhoneOtp/>} /> */}
             <Route path="choosephoto" element={<ChooseProfilePhoto />} />
             <Route path="personalInfo" element={<PersonalInfoSteps />} />
             <Route path="userManagement" element={<UserManagementLayout />}>
-              <Route path="drivers" element={<Drivers />} />
               <Route path="drivers/new-profile" element={<DriverProfile />} />
               <Route path="createprofile" element={<CreateProfile/>} />
-              <Route path="Success" element={<SuccessPage />} />
-              <Route path="Registered" element={<Registered />} />
-              
+              <Route path="drivers" element={<Registered />} />
             </Route>
           </Routes>
         </ScrollToTop>
