@@ -1,12 +1,12 @@
 import { swiperSlides } from "../../lib/variants";
-import Input from "../Input";
+import Input from "../UI/Input";
 
 import { motion } from "framer-motion";
 
 import { City, State } from "country-state-city";
 import { nonStates } from "../../lib/data";
 import { useFormContext } from "react-hook-form";
-import SearchDropdown from "../SearchDropdown";
+import SearchDropdown from "../UI/SearchDropdown";
 
 const LocationDetails = ({ forwards }) => {
   const statesUS = State.getStatesOfCountry("US");
