@@ -100,7 +100,8 @@ const PersonalInfoSteps = () => {
   const onSubmit = async (data) => {
     if (currentStep === 3) {
       // Format formData
-      data.profile_pic = state.image;
+      data.profile_pic = state.image.image;
+      data["phone_number"] = state.phoneNumber;
       data = replaceFileListWithFile(data);
       console.log(data);
 
@@ -131,6 +132,10 @@ const PersonalInfoSteps = () => {
     }
   };
 
+  useEffect(() => {
+    console.log(state);
+  }, [currentStep]);
+
   return (
     <OnboardingLayoutLite className={currentStep === 3 ? "bg-[#F7F7F7]" : ""}>
       {modal && (
@@ -146,7 +151,7 @@ const PersonalInfoSteps = () => {
           <Link
             onClick={() => previous()}
             to={currentStep === 0 ? "/choosephoto" : ""}
-            className="absolute top-[0.37rem] block w-[1.4rem] py-2 ~left-[-8rem]/[-22.37rem]"
+            className="absolute top-[0.37rem] block w-[1.4rem] py-2 ~left-[-1rem]/[-22.37rem]"
             href="#"
           >
             <img src={arrow_left} alt="Back arrow icon" />
