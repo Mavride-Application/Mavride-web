@@ -54,7 +54,7 @@ const PhoneVerificationSteps = () => {
                 <FormProvider {...methods}>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {currentStep === 'phone' && <EnterPhoneNumber />}
-                        {currentStep === 'otp' && <PhoneOtp phoneNumber={phoneNumber} otpCode={otpCode} />}
+                        {currentStep === 'otp' && <PhoneOtp phoneNumber={phoneNumber} otpCode={otpCode} requestOtp={requestOtp} />}
                     </form>
                 </FormProvider>
             </div>

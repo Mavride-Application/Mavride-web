@@ -1,17 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { useAuth } from './OtpAuth/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
-const PhoneOtp = ({ phoneNumber, otpCode }) => {
+const PhoneOtp = ({ phoneNumber, otpCode, requestOtp }) => {
   const [otpSent, setOtpSent] = useState(true);
   const [isOtpComplete, setIsOtpComplete] = useState(false);
   const [resTrue, setResTrue] = useState(undefined)
+  const [otpCounter, setOtpCounter] = useState(30)
+
+  const handleResendOtp = () => {
+    if (phoneNumber) {
+      setOtpCounter(30); // Reset the counter
+      requestOtp(phoneNumber);
+    } else {
+      console.error("Phone number is missing");
+    }
+  };
 
 
   const { register, setValue, formState: { isValid }, watch } = useFormContext();
   const otpValues = watch(['otp[0]', 'otp[1]', 'otp[2]', 'otp[3]']); // Watch all OTP fields individually
 
+  const { setIsOtpVerified } = useAuth();
+
+  //To navigate to next route if otp is verified
+  const navigate = useNavigate();
+
   //Backspace and next input functionality for otp field
- const handleChange = (event, index) => {
+  const handleChange = (event, index) => {
     let value = event.target.value;
 
     value = value.slice(0, 1);
@@ -50,37 +67,50 @@ const PhoneOtp = ({ phoneNumber, otpCode }) => {
     }
   };
 
+  useEffect(() => {
+    if (otpCounter > 0) {
+      const timer = setInterval(() => {
+        setOtpCounter((prevCounter) => prevCounter - 1);
+      }, 1000);
+
+      // Cleanup the interval on unmount or when otpCounter changes
+      return () => clearInterval(timer);
+    }
+  }, [otpCounter]);
+
   const verifyOtp = async () => {
     const otp = otpValues.join(''); // Combine OTP input values
     try {
-        console.log('Sending OTP verification request with:', { phone_number: phoneNumber, otp });
+      console.log('Sending OTP verification request with:', { phone_number: phoneNumber, otp });
 
-        const response = await fetch('http://13.53.133.131/api/v1/auth/verify-otp', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                phone_number: phoneNumber,
-                otp
-            })
-        });
+      const response = await fetch('http://13.53.133.131/api/v1/auth/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          phone_number: phoneNumber,
+          otp
+        })
+      });
 
-        const responseData = await response.json();
-        console.log('Full response data:', responseData);
+      const responseData = await response.json();
+      console.log('Full response data:', responseData);
 
-        // Check for a specific status or message indicating success/failure
-        if (response.ok && responseData.status === "success" && responseData.message === "Phone number verified.") {
-            console.log('OTP verified with backend:', responseData.message);
-            setResTrue(true); // Indicate success for UI styling
-        } else {
-            console.error('OTP verification failed:', responseData.message || responseData);
-            setResTrue(false); // Indicate failure for UI styling
-        }
-    } catch (error) {
-        console.error('Error verifying OTP with backend:', error);
+      // Check for a specific status or message indicating success/failure
+      if (response.ok && responseData.status === "success" && responseData.message === "Phone number verified.") {
+        console.log('OTP verified with backend:', responseData.message);
+        setResTrue(true); // Indicate success for UI styling
+        setIsOtpVerified(true);
+        navigate('/choosephoto');
+      } else {
+        console.error('OTP verification failed:', responseData.message || responseData);
         setResTrue(false); // Indicate failure for UI styling
-        alert("An error occurred while verifying OTP. Please try again later.");
+      }
+    } catch (error) {
+      console.error('Error verifying OTP with backend:', error);
+      setResTrue(false); // Indicate failure for UI styling
+      alert("An error occurred while verifying OTP. Please try again later.");
     }
-};
+  };
 
 
 
@@ -118,7 +148,19 @@ const PhoneOtp = ({ phoneNumber, otpCode }) => {
             ))}
           </div>
 
-          {otpSent && <p className="font-medium font-outfit">Resend code in <span className="text-blue-500 font-medium">30 sec</span></p>}
+          {otpSent && (
+            <p className="font-medium font-outfit">
+              {otpCounter > 0 ? (
+                <>
+                  Resend code in <span className="text-blue-500 font-medium">{otpCounter} sec</span>
+                </>
+              ) : (
+                <span className="text-blue-500 cursor-pointer" onClick={handleResendOtp}>
+                  Resend
+                </span>
+              )}
+            </p>
+          )}
 
 
           <button
