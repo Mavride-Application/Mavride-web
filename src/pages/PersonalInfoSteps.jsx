@@ -142,7 +142,7 @@ const PersonalInfoSteps = () => {
         <SuccessModal
           message="Your registration was successful. Now, please log in with your email and password to get started"
           linkTextContent="Done"
-          href="/signIn"
+          href="/signin"
           className="max-w-[37rem]"
         />
       )}
