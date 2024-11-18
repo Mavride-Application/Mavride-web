@@ -26,7 +26,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Onboarding />} />
             <Route path="signup" element={<PhoneVerificationSteps />} />
-            <Route path="Sign" element={<SignIn />} />
+            <Route path="Signin" element={<SignIn />} />
             
             {/* <Route path="phoneotp" element={<PhoneOtp/>} /> */}
             <Route path="choosephoto" element={<ChooseProfilePhoto />} />
