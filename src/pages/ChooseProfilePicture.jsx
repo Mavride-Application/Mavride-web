@@ -2,6 +2,7 @@ import OnboardingLayoutLite from "../layouts/OnboardingLayoutLite";
 import camera from "../assets/camera.svg";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const ChooseProfilePicture = () => {
   const [image, setImage] = useState({
@@ -9,6 +10,12 @@ const ChooseProfilePicture = () => {
     image: undefined,
     preview: "",
   });
+
+  const {state} = useLocation();
+
+useEffect(() => {
+  console.log(state)
+}, [])
 
   const [disabled, setDisabled] = useState(true);
 
