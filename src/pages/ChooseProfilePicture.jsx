@@ -1,8 +1,7 @@
 import OnboardingLayoutLite from "../layouts/OnboardingLayoutLite";
 import camera from "../assets/camera.svg";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const ChooseProfilePicture = () => {
   const [image, setImage] = useState({
@@ -11,11 +10,7 @@ const ChooseProfilePicture = () => {
     preview: "",
   });
 
-  const {state} = useLocation();
-
-useEffect(() => {
-  console.log(state)
-}, [])
+  const { state } = useLocation();
 
   const [disabled, setDisabled] = useState(true);
 
@@ -86,7 +81,7 @@ useEffect(() => {
           </div>
 
           {/* Form Submit Button */}
-          <NavLink to="/personalInfo">
+          <Link to="/personalInfo" state={{ image, phoneNumber: state }}>
             <button
               type="submit"
               disabled={disabled}
@@ -94,7 +89,7 @@ useEffect(() => {
             >
               Proceed
             </button>
-          </NavLink>
+          </Link>
         </form>
       </div>
     </OnboardingLayoutLite>

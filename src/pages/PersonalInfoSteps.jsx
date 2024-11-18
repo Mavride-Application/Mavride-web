@@ -7,6 +7,9 @@ import LocationDetails from "../components/PersonalInfo/LocationDetails";
 import CompanyDetails from "../components/PersonalInfo/CompanyDetails";
 import UploadCertification from "../components/PersonalInfo/UploadCertification";
 import { AnimatePresence } from "framer-motion";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import SuccessModal from "../components/UI/SuccessModal";
+import { convertToFormData, replaceFileListWithFile } from "../lib/utils";
 
 const steps = [
   {
@@ -14,92 +17,145 @@ const steps = [
     title: "Personal Information",
     subtitle:
       "Create an account with us and complete verification to get started",
+    fields: ["fullname", "gender", "email", "password", "confirm_password"],
   },
   {
     id: "Step 2",
     title: "Enter Location Details",
     subtitle: "Enter valid location details to complete registration",
+    fields: ["state", "city", "address"],
   },
   {
     id: "Step 3",
     title: "Company Details",
     subtitle: "Enter valid company details to complete registration",
+    fields: ["company_name", "company_address", "phone_number"],
   },
   {
     id: "Step 4",
     title: "Upload Valid Certification",
     subtitle: "Upload valid certifications for verification",
+    fields: ["health_license", "transport_license"],
   },
 ];
 
 const PersonalInfoSteps = () => {
+  const { state } = useLocation(); // get profile_pic
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!state) {
+      navigate("/choosephoto");
+    }
+  }, []);
+
+  // Set up use form
   const methods = useForm({
     defaultValues: {
-      fullName: "",
-      email: "",
+      fullname: "",
       gender: "",
+      email: "",
+      password: "",
+      confirm_password: "",
       state: "",
       city: "",
       address: "",
-      companyName: "",
-      companyAddress: "",
-      companyPhoneNumber: "",
-      driverLicense: "",
-      transportLicense: "",
+      company_name: "",
+      company_address: "",
+      company_contacts: "",
+      health_license: "",
+      transport_license: "",
     },
   });
   const {
     handleSubmit,
-    reset,
     trigger,
-    formState: { isValid, isSubmitSuccessful },
+    formState: { isValid },
   } = methods;
 
   const [previousStep, setPreviousStep] = useState(-1);
   const [currentStep, setCurrentStep] = useState(0);
+  const [modal, setModal] = useState(false);
 
   const forwards = currentStep > previousStep;
 
   // Control current form step
-  const next = () => {
-    if (currentStep < steps.length - 1) {
+  const next = async () => {
+    //const isValid = await trigger(steps[currentStep]);
+    if (isValid) {
       setPreviousStep(currentStep);
-      setCurrentStep((step) => step + 1);
+      setCurrentStep((step) => Math.min(step + 1, 3));
+    } else {
+      await trigger(steps[currentStep].fields);
     }
   };
 
-  const previous = async () => {
+  const previous = () => {
     if (currentStep > 0) {
-      setTimeout(async () => trigger(), 1000);
       setPreviousStep(currentStep);
-      setCurrentStep((step) => step - 1);
+      setCurrentStep((step) => Math.max(step - 1, 0));
     }
   };
 
-  const onSubmit = (data) => {
-    if (currentStep === 3) console.log(data);
+  const onSubmit = async (data) => {
+    if (currentStep === 3) {
+      // Format formData
+      data.profile_pic = state.image.image;
+      data["phone_number"] = state.phoneNumber;
+      data = replaceFileListWithFile(data);
+      console.log(data);
+
+      //Send data to backend
+      try {
+        const formData = convertToFormData(data);
+        const res = await fetch(
+          "http://13.53.133.131/api/v1/providers/signup",
+          {
+            method: "POST",
+            body: formData,
+          },
+        );
+
+        if (!res.ok) {
+          throw new Error("Failed to send sign-up data");
+        }
+
+        const result = await res.json();
+
+        //Open modal
+        setModal(true);
+
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
-  // Reset form after successful submission
   useEffect(() => {
-    // reset();
-    // setCurrentStep(0);
-  }, [isSubmitSuccessful]);
+    console.log(state);
+  }, [currentStep]);
 
   return (
     <OnboardingLayoutLite className={currentStep === 3 ? "bg-[#F7F7F7]" : ""}>
+      {modal && (
+        <SuccessModal
+          message="Your registration was successful. Now, please log in with your email and password to get started"
+          linkTextContent="Done"
+          href="/signin"
+          className="max-w-[37rem]"
+        />
+      )}
       <div className="mx-auto w-full max-w-[27.63rem] py-20">
         <div className="relative mx-auto text-center">
-          <button
+          <Link
             onClick={() => previous()}
-            className="absolute top-[0.37rem] block w-[1.4rem] py-2 ~left-[-8rem]/[-22.37rem]"
+            to={currentStep === 0 ? "/choosephoto" : ""}
+            className="absolute top-[0.37rem] block w-[1.4rem] py-2 ~left-[-1rem]/[-22.37rem]"
             href="#"
           >
             <img src={arrow_left} alt="Back arrow icon" />
-          </button>
-
-          {/* Users Profile Image */}
-          <div className="mx-auto mb-10 size-20 overflow-hidden rounded-full bg-[#E7E9FB] bg-profile bg-[size:2.5rem] bg-center bg-no-repeat"></div>
+          </Link>
 
           {/* Page Heading & Description */}
           <h1 className="mb-1 font-medium text-mavride-deep-blue ~text-2xl/[2rem]">
@@ -111,7 +167,6 @@ const PersonalInfoSteps = () => {
         </div>
 
         {/* Form  */}
-
         <FormProvider {...methods}>
           <form
             className="mt-[2.81rem]"
@@ -137,7 +192,6 @@ const PersonalInfoSteps = () => {
             {/* Forms's Proceed/Submit Button */}
             <button
               key={currentStep}
-              disabled={!isValid}
               type={currentStep === 3 ? "submit" : "button"}
               onClick={() => next()}
               className="w-full rounded-[0.625rem] bg-mavride-blue py-4 font-semibold text-white ~text-base/lg ~mt-8/[3.44rem] disabled:bg-[#D3D3D3]"

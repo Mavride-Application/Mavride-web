@@ -13,14 +13,14 @@ const UploadCertification = ({ forwards }) => {
       className="space-y-[1.62rem]"
     >
       <FileInput
-        label="Driver’s license"
-        subtext="Upload your driver’s license"
-        name="driverLicense"
+        label="Health license"
+        subtext="Upload your health license"
+        name="health_license"
       />
       <FileInput
         label="Transport license"
         subtext="Upload your transport license"
-        name="transportLicense"
+        name="transport_license"
       />
     </motion.div>
   );

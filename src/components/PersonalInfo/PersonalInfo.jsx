@@ -20,8 +20,8 @@ const PersonalInfo = ({ forwards }) => {
     >
       <Input
         label="Full name"
-        id="fullName"
-        name="fullName"
+        id="fullname"
+        name="fullname"
         type="text"
         placeholder="Enter Full Name"
         required={true}
@@ -51,18 +51,23 @@ const PersonalInfo = ({ forwards }) => {
         id="password"
         name="password"
         type="password"
+        placeholder="Enter Password"
         required={true}
         pattern={{
-          value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
           message:
             "Password should combination of letters, numbers, and special characters e.g. a1@",
+        }}
+        validations={{
+          minLength: (value) =>
+            value.length > 5 || "Password must at least 6 characters",
         }}
       />
       <Input
         label="Confirm Password"
-        id="confirmPassword"
-        name="confirmPassword"
+        id="confirm_password"
+        name="confirm_password"
         type="password"
+        placeholder="Confirm Password"
         required={true}
         validations={{
           sameAsPassword: (value) =>
