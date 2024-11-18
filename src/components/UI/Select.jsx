@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import dropdown_icon from "../assets/dropdown_icon.svg";
+import dropdown_icon from "../../assets/dropdown_icon.svg";
 import Input from "./Input";
 
 import { motion } from "framer-motion";

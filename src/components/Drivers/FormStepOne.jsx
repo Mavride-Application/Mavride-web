@@ -1,7 +1,7 @@
 import { State, City } from "country-state-city";
-import Input from "../Input";
-import SearchDropdown from "../SearchDropdown";
-import Select from "../Select";
+import Input from "../UI/Input";
+import SearchDropdown from "../UI/SearchDropdown";
+import Select from "../UI/Select";
 import { nonStates } from "../../lib/data";
 import { useFormContext } from "react-hook-form";
 
@@ -24,9 +24,26 @@ const FormStepOne = () => {
   ) || ["Select a state"];
   return (
     <>
-      <Input label="Full Name" name="fullName" required={true} />
-      <Input label="Phone" name="phone" type="tel" required={true} />
-      <Input label="Email" name="email" type="email" required={true} />
+      <Input
+        label="Full Name"
+        name="fullName"
+        required={true}
+        placeholder="John Doe"
+      />
+      <Input
+        label="Phone"
+        name="phone"
+        type="tel"
+        required={true}
+        placeholder="Enter Phone number"
+      />
+      <Input
+        label="Email"
+        name="email"
+        type="email"
+        required={true}
+        placeholder="Example@gmail.com"
+      />
       <SearchDropdown
         key={"state"}
         label="State"
@@ -62,8 +79,18 @@ const FormStepOne = () => {
           cityNotInState: (city) => cities.includes(city) || "City not found",
         }}
       />
-      <Input label="Driver License" name="driverLicense" required={true} />
-      <Input label="Address" name="address" required={true} />
+      <Input
+        label="Driver License"
+        name="driverLicense"
+        required={true}
+        placeholder="Enter Driver’s License"
+      />
+      <Input
+        label="Address"
+        name="address"
+        required={true}
+        placeholder="Enter Address"
+      />
     </>
   );
 };

@@ -1,5 +1,5 @@
-import Input from "../Input";
-import Select from "../Select";
+import Input from "../UI/Input";
+import Select from "../UI/Select";
 
 const FormStepTwo = () => {
   return (
