@@ -83,7 +83,7 @@ const PhoneOtp = ({ phoneNumber, otpCode, requestOtp }) => {
     try {
       console.log('Sending OTP verification request with:', { phone_number: phoneNumber, otp });
 
-      const response = await fetch('http://13.53.133.131/api/v1/auth/verify-otp', {
+      const response = await fetch('https://yv6zgf4z0d.execute-api.eu-north-1.amazonaws.com/api/v1/auth/verify-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -21,7 +21,7 @@ const PhoneVerificationSteps = () => {
     // Function to request OTP
     const requestOtp = async (validPhoneNumber) => {
         try {
-            const response = await fetch('http://13.53.133.131/api/v1/auth/send-otp', {
+            const response = await fetch('https://yv6zgf4z0d.execute-api.eu-north-1.amazonaws.com/api/v1/auth/send-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ phone_number: validPhoneNumber })
