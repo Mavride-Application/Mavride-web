@@ -16,6 +16,7 @@ import CreateProfile from "./pages/CreateProfile";
 // import Personalinfo from "./pages/Personalinfo";
 import SuccessPage from "./pages/Success";
 import Registered from "./pages/Registered";
+import SignIn from "./pages/SignIn"
 import DriverProfileEdit from "./pages/DriverProfileEdit";
 import { AuthProvider } from "./components/OtpAuth/AuthProvider";
 import ProtectedRoute from "./components/OtpAuth/ProtectedRoute";
@@ -23,6 +24,24 @@ import ProtectedRoute from "./components/OtpAuth/ProtectedRoute";
 function App() {
   return (
     <div>
+      <Router>
+        <ScrollToTop>
+          <Routes>
+            <Route path="/" element={<Onboarding />} />
+            <Route path="signup" element={<PhoneVerificationSteps />} />
+            <Route path="signin" element={<SignIn />} />
+            
+            {/* <Route path="phoneotp" element={<PhoneOtp/>} /> */}
+            <Route path="choosephoto" element={<ChooseProfilePhoto />} />
+            <Route path="personalInfo" element={<PersonalInfoSteps />} />
+            <Route path="userManagement" element={<UserManagementLayout />}>
+              <Route path="drivers/new-profile" element={<DriverProfile />} />
+              <Route path="createprofile" element={<CreateProfile/>} />
+              <Route path="drivers" element={<Registered />} />
+            </Route>
+          </Routes>
+        </ScrollToTop>
+      </Router>
       <AuthProvider>
         <Router>
           <ScrollToTop>

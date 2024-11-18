@@ -29,7 +29,7 @@ const AnimatedCheckPage = () => {
   }, []);
 
   return (
-    <div style={styles.pageContainer}>
+    <div className="h-[80vh]" style={styles.pageContainer}>
       <svg width="150" height="150" viewBox="0 0 100 100" style={styles.svgContainer}>
         <circle
           cx="50"
@@ -64,9 +64,9 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100%',
+    height: '88vh',
     width: '100%',
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#fff',
     fontFamily: 'Arial, sans-serif'
   },
   svgContainer: {
