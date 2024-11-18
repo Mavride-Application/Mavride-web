@@ -58,6 +58,10 @@ const PersonalInfo = ({ forwards }) => {
           message:
             "Password should combination of letters, numbers, and special characters e.g. a1@",
         }}
+        validations={{
+          minLength: (value) =>
+            value.length > 5 || "Password must at least 6 characters",
+        }}
       />
       <Input
         label="Confirm Password"

@@ -1,13 +1,13 @@
 import { FormProvider, useForm } from "react-hook-form";
 import OnboardingLayoutLite from "../layouts/OnboardingLayoutLite";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import arrow_left from "../assets/arrow_left.svg";
 import PersonalInfo from "../components/PersonalInfo/PersonalInfo";
 import LocationDetails from "../components/PersonalInfo/LocationDetails";
 import CompanyDetails from "../components/PersonalInfo/CompanyDetails";
 import UploadCertification from "../components/PersonalInfo/UploadCertification";
 import { AnimatePresence } from "framer-motion";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SuccessModal from "../components/UI/SuccessModal";
 import { convertToFormData, replaceFileListWithFile } from "../lib/utils";
 
@@ -41,6 +41,13 @@ const steps = [
 
 const PersonalInfoSteps = () => {
   const { state } = useLocation(); // get profile_pic
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!state) {
+      navigate("/choosephoto");
+    }
+  }, []);
 
   // Set up use form
   const methods = useForm({
@@ -83,11 +90,10 @@ const PersonalInfoSteps = () => {
     }
   };
 
-  const previous = async () => {
+  const previous = () => {
     if (currentStep > 0) {
-      setTimeout(async () => trigger(), 1000);
       setPreviousStep(currentStep);
-      setCurrentStep((step) => Math.max(step + 1, 0));
+      setCurrentStep((step) => Math.max(step - 1, 0));
     }
   };
 
@@ -97,7 +103,6 @@ const PersonalInfoSteps = () => {
       data.profile_pic = state.image;
       data = replaceFileListWithFile(data);
       console.log(data);
-      data = convertToFormData(data);
 
       //Send data to backend
       try {
@@ -138,13 +143,14 @@ const PersonalInfoSteps = () => {
       )}
       <div className="mx-auto w-full max-w-[27.63rem] py-20">
         <div className="relative mx-auto text-center">
-          <button
+          <Link
             onClick={() => previous()}
+            to={currentStep === 0 ? "/choosephoto" : ""}
             className="absolute top-[0.37rem] block w-[1.4rem] py-2 ~left-[-8rem]/[-22.37rem]"
             href="#"
           >
             <img src={arrow_left} alt="Back arrow icon" />
-          </button>
+          </Link>
 
           {/* Page Heading & Description */}
           <h1 className="mb-1 font-medium text-mavride-deep-blue ~text-2xl/[2rem]">
