@@ -46,7 +46,7 @@ const SignIn = () => {
             {/* Form */}
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* Email Field */}
-              <div className="mb-4">
+              <div className="mb-4 relative">
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   Email <span className="text-red-500">*</span>
                 </label>

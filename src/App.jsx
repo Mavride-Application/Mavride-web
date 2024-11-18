@@ -16,7 +16,7 @@ import CreateProfile from "./pages/CreateProfile";
 // import Personalinfo from "./pages/Personalinfo";
 import SuccessPage from "./pages/Success";
 import Registered from "./pages/Registered";
-import SignIn from "./pages/SIgnin";
+import SignIn from "./pages/SignIn"
 import DriverProfileEdit from "./pages/DriverProfileEdit";
 import { AuthProvider } from "./components/OtpAuth/AuthProvider";
 import ProtectedRoute from "./components/OtpAuth/ProtectedRoute";
@@ -29,7 +29,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Onboarding />} />
             <Route path="signup" element={<PhoneVerificationSteps />} />
-            <Route path="Signin" element={<SignIn />} />
+            <Route path="signin" element={<SignIn />} />
             
             {/* <Route path="phoneotp" element={<PhoneOtp/>} /> */}
             <Route path="choosephoto" element={<ChooseProfilePhoto />} />
