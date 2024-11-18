@@ -100,7 +100,7 @@ const PhoneOtp = ({ phoneNumber, otpCode, requestOtp }) => {
         console.log('OTP verified with backend:', responseData.message);
         setResTrue(true); // Indicate success for UI styling
         setIsOtpVerified(true);
-        navigate('/choosephoto');
+        navigate('/choosephoto', {state: phoneNumber});
       } else {
         console.error('OTP verification failed:', responseData.message || responseData);
         setResTrue(false); // Indicate failure for UI styling
