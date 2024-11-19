@@ -109,7 +109,7 @@ const PersonalInfoSteps = () => {
       try {
         const formData = convertToFormData(data);
         const res = await fetch(
-          "http://13.53.133.131/api/v1/providers/signup",
+          "https://yv6zgf4z0d.execute-api.eu-north-1.amazonaws.com/api/v1/providers/signup",
           {
             method: "POST",
             body: formData,
