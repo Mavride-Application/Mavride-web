@@ -20,7 +20,7 @@ import Registered from "./pages/Registered";
 import DriverProfileEdit from "./pages/DriverProfileEdit";
 import { AuthProvider } from "./components/OtpAuth/AuthProvider";
 import ProtectedRoute from "./components/OtpAuth/ProtectedRoute";
-import SignIn from "./pages/SIgnin";
+import SignIn from "./pages/SignIn";
 
 function App() {
   return (
