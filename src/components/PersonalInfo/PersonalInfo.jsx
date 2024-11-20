@@ -54,7 +54,7 @@ const PersonalInfo = ({ forwards }) => {
         placeholder="Enter Password"
         required={true}
         pattern={{
-          value: /^[A-Za-z0-9@#$%^&+=!~]{6,}$/,
+          value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
           message:
             "Password should combination of letters, numbers, and special characters e.g. a1@",
         }}
