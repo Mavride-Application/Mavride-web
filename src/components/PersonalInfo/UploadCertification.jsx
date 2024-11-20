@@ -16,11 +16,13 @@ const UploadCertification = ({ forwards }) => {
         label="Health license"
         subtext="Upload your health license"
         name="health_license"
+        accept="application/pdf"
       />
       <FileInput
         label="Transport license"
         subtext="Upload your transport license"
         name="transport_license"
+        accept="application/pdf"
       />
     </motion.div>
   );

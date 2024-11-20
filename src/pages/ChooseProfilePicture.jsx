@@ -16,6 +16,12 @@ const ChooseProfilePicture = () => {
 
   const handleChange = (event) => {
     const image = event.target.files[0];
+
+    // Check if the file is an image using a regular expression
+    if (!image.type.match(/^image\//)) {
+      return;
+    }
+
     const preview = URL.createObjectURL(image);
     setImage({ name: image.name, image, preview });
   };
@@ -56,6 +62,7 @@ const ChooseProfilePicture = () => {
               type="file"
               name="profile-pic"
               id="profile-pic"
+              accept="image/*"
               onChange={handleChange}
             />
 
