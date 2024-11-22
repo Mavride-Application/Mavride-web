@@ -66,7 +66,6 @@ const SignIn = () => {
                   placeholder="Example@gmail.com"
                   autoComplete="email"
                 />
-                <input type="text" name="" id="" />
                 {errors.email && (
                   <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
                 )}
@@ -95,7 +94,6 @@ const SignIn = () => {
                     placeholder="Password"
                      autoComplete="current-password"
                   />
-                  <input type="text" />
                   <div
                     className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
                     onClick={() => setShowPassword(!showPassword)}
