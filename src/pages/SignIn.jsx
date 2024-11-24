@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import Cookies from "js-cookie"; // Import Cookies
 import logoblue from "../assets/logo_blue.svg";
 import {
   EyeIcon,
@@ -20,7 +21,7 @@ const SignIn = () => {
       console.log(data); // Log the submitted data for debugging
 
       const res = await fetch(
-        "https://yv6zgf4z0d.execute-api.eu-north-1.amazonaws.com/api/v1/auth/login ",
+        "https://yv6zgf4z0d.execute-api.eu-north-1.amazonaws.com/api/v1/auth/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -36,13 +37,25 @@ const SignIn = () => {
       }
 
       const result = await res.json();
-      console.log("Login successful", result);
-      window.location.href = '/userManagement';
-      // Handle successful login (e.g., redirect or store tokens)
+      console.log("Login result:", result);
+
+      // Check if access token is present in the result
+      if (result.access) {
+        setCookies(result.access, "App1"); // Store the access token in cookies
+        console.log("Login successful", result);
+        window.location.href = "/userManagement"; // Redirect after successful login
+      } else {
+        throw new Error("Authentication token is missing");
+      }
     } catch (error) {
       console.error("Error during login:", error);
       // Handle login error (e.g., show an error message)
     }
+  };
+
+  const setCookies = (authToken, appName) => {
+    const tokenName = `accessToken_${appName}`; // App-specific name
+    Cookies.set(tokenName, authToken, { expires: 1 });
   };
 
   return (
@@ -146,8 +159,7 @@ const SignIn = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                // onClick={onSubmit}
-                className="relative cursor-pointer w-full rounded-md bg-blue-800 py-2 font-medium text-white hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="relative w-full cursor-pointer rounded-md bg-blue-800 py-2 font-medium text-white hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 Sign in
               </button>
