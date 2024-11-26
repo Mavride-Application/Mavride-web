@@ -1,5 +1,5 @@
 import { swiperSlides } from "../../lib/variants";
-import Input from "../Input";
+import Input from "../UI/Input";
 
 import { motion } from "framer-motion";
 

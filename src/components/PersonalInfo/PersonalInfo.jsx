@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { swiperSlides } from "../../lib/variants";
-import Input from "../Input";
-import Select from "../Select";
+import Input from "../UI/Input";
+import Select from "../UI/Select";
 
 import { motion } from "framer-motion";
 

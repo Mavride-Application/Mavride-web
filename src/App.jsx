@@ -16,6 +16,9 @@ import Registered from "./pages/Registered";
 import SignIn from "./pages/SIgnin";
 import ScheduledTripsPage from "./pages/ScheduledTripsPage";
 import Dashboard from "./components/Dashboard/Dashboard";
+import DriverProfileEdit from "./pages/DriverProfileEdit";
+import { AuthProvider } from "./components/OtpAuth/AuthProvider";
+import ProtectedRoute from "./components/OtpAuth/ProtectedRoute";
 
 function App() {
   return (
@@ -25,7 +28,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Onboarding />} />
             <Route path="signup" element={<PhoneVerificationSteps />} />
-            <Route path="Sign" element={<SignIn />} />
+            <Route path="signin" element={<SignIn />} />
             
             <Route path="/Scheduled-trips" element={<ScheduledTripsPage />} />
             
@@ -41,6 +44,30 @@ function App() {
           </Routes>
         </ScrollToTop>
       </Router>
+      <AuthProvider>
+        <Router>
+          <ScrollToTop>
+            <Routes>
+              <Route path="/" element={<Onboarding />} />
+              <Route path="signup" element={<PhoneVerificationSteps />} />
+              <Route 
+              path="choosephoto" 
+              element={<ProtectedRoute>
+                          <ChooseProfilePhoto />
+                      </ProtectedRoute>} 
+              />
+              <Route path="personalInfo" element={<PersonalInfoSteps />} />
+              <Route path="userManagement" element={<UserManagementLayout />}>
+                <Route path="drivers/new-profile" element={<DriverProfile />} />
+                <Route path="createprofile" element={<CreateProfile />} />
+                <Route path="createprofile" element={<CreateProfile />} />
+                <Route path="drivers" element={<Registered />} />
+                <Route path="drivers/driver-profile" element={<DriverProfileEdit />} />
+              </Route>
+            </Routes>
+          </ScrollToTop>
+        </Router>
+      </AuthProvider>
     </div>
   );
 }
