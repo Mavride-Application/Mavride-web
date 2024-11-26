@@ -13,7 +13,7 @@ import DriverProfile from "./pages/DriverProfile";
 import CreateProfile from "./pages/CreateProfile";
 import SuccessPage from "./pages/Success";
 import Registered from "./pages/Registered";
-import SignIn from "./pages/SIgnin";
+import SignIn from "./pages/SignIn";
 import ScheduledTripsPage from "./pages/ScheduledTripsPage";
 import Dashboard from "./components/Dashboard/Dashboard";
 import DriverProfileEdit from "./pages/DriverProfileEdit";
