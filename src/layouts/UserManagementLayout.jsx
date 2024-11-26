@@ -197,7 +197,7 @@ const UserManagementLayout = () => {
                     userAccountPop ?
 
                       <div ref={dropdownRef} className="user-account-nav w-full absolute left-0 top-10 bg-white shadow-lg rounded-lg" >
-                        <div className="manage-account flex items-center gap-3 px-3 py-5 border-b-2 border-custom-gray cursor-pointer">
+                        <div className="manage-account flex items-center gap-3  py-5 border-b-2 border-custom-gray cursor-pointer">
                           <img src={manage_account} alt="" className="w-[25px]" />
                           <p>Manage Account</p>
                         </div>
@@ -215,7 +215,7 @@ const UserManagementLayout = () => {
                 </div>
               </div>
 
-              <div className="management_right_bottom_children px-8">
+              <div className="management_right_bottom_children bg-gray-50 pl-4 pr-2">
                 <Outlet />
               </div>
             </div>

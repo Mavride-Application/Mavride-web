@@ -46,7 +46,7 @@ const SignIn = () => {
             {/* Form */}
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* Email Field */}
-              <div className="mb-4">
+              <div className="mb-4 relative">
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   Email <span className="text-red-500">*</span>
                 </label>
@@ -66,14 +66,14 @@ const SignIn = () => {
                   placeholder="Example@gmail.com"
                   autoComplete="email"
                 />
-                <input type="text" name="" id="" />
                 {errors.email && (
                   <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
                 )}
               </div>
 
               {/* Password Field */}
-              <div className="mb-6">
+              <div className="mb-6 relative">
+               
                 <label htmlFor="password" id="password" className="block text-sm font-medium text-gray-700">
                   Password <span className="text-red-500">*</span>
                 </label>
@@ -95,7 +95,7 @@ const SignIn = () => {
                     placeholder="Password"
                      autoComplete="current-password"
                   />
-                  <input type="text" />
+                  
                   <div
                     className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
                     onClick={() => setShowPassword(!showPassword)}

@@ -11,12 +11,11 @@ import UserManagementLayout from "./layouts/UserManagementLayout";
 import Drivers from "./pages/Drivers";
 import DriverProfile from "./pages/DriverProfile";
 import CreateProfile from "./pages/CreateProfile";
-
-// import ChooseProfilePicture from "./pages/ChooseProfilePicture";
-// import Personalinfo from "./pages/Personalinfo";
 import SuccessPage from "./pages/Success";
 import Registered from "./pages/Registered";
 import SignIn from "./pages/SIgnin";
+import ScheduledTripsPage from "./pages/ScheduledTripsPage";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -28,6 +27,8 @@ function App() {
             <Route path="signup" element={<PhoneVerificationSteps />} />
             <Route path="Sign" element={<SignIn />} />
             
+            <Route path="/Scheduled-trips" element={<ScheduledTripsPage />} />
+            
             {/* <Route path="phoneotp" element={<PhoneOtp/>} /> */}
             <Route path="choosephoto" element={<ChooseProfilePhoto />} />
             <Route path="personalInfo" element={<PersonalInfoSteps />} />
@@ -35,6 +36,7 @@ function App() {
               <Route path="drivers/new-profile" element={<DriverProfile />} />
               <Route path="createprofile" element={<CreateProfile/>} />
               <Route path="drivers" element={<Registered />} />
+              <Route path="Dashboard" element={<Dashboard />} />
             </Route>
           </Routes>
         </ScrollToTop>
