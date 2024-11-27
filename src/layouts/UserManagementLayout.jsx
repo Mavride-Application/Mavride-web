@@ -221,7 +221,7 @@ const UserManagementLayout = () => {
                 </div>
               </div>
 
-              <div className="management_right_bottom_children px-8">
+              <div className="management_right_bottom_children bg-gray-50 pl-4 pr-2">
                 <Outlet />
               </div>
             </div>

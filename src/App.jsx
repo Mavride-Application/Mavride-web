@@ -11,12 +11,10 @@ import UserManagementLayout from "./layouts/UserManagementLayout";
 import Drivers from "./pages/Drivers";
 import DriverProfile from "./pages/DriverProfile";
 import CreateProfile from "./pages/CreateProfile";
-
-// import ChooseProfilePicture from "./pages/ChooseProfilePicture";
-// import Personalinfo from "./pages/Personalinfo";
 import SuccessPage from "./pages/Success";
 import Registered from "./pages/Registered";
-// import SignIn from "./pages/SignIn"
+import ScheduledTripsPage from "./pages/ScheduledTripsPage";
+import Dashboard from "./components/Dashboard/Dashboard";
 import DriverProfileEdit from "./pages/DriverProfileEdit";
 import { AuthProvider } from "./components/OtpAuth/AuthProvider";
 import ProtectedRoute from "./components/OtpAuth/ProtectedRoute";
@@ -55,10 +53,8 @@ function App() {
               >
                 <Route path="drivers" element={<Registered />} />
                 <Route path="drivers/new-profile" element={<DriverProfile />} />
-                <Route
-                  path="drivers/driver-profile"
-                  element={<DriverProfileEdit />}
-                />
+                <Route path="drivers/driver-profile" element={<DriverProfileEdit />} />
+                <Route path="overview" element={<Dashboard />} />
               </Route>
 
               <Route path="createprofile" element={<CreateProfile />} />

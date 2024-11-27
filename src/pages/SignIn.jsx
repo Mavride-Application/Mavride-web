@@ -43,7 +43,7 @@ const SignIn = () => {
       if (result.access) {
         setCookies(result.access, "App1"); // Store the access token in cookies
         console.log("Login successful", result);
-        window.location.href = "/userManagement"; // Redirect after successful login
+        window.location.href = "/userManagement/overview"; // Redirect after successful login
       } else {
         throw new Error("Authentication token is missing");
       }
