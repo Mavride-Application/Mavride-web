@@ -3,7 +3,14 @@ import upload_icon from "../../assets/upload_file_icon.svg";
 import { useFormContext } from "react-hook-form";
 import { BinIcon } from "../SvgIcons";
 
-const FileInput = ({ label, subtext, name, required = true }) => {
+const FileInput = ({
+  label,
+  subtext,
+  name,
+  required = true,
+  accept,
+  validations,
+}) => {
   const {
     register,
     watch,
@@ -53,11 +60,20 @@ const FileInput = ({ label, subtext, name, required = true }) => {
       <input
         hidden
         type="file"
+        accept={accept}
         {...register(name, {
           validate: {
             empty: (value) => {
               if (required) return value.length > 0;
             },
+            acceptedFormats: (files) => {
+              if (accept)
+                return (
+                  accept.split(",").includes(files[0]?.type) ||
+                  "Invalid file format"
+                );
+            },
+            ...validations,
           },
         })}
       />

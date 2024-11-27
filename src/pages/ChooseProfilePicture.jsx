@@ -1,8 +1,7 @@
 import OnboardingLayoutLite from "../layouts/OnboardingLayoutLite";
 import camera from "../assets/camera.svg";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const ChooseProfilePicture = () => {
   const [image, setImage] = useState({
@@ -11,16 +10,18 @@ const ChooseProfilePicture = () => {
     preview: "",
   });
 
-  const {state} = useLocation();
-
-useEffect(() => {
-  console.log(state)
-}, [])
+  const { state } = useLocation();
 
   const [disabled, setDisabled] = useState(true);
 
   const handleChange = (event) => {
     const image = event.target.files[0];
+
+    // Check if the file is an image using a regular expression
+    if (!image.type.match(/^image\//)) {
+      return;
+    }
+
     const preview = URL.createObjectURL(image);
     setImage({ name: image.name, image, preview });
   };
@@ -61,6 +62,7 @@ useEffect(() => {
               type="file"
               name="profile-pic"
               id="profile-pic"
+              accept="image/*"
               onChange={handleChange}
             />
 
@@ -86,7 +88,7 @@ useEffect(() => {
           </div>
 
           {/* Form Submit Button */}
-          <NavLink to="/personalInfo">
+          <Link to="/personalInfo" state={{ image, phoneNumber: state }}>
             <button
               type="submit"
               disabled={disabled}
@@ -94,7 +96,7 @@ useEffect(() => {
             >
               Proceed
             </button>
-          </NavLink>
+          </Link>
         </form>
       </div>
     </OnboardingLayoutLite>

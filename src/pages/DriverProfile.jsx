@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import SuccessModal from "../components/UI/SuccessModal";
+import { replaceFileListWithFile } from "../lib/utils";
 
 const DriverProfile = () => {
   //Array of all Form Steps
@@ -82,28 +83,10 @@ const DriverProfile = () => {
 
   //handle form submission
   const onSubmit = (data) => {
-    for (const key in data) {
-      if (data[key] instanceof FileList) {
-        // replace the fileList with the actual file, or null if the fileList is empty
-        data[key] = data[key].length > 0 ? data[key][0] : null;
-      }
-    }
+    data = replaceFileListWithFile(data);
     console.log(data);
     setModal(true);
   };
-
-  //hide body overflow when modal is shown
-  useEffect(() => {
-    if (modal) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-
-    return () => {
-      document.body.classList.remove("overflow-hidden");
-    };
-  }, [modal]);
 
   return (
     <div className="px-5 pb-[2.38rem] pt-[1.69rem]">
@@ -165,6 +148,7 @@ const DriverProfile = () => {
                       linkTextContent="Done"
                       onClick={() => setModal(false)}
                       state={formData}
+                      className="max-w-[20rem]"
                     />
                   )}
                 </div>

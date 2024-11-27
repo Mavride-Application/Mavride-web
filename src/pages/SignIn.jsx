@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import Cookies from "js-cookie"; // Import Cookies
 import logoblue from "../assets/logo_blue.svg";
-import sign_pro from "../assets/sign_pro.png";
-import { EyeIcon, EyeSlashIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
+import {
+  EyeIcon,
+  EyeSlashIcon,
+  ArrowLeftIcon,
+} from "@heroicons/react/24/outline";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,69 +16,109 @@ const SignIn = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      console.log(data); // Log the submitted data for debugging
+
+      const res = await fetch(
+        "https://yv6zgf4z0d.execute-api.eu-north-1.amazonaws.com/api/v1/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: data.email,
+            password: data.password,
+          }),
+        },
+      );
+
+      if (!res.ok) {
+        throw new Error("Login failed");
+      }
+
+      const result = await res.json();
+      console.log("Login result:", result);
+
+      // Check if access token is present in the result
+      if (result.access) {
+        setCookies(result.access, "App1"); // Store the access token in cookies
+        console.log("Login successful", result);
+        window.location.href = "/userManagement/overview"; // Redirect after successful login
+      } else {
+        throw new Error("Authentication token is missing");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      // Handle login error (e.g., show an error message)
+    }
+  };
+
+  const setCookies = (authToken, appName) => {
+    const tokenName = `accessToken_${appName}`; // App-specific name
+    Cookies.set(tokenName, authToken, { expires: 1 });
   };
 
   return (
-    <div className="min-h-screen w-full h-full bg-gray-50 scrollbar-none">
-      {/* Back Arrow */}
-      <div className="absolute inset-y-[100px] inset-x-[150px] items-start p-4">
+    <div className="h-full min-h-screen w-full bg-gray-50 scrollbar-none">
+      <div className="absolute inset-x-[150px] inset-y-[100px] items-start p-4">
         <button
           onClick={() => window.history.back()}
           className="flex items-center text-gray-700 hover:text-blue-600"
         >
-          <ArrowLeftIcon className="w-5 h-5 mr-1" />
-          
+          <ArrowLeftIcon className="mr-1 h-5 w-5" />
         </button>
       </div>
 
-      {/* Sign In Form */}
-      <div className="flex justify-center items-center">
+      <div className="flex items-center justify-center">
         <div className="px-4">
           <div className="p-6">
-            {/* Logo */}
-            <div className="flex flex-col items-center pt-8 mb-12">
-              <img src={logoblue} alt="Logo" className="w-1/3 h-12 mb-8" />
-              
+            <div className="mb-12 flex flex-col items-center pt-8">
+              <img src={logoblue} alt="Logo" className="mb-8 h-12 w-1/3" />
+
               <h1 className="text-2xl font-semibold">Sign in</h1>
-              <p className="text-gray-500 text-base">
+              <p className="text-base text-gray-500">
                 Please enter your credentials to log in and continue
               </p>
             </div>
 
-            {/* Form */}
-            <form onSubmit={handleSubmit(onSubmit)}>
-              {/* Email Field */}
-              <div className="mb-4 relative">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
+              {/* Phone Number Field */}
+              <div className="relative mb-5">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Email <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="email"
                   id="email"
                   {...register("email", {
-                    required: true,
+                    required: "Email is required",
                     pattern: {
-                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: "Invalid email",
+                      value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                      message: "Please input a valid email address",
                     },
                   })}
-                  className={`mt-1 block w-full px-3 py-2 bg-gray-100 border ${
-                    errors.email ? "border-red-500" : "border-gray-300"
-                  } rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
+                  className={`mt-1 block w-full border bg-gray-100 px-3 py-2 ${
+                    errors.phone_number ? "border-red-500" : "border-gray-300"
+                  } rounded-md shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500`}
                   placeholder="Example@gmail.com"
-                  autoComplete="email"
                 />
                 {errors.email && (
-                  <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+                  <p className="mt-1 text-sm text-red-500">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
 
               {/* Password Field */}
-              <div className="mb-6 relative">
-               
-                <label htmlFor="password" id="password" className="block text-sm font-medium text-gray-700">
+              <div className="mb-6">
+                <label
+                  htmlFor="password"
+                  id="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Password <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
@@ -83,59 +127,43 @@ const SignIn = () => {
                     name="password"
                     id="password"
                     {...register("password", {
-                      required: true,
+                      required: "Password is required",
                       minLength: {
                         value: 6,
-                        message: "Too short",
+                        message: "Password must be at least 6 characters",
                       },
                     })}
-                    className={`mt-1 block w-full px-3 py-2 bg-gray-100 border ${
+                    className={`mt-1 block w-full border bg-gray-100 px-3 py-2 ${
                       errors.password ? "border-red-500" : "border-gray-300"
-                    } rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
+                    } rounded-md shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500`}
                     placeholder="Password"
-                     autoComplete="current-password"
                   />
-                  
                   <div
-                    className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
+                    className="absolute inset-y-0 right-3 flex cursor-pointer items-center"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
-                      <EyeSlashIcon className="w-5 h-5 text-gray-500" />
+                      <EyeIcon className="h-5 w-5 text-gray-500" />
                     ) : (
-                      <EyeIcon className="w-5 h-5 text-gray-500" />
+                      <EyeSlashIcon className="h-5 w-5 text-gray-500" />
                     )}
                   </div>
                 </div>
                 {errors.password && (
-                  <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+                  <p className="mt-1 text-sm text-red-500">
+                    {errors.password.message}
+                  </p>
                 )}
-              </div>
-
-              {/* Forgot Password */}
-              <div className="mb-4 text-sm text-center w-44 mx-auto">
-                <a
-                  href="/reset-password"
-                  className="font-semibold"
-                >
-                  Forgot your password?<span style={{ color: "#0A1ED9" }}> Reset Password</span>
-                </a>
               </div>
 
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-2 bg-blue-800 text-white font-medium rounded-md hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="relative w-full cursor-pointer rounded-md bg-blue-800 py-2 font-medium text-white hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 Sign in
               </button>
             </form>
-
-            {/* Footer */}
-            <p className="mt-24 text-sm w-64 mx-auto text-center text-gray-500">
-              By signing up you accept our <span className="font-semibold" style={{color: "#26203B"}}>Terms of Use</span> &{" "}
-              <span className="font-semibold" style={{color: "#26203B"}}>Privacy Policy</span>.
-            </p>
           </div>
         </div>
       </div>

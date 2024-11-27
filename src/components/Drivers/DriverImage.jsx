@@ -16,9 +16,18 @@ const DriverImage = ({ className }) => {
         {/* Hidden Image File Input */}
         <input
           hidden
+          accept="image/*"
           type="file"
           id="driver-pic"
-          {...register("driverPic", { required: true })}
+          {...register("driverPic", {
+            required: true,
+            validate: {
+              acceptedFormats: (files) => {
+                const image = files[0];
+                return image.type.match(/^image\//) || "Invalid file format";
+              },
+            },
+          })}
         />
 
         {/* Image Preview */}
