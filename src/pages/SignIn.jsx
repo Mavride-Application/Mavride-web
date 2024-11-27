@@ -26,7 +26,7 @@ const SignIn = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            phone_number: data.phone_number,
+            email: data.email,
             password: data.password,
           }),
         },
@@ -81,33 +81,33 @@ const SignIn = () => {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
               {/* Phone Number Field */}
-              <div className="relative mb-4">
+              <div className="relative mb-5">
                 <label
-                  htmlFor="phone_number"
+                  htmlFor="email"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Phone Number <span className="text-red-500">*</span>
+                  Email <span className="text-red-500">*</span>
                 </label>
                 <input
-                  type="tel"
-                  id="phone_number"
-                  {...register("phone_number", {
-                    required: "Phone number is required",
+                  type="email"
+                  id="email"
+                  {...register("email", {
+                    required: "Email is required",
                     pattern: {
-                      value: /^[0-9]{10,15}$/,
-                      message: "Invalid phone number format",
+                      value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                      message: "Please input a valid email address",
                     },
                   })}
                   className={`mt-1 block w-full border bg-gray-100 px-3 py-2 ${
                     errors.phone_number ? "border-red-500" : "border-gray-300"
                   } rounded-md shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500`}
-                  placeholder="Enter your phone number"
+                  placeholder="Example@gmail.com"
                 />
-                {errors.phone_number && (
+                {errors.email && (
                   <p className="mt-1 text-sm text-red-500">
-                    {errors.phone_number.message}
+                    {errors.email.message}
                   </p>
                 )}
               </div>
@@ -143,9 +143,9 @@ const SignIn = () => {
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
-                      <EyeSlashIcon className="h-5 w-5 text-gray-500" />
-                    ) : (
                       <EyeIcon className="h-5 w-5 text-gray-500" />
+                    ) : (
+                      <EyeSlashIcon className="h-5 w-5 text-gray-500" />
                     )}
                   </div>
                 </div>
