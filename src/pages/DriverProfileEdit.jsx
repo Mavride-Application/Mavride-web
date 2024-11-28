@@ -6,84 +6,84 @@ import { FormProvider, useForm } from "react-hook-form";
 import FormStepTwo from "../components/Drivers/FormStepTwo";
 import FileInput from "../components/UI/FileInput";
 
-const DriverDocuments = ({ documents }) => {
-  const methods = useForm({ defaultValues: documents });
-  const { handleSubmit } = methods;
+// const DriverDocuments = ({ documents }) => {
+//   const methods = useForm({ defaultValues: documents });
+//   const { handleSubmit } = methods;
 
-  //handle form submission
-  const onSubmit = (data) => {
-    console.log(data);
-  };
-  return (
-    <div className="mt-[0.88rem] px-5 pb-20 pt-14">
-      <h2 className="mb-6 text-center text-2xl font-bold">Update Document</h2>
+//   //handle form submission
+//   const onSubmit = (data) => {
+//     console.log(data);
+//   };
+//   return (
+//     <div className="mt-[0.88rem] px-5 pb-20 pt-14">
+//       <h2 className="mb-6 text-center text-2xl font-bold">Update Document</h2>
 
-      <h3 className="text-center text-lg">
-        Vehicle document and Government Requirement
-      </h3>
-      <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <div className="mt-[3.2rem] grid grid-cols-1 gap-y-[0.81rem] px-8 sm:grid-cols-3">
-            <FileInput
-              label="Vehicle Insurance"
-              subtext="Upload your vehicle insurance"
-              name="vehicleInsurance"
-            />
-            <FileInput
-              label="Exterior photo of vehicle"
-              subtext="Upload vehicle’s exterior photo"
-              name="vehiclePhotoExterior"
-            />
-            <FileInput
-              label="Interior photo of vehicle"
-              subtext="Upload vehicle’s interior photo"
-              name="vehiclePhotoInterior"
-            />
+//       <h3 className="text-center text-lg">
+//         Vehicle document and Government Requirement
+//       </h3>
+//       <FormProvider {...methods}>
+//         <form onSubmit={handleSubmit(onSubmit)} noValidate>
+//           <div className="mt-[3.2rem] grid grid-cols-1 gap-y-[0.81rem] px-8 sm:grid-cols-3">
+//             <FileInput
+//               label="Vehicle Insurance"
+//               subtext="Upload your vehicle insurance"
+//               name="vehicleInsurance"
+//             />
+//             <FileInput
+//               label="Exterior photo of vehicle"
+//               subtext="Upload vehicle’s exterior photo"
+//               name="vehiclePhotoExterior"
+//             />
+//             <FileInput
+//               label="Interior photo of vehicle"
+//               subtext="Upload vehicle’s interior photo"
+//               name="vehiclePhotoInterior"
+//             />
 
-            <FileInput
-              label="Proof of car ownership"
-              subtext="Upload proof of car ownership"
-              name="carOwnershipProof"
-            />
-            <FileInput
-              label="Road worthiness"
-              subtext="Upload road worthiness"
-              name="roadWorthiness"
-            />
-          </div>
+//             <FileInput
+//               label="Proof of car ownership"
+//               subtext="Upload proof of car ownership"
+//               name="carOwnershipProof"
+//             />
+//             <FileInput
+//               label="Road worthiness"
+//               subtext="Upload road worthiness"
+//               name="roadWorthiness"
+//             />
+//           </div>
 
-          <button
-            type="submit"
-            className="mx-auto mt-12 block w-full max-w-[20.8125rem] rounded-[0.625rem] bg-mavride-blue p-5 font-semibold text-white"
-          >
-            Update Document
-          </button>
-        </form>
-      </FormProvider>
-    </div>
-  );
-};
+//           <button
+//             type="submit"
+//             className="mx-auto mt-12 block w-full max-w-[20.8125rem] rounded-[0.625rem] bg-mavride-blue p-5 font-semibold text-white"
+//           >
+//             Update Document
+//           </button>
+//         </form>
+//       </FormProvider>
+//     </div>
+//   );
+// };
 
 const DriverProfileEdit = () => {
   const { state } = useLocation();
-  const {
-    vehicleInsurance,
-    vehiclePhotoExterior,
-    vehiclePhotoInterior,
-    carOwnershipProof,
-    roadWorthiness,
-    ...profileData
-  } = state || {};
+  // const {
+  //   vehicleInsurance,
+  //   vehiclePhotoExterior,
+  //   vehiclePhotoInterior,
+  //   carOwnershipProof,
+  //   roadWorthiness,
+  //   ...profileData
+  // } = state || {};
 
-  const documents = {
-    vehicleInsurance,
-    vehiclePhotoExterior,
-    vehiclePhotoInterior,
-    carOwnershipProof,
-    roadWorthiness,
-  };
+  // const documents = {
+  //   vehicleInsurance,
+  //   vehiclePhotoExterior,
+  //   vehiclePhotoInterior,
+  //   carOwnershipProof,
+  //   roadWorthiness,
+  // };
 
-  const methods = useForm({ defaultValues: profileData });
+  const methods = useForm({ defaultValues: state });
   const { handleSubmit } = methods;
 
   //handle form submission
@@ -96,7 +96,7 @@ const DriverProfileEdit = () => {
         <form className="pb-20" onSubmit={handleSubmit(onSubmit)} noValidate>
           <section className="relative text-center">
             <Link
-              to="/"
+              to="/userManagement/drivers"
               className="absolute left-5 mt-2 flex items-center gap-2"
             >
               <BackArrowIcon className="w-4" />
@@ -128,28 +128,25 @@ const DriverProfileEdit = () => {
               </div>
             </section>
           </div>
-
+          {/* 
           <section className="mt-20 px-5">
             <div className="ms-auto w-full max-w-[43.5rem]">
               <h2 className="text-center text-lg">Vehicle Details & Service</h2>
-              {/* Form Steps */}
 
               <div className="mt-10 grid grid-cols-2 gap-x-[0.88rem] gap-y-5">
                 <FormStepTwo />
               </div>
             </div>
-          </section>
+          </section> */}
 
           <button
             type="submit"
-            className="mx-auto mt-14 block w-full max-w-[20.8125rem] rounded-[0.625rem] bg-mavride-blue p-5 font-semibold text-white"
+            className="mx-auto mt-24 block w-full max-w-[20.8125rem] rounded-[0.625rem] bg-mavride-blue p-5 font-semibold text-white"
           >
             Edit Profile
           </button>
         </form>
       </FormProvider>
-
-      <DriverDocuments documents={documents} />
     </div>
   );
 };
