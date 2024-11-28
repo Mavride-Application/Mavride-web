@@ -78,9 +78,9 @@ const Onboarding = () => {
           </NavLink>
           <p className="mt-4 text-gray-600">
             Already have an Account?{" "}
-            <a href="#" className="text-blue-600 hover:underline">
+            <NavLink to="/signin" className="text-blue-600 hover:underline">
               Sign In
-            </a>
+            </NavLink>
           </p>
           <div className="mt-[10rem] text-[0.7rem]">
             <p className="mb-[0.2rem] text-gray-500">

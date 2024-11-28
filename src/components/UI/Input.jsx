@@ -69,9 +69,9 @@ const Input = ({
               type="button"
             >
               {inputType === "password" ? (
-                <EyeIcon className="~size-5/6" />
-              ) : (
                 <EyeSlashIcon className="~size-5/6" />
+              ) : (
+                <EyeIcon className="~size-5/6" />
               )}
             </button>
           </span>

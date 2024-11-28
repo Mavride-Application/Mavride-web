@@ -55,3 +55,23 @@ html *::after {
 #onboarding-layout .swiper-pagination-bullet-active {
   @apply w-6 rounded-[0.625rem] transition-all duration-300;
 }
+
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e0e0e0;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb{
+  background: #888;
+}
+
+/* Handle on Hover */
+::-webkit-scrollbar-track:hover {
+  background: #555;
+}

@@ -10,22 +10,25 @@ import manage_account from "../assets/manage_account.png"
 import change_password from "../assets/change_password.png"
 import logout from "../assets/logout.png"
 import useClickOutside from "../components/Hooks/onClickOutside"
+import checkUserToken from "../OAuth2CallbackPage/checkUserToken";
 
 
 const UserManagementLayout = () => {
+  
+    checkUserToken();
+
   const [openDropdowns, setOpenDropdowns] = useState({});
   const dropdownRefs = useRef({});
   const arrowRefs = useRef({});
 
-  let [userAccountPop, setUserAccountPop] = useState(false)
+  let [userAccountPop, setUserAccountPop] = useState(false);
   const dropdownRef = useRef(null);
   const profileRef = useRef(null);
 
-
   const userAccountToggle = () => {
-    setUserAccountPop(currentValue => !currentValue)
-    console.log(userAccountPop)
-  }
+    setUserAccountPop((currentValue) => !currentValue);
+    console.log(userAccountPop);
+  };
 
   const handleClickOutside = (event) => {
     // Close dropdown only if click is outside both dropdown and profile icon
@@ -46,10 +49,7 @@ const UserManagementLayout = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  
-
-  useClickOutside(dropdownRef, handleClickOutside); 
-  
+  useClickOutside(dropdownRef, handleClickOutside);
 
   const toggleDropdown = (title) => {
     setOpenDropdowns((prevState) => ({
@@ -79,7 +79,6 @@ const UserManagementLayout = () => {
     Object.keys(dropdownRefs.current).forEach((key) => {
       gsap.set(dropdownRefs.current[key], { height: 0, opacity: 0 });
     });
-
   }, []);
 
   return (
@@ -102,10 +101,7 @@ const UserManagementLayout = () => {
                   "",
                   <SvgIcons number="1" fill="#8C8C8C" />,
                   <SvgIcons number="7" fill="#8C8C8C" />,
-                  ["Drivers",
-                    "Members"
-
-                  ],
+                  ["Drivers", "Members"],
                 ],
                 [
                   "Trips",
@@ -178,12 +174,16 @@ const UserManagementLayout = () => {
         </div>
 
         <div className="management_right basis-[80%]">
-          <div className="flex justify-center w-full">
+          <div className="flex w-full justify-center">
             <div className="w-full">
-              <div className="management_right_top flex-col px-8 z-30 sticky top-0 flex h-[70px] w-full justify-center items-end bg-white shadow-sm">
-                <div className="flex items-center gap-5 relative" >
+              <div className="management_right_top sticky top-0 z-30 flex h-[70px] w-full flex-col items-end justify-center bg-white px-8 shadow-sm">
+                <div className="relative flex items-center gap-5">
                   <img src={notification} alt="Notification" />
-                  <div ref={profileRef} className="profile flex items-center gap-3 cursor-pointer" onClick={userAccountToggle} >
+                  <div
+                    ref={profileRef}
+                    className="profile flex cursor-pointer items-center gap-3"
+                    onClick={userAccountToggle}
+                  >
                     <img src={profile} alt="Profile" />
                     <div className="profile_name font-inter">
                       <p className="text-[0.861rem] text-[#70757D]">
@@ -193,29 +193,35 @@ const UserManagementLayout = () => {
                     </div>
                     <img src={arrow_down} alt="" />
                   </div>
-                  {
-                    userAccountPop ?
-
-                      <div ref={dropdownRef} className="user-account-nav w-full absolute left-0 top-10 bg-white shadow-lg rounded-lg" >
-                        <div className="manage-account flex items-center gap-3 px-3 py-5 border-b-2 border-custom-gray cursor-pointer">
-                          <img src={manage_account} alt="" className="w-[25px]" />
-                          <p>Manage Account</p>
-                        </div>
-                        <div className="manage-account flex items-center gap-3 px-3 py-5 border-b-2 border-custom-gray cursor-pointer">
-                          <img src={change_password} alt="" className="w-[25px]" />
-                          <p>Change Password</p>
-                        </div>
-                        <div className="manage-account flex items-center gap-3 px-3 pt-5 pb-10 cursor-pointer">
-                          <img src={logout} alt="" className="w-[25px]" />
-                          <p>Log out</p>
-                        </div>
-                      </div> : ""
-                  }
-
+                  {userAccountPop ? (
+                    <div
+                      ref={dropdownRef}
+                      className="user-account-nav absolute left-0 top-10 w-full rounded-lg bg-white shadow-lg"
+                    >
+                      <div className="manage-account flex cursor-pointer items-center gap-3 border-b-2 border-custom-gray px-3 py-5">
+                        <img src={manage_account} alt="" className="w-[25px]" />
+                        <p>Manage Account</p>
+                      </div>
+                      <div className="manage-account flex cursor-pointer items-center gap-3 border-b-2 border-custom-gray px-3 py-5">
+                        <img
+                          src={change_password}
+                          alt=""
+                          className="w-[25px]"
+                        />
+                        <p>Change Password</p>
+                      </div>
+                      <div className="manage-account flex cursor-pointer items-center gap-3 px-3 pb-10 pt-5">
+                        <img src={logout} alt="" className="w-[25px]" />
+                        <p>Log out</p>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
 
-              <div className="management_right_bottom_children px-8">
+              <div className="management_right_bottom_children bg-gray-50 pl-4 pr-2">
                 <Outlet />
               </div>
             </div>

@@ -11,16 +11,16 @@ import UserManagementLayout from "./layouts/UserManagementLayout";
 import Drivers from "./pages/Drivers";
 import DriverProfile from "./pages/DriverProfile";
 import CreateProfile from "./pages/CreateProfile";
-
-// import ChooseProfilePicture from "./pages/ChooseProfilePicture";
-// import Personalinfo from "./pages/Personalinfo";
 import SuccessPage from "./pages/Success";
 import Registered from "./pages/Registered";
-// import SignIn from "./pages/SignIn"
+import ScheduledTripsPage from "./pages/ScheduledTripsPage";
+import Dashboard from "./components/Dashboard/Dashboard";
 import DriverProfileEdit from "./pages/DriverProfileEdit";
 import { AuthProvider } from "./components/OtpAuth/AuthProvider";
 import ProtectedRoute from "./components/OtpAuth/ProtectedRoute";
+import PrivateRoute from "./components/OtpAuth/PrivateRoute";
 import SignIn from "./pages/SignIn";
+
 
 function App() {
   return (
@@ -31,21 +31,38 @@ function App() {
             <Routes>
               <Route path="/" element={<Onboarding />} />
               <Route path="signup" element={<PhoneVerificationSteps />} />
-              <Route 
-              path="choosephoto" 
-              element={<ProtectedRoute>
-                          <ChooseProfilePhoto />
-                      </ProtectedRoute>} 
+              <Route
+                path="choosephoto"
+                element={
+                  <ProtectedRoute>
+                    <ChooseProfilePhoto />
+                  </ProtectedRoute>
+                }
               />
               <Route path="signin" element={<SignIn />} />
               <Route path="personalInfo" element={<PersonalInfoSteps />} />
-              <Route path="userManagement" element={<UserManagementLayout />}>
-                <Route path="drivers/new-profile" element={<DriverProfile />} />
-                <Route path="createprofile" element={<CreateProfile />} />
-                <Route path="createprofile" element={<CreateProfile />} />
+
+              {/* User Management Route with Nested Routes */}
+              <Route
+                path="userManagement"
+                element={
+                  <PrivateRoute>
+                    <UserManagementLayout />
+                  </PrivateRoute>
+                }
+              >
                 <Route path="drivers" element={<Registered />} />
+                <Route path="drivers/new-profile" element={<DriverProfile />} />
                 <Route path="drivers/driver-profile" element={<DriverProfileEdit />} />
+                <Route path="overview" element={<Dashboard />} />
               </Route>
+
+              <Route path="createprofile" element={<CreateProfile />} />
+              <Route path="drivers" element={<Registered />} />
+              <Route
+                path="drivers/driver-profile"
+                element={<DriverProfileEdit />}
+              />
             </Routes>
           </ScrollToTop>
         </Router>
