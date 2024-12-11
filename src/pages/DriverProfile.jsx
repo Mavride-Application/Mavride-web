@@ -8,25 +8,43 @@ import FormStepOne from "../components/Drivers/FormStepOne";
 //Library Imports
 import { Link } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SuccessModal from "../components/UI/SuccessModal";
 import { replaceFileListWithFile } from "../lib/utils";
 
 const DriverProfile = () => {
   const [modal, setModal] = useState(false);
 
-  const methods = useForm();
-  const { handleSubmit, watch } = methods;
+  const [draft, setDraft] = useState(
+    () => JSON.parse(localStorage.getItem("driver-profile")) || {},
+  );
+
+  const methods = useForm({ defaultValues: draft || {} });
+  const {
+    handleSubmit,
+    formState: { isDirty },
+    watch,
+  } = methods;
 
   //Form data
   const formData = watch();
+
+  const saveDraft = () => {
+    const draft = JSON.stringify(formData);
+    localStorage.setItem("driver-profile", draft);
+  };
 
   //handle form submission
   const onSubmit = (data) => {
     data = replaceFileListWithFile(data);
     console.log(data);
+    localStorage.removeItem("driver-profile");
     setModal(true);
   };
+
+  useEffect(() => {
+    setDraft(JSON.parse(localStorage.getItem("driver-profile")));
+  }, []);
 
   return (
     <div className="px-5 pb-[2.38rem] pt-[1.69rem]">
@@ -86,7 +104,8 @@ const DriverProfile = () => {
           {/* Form Action Buttons */}
           <div className="ms-auto mt-20 flex max-w-[43.5rem] items-center justify-center gap-8 px-5">
             <button
-              disabled
+              disabled={!isDirty}
+              onClick={() => saveDraft()}
               className="inline-block w-full max-w-[20.8125rem] rounded-[0.625rem] bg-mavride-blue p-5 font-semibold text-white disabled:bg-[#E7E9FB] disabled:text-black disabled:text-opacity-35"
               type="button"
             >
