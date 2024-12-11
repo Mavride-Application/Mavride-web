@@ -2,9 +2,14 @@ import camera from "../../assets/camera.svg";
 import { useFormContext } from "react-hook-form";
 
 const DriverImage = ({ className }) => {
-  const { register, watch } = useFormContext();
+  const {
+    register,
+    watch,
+    formState: { errors },
+  } = useFormContext();
 
   const image = watch("driverPic")?.[0];
+
   let preview;
   if (image) preview = URL.createObjectURL(image);
 
@@ -23,7 +28,9 @@ const DriverImage = ({ className }) => {
             validate: {
               acceptedFormats: (files) => {
                 const image = files[0];
-                return image.type.startsWith("image") || "Invalid file format";
+                return (
+                  image?.type?.startsWith("image") || "Invalid file format"
+                );
               },
             },
           })}
@@ -35,7 +42,7 @@ const DriverImage = ({ className }) => {
             <img
               className="size-full object-cover"
               src={preview}
-              alt={image.name}
+              alt={image?.name}
             />
           </div>
         )}
@@ -48,6 +55,12 @@ const DriverImage = ({ className }) => {
           <img className="object-contain" src={camera} alt="camera-icon" />
         </label>
       </label>
+
+      {errors?.driverPic?.message && (
+        <p className="mt-4 text-center text-sm text-red-600">
+          {errors.driverPic.message}
+        </p>
+      )}
 
       <div className="mt-12 text-center text-sm">
         <p className="text-[#777]">Allowed format</p>

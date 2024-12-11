@@ -30,6 +30,7 @@ const DriverProfile = () => {
   const formData = watch();
 
   const saveDraft = () => {
+    formData.driverPic = "";
     const draft = JSON.stringify(formData);
     localStorage.setItem("driver-profile", draft);
   };
