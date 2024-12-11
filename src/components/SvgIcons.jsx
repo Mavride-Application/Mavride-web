@@ -194,6 +194,19 @@ const SvgIcons = ({ number, fill }) => {
         </svg>
       ),
     },
+    {
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14.1667 16.6663C15.0871 16.6663 15.8333 15.9201 15.8333 14.9997C15.8333 14.0792 15.0871 13.333 14.1667 13.333C13.2462 13.333 12.5 14.0792 12.5 14.9997C12.5 15.9201 13.2462 16.6663 14.1667 16.6663Z" stroke="#8C8C8C" stroke-width="1.25" />
+          <path d="M5.83332 16.6663C6.7538 16.6663 7.49999 15.9201 7.49999 14.9997C7.49999 14.0792 6.7538 13.333 5.83332 13.333C4.91285 13.333 4.16666 14.0792 4.16666 14.9997C4.16666 15.9201 4.91285 16.6663 5.83332 16.6663Z" stroke="#8C8C8C" stroke-width="1.25" />
+          <path d="M4.16666 14.9767C3.25272 14.9312 2.68257 14.7952 2.27685 14.3895C1.87112 13.9838 1.73517 13.4136 1.68961 12.4997M7.49999 14.9997H12.5M15.8333 14.9767C16.7472 14.9312 17.3174 14.7952 17.7232 14.3895C18.3333 13.7793 18.3333 12.7972 18.3333 10.833V9.16634H14.4167C13.7962 9.16634 13.486 9.16634 13.235 9.08476C12.7276 8.91992 12.3297 8.52209 12.1649 8.0147C12.0833 7.76365 12.0833 7.45343 12.0833 6.83301C12.0833 5.90237 12.0833 5.43705 11.961 5.06047C11.7137 4.29937 11.117 3.70266 10.3559 3.45537C9.97932 3.33301 9.51399 3.33301 8.58332 3.33301H1.66666" stroke="#8C8C8C" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M1.66666 6.66699H6.66666" stroke="#8C8C8C" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M1.66666 9.16699H4.99999" stroke="#8C8C8C" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M12.0833 5H13.601C14.8138 5 15.4202 5 15.9137 5.29476C16.4072 5.58952 16.6947 6.12343 17.2697 7.19125L18.3333 9.16667" stroke="#8C8C8C" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+
+      )
+    }
   ];
 
   return <>{svg[number].icon}</>;
@@ -304,7 +317,7 @@ export const SuccessIcon = ({ className, animated }) => {
   const circleRef = useRef(null);
   const lineRef = useRef(null);
 
-  useGSAP(() => {}, []);
+  useGSAP(() => { }, []);
 
   useEffect(() => {
     const animate = () => {
@@ -368,4 +381,4 @@ export const SuccessIcon = ({ className, animated }) => {
   );
 };
 
-export default SvgIcons;top
+export default SvgIcons; top
