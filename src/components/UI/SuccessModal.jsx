@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { SuccessIcon } from "../SvgIcons";
 import { useEffect } from "react";
+import { cn } from "../../lib/utils";
 
 const SuccessModal = ({
   message,
@@ -21,7 +22,11 @@ const SuccessModal = ({
     <div className="fixed inset-0 z-30 flex w-full flex-col content-end items-center justify-center bg-white p-5 text-center">
       <SuccessIcon className="size-[15.375rem]" animated />
 
-      <p className={`mx-auto my-[2.31rem] text-2xl ${className}`}>{message}</p>
+      <p
+        className={cn("mx-auto my-[2.31rem] max-w-[20rem] text-2xl", className)}
+      >
+        {message}
+      </p>
 
       {/* Link in modal to view new profile */}
       <Link
