@@ -1,16 +1,14 @@
-// Asset Imports
-import { BackArrowIcon } from "../components/SvgIcons";
-
 // Component Imports
 import DriverImage from "../components/Drivers/DriverImage";
 import FormStepOne from "../components/Drivers/FormStepOne";
 
 //Library Imports
-import { Link } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import SuccessModal from "../components/UI/SuccessModal";
 import { replaceFileListWithFile } from "../lib/utils";
+import Button from "../components/UI/Button";
+import BackLink from "../components/UI/BackLink";
 
 const DriverProfile = () => {
   const [modal, setModal] = useState(false);
@@ -55,13 +53,7 @@ const DriverProfile = () => {
             {/* Left Column */}
             <section className="flex w-full max-w-[20.8125rem] flex-col gap-24">
               {/* Back or Previous Button */}
-              <Link
-                to="/userManagement/drivers"
-                className="mt-2 flex items-center gap-2"
-              >
-                <BackArrowIcon className="w-4" />
-                Back
-              </Link>
+              <BackLink to="/userManagement/drivers" className="mt-2" />
 
               {/* Driver Image */}
               <DriverImage className="pb-32 pt-20" />
@@ -96,7 +88,6 @@ const DriverProfile = () => {
                   linkTextContent="Done"
                   onClick={() => setModal(false)}
                   state={formData}
-                  className="max-w-[20rem]"
                 />
               )}
             </section>
@@ -104,21 +95,17 @@ const DriverProfile = () => {
 
           {/* Form Action Buttons */}
           <div className="ms-auto mt-20 flex max-w-[43.5rem] items-center justify-center gap-8 px-5">
-            <button
+            <Button
+              type="button"
               disabled={!isDirty}
               onClick={() => saveDraft()}
-              className="inline-block w-full max-w-[20.8125rem] rounded-[0.625rem] bg-mavride-blue p-5 font-semibold text-white disabled:bg-[#E7E9FB] disabled:text-black disabled:text-opacity-35"
-              type="button"
+              className="inline-block w-full max-w-[20.8125rem] p-5 disabled:bg-[#E7E9FB] disabled:text-black disabled:text-opacity-35"
             >
               Save as Draft
-            </button>
-
-            <button
-              type="submit"
-              className="inline-block w-full max-w-[20.8125rem] rounded-[0.625rem] bg-mavride-blue p-5 font-semibold text-white"
-            >
+            </Button>
+            <Button className="inline-block w-full max-w-[20.8125rem] p-5">
               Create Profile
-            </button>
+            </Button>
           </div>
         </form>
       </FormProvider>

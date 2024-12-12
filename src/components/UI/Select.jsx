@@ -4,6 +4,7 @@ import dropdown_icon from "../../assets/dropdown_icon.svg";
 import Input from "./Input";
 
 import { motion } from "framer-motion";
+import { cn } from "../../lib/utils";
 
 const Select = ({
   label,
@@ -70,7 +71,13 @@ const Select = ({
       </label>
 
       <div
-        className={`relative rounded-[0.625rem] ${selectOpen ? "border" : "border-0"} border-mavride-blue bg-[#EFEFEF] text-base transition duration-300 ${errors?.[name]?.message ? "border border-[#F32121]" : ""}`}
+        className={cn(
+          "relative rounded-[0.625rem] bg-[#EFEFEF] text-base outline outline-1 -outline-offset-2 outline-transparent transition duration-300",
+          {
+            "outline-error-red": errors?.[name],
+            "outline-mavride-blue": selectOpen && !errors?.[name],
+          },
+        )}
       >
         {/* Toggle Dropdown button */}
         <button

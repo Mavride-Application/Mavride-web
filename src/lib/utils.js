@@ -1,3 +1,6 @@
+import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
+
 /**
  * Replaces FileList properties in the given object with the first file in the list
  * or null if the FileList is empty.
@@ -38,3 +41,7 @@ export const convertToFormData = (data) => {
   });
   return formData;
 };
+
+export function cn(...inputs) {
+  return twMerge(clsx(inputs));
+}
