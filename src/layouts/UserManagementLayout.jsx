@@ -82,7 +82,7 @@ const UserManagementLayout = () => {
   return (
     <div className="management_container">
       <div className="management_wrapper flex">
-        <div className="management_left_nav card sticky left-0 top-0 flex h-[100dvh] basis-[20%] justify-center">
+        <div className="management_left_nav card sticky left-0 top-0 flex h-[100dvh] basis-[23%] justify-center">
           <div className="management-center w-[80%]">
             <div className="mb-[70px] flex h-[70px] items-center">
               <img src={logo_black} alt="Logo" className="w-[150px]" />
@@ -95,7 +95,7 @@ const UserManagementLayout = () => {
                   <SvgIcons number="0" fill="#8C8C8C" />,
                 ],
                 [
-                  "Manage users",
+                  "User management",
                   "",
                   <SvgIcons number="1" fill="#8C8C8C" />,
                   <SvgIcons number="7" fill="#8C8C8C" />,
@@ -106,7 +106,14 @@ const UserManagementLayout = () => {
                   "",
                   <SvgIcons number="2" fill="#8C8C8C" />,
                   <SvgIcons number="7" fill="#8C8C8C" />,
-                  ["Ongoing", "Completed"],
+                  ["Scheduled Trips", "Completed Trips "],
+                ],
+                [
+                  "Fleet Management",
+                  "",
+                  <SvgIcons number="8" fill="#8C8C8C" />,
+                  <SvgIcons number="7" fill="#8C8C8C" />,
+                  ["Scheduled Trips", "Completed Trips "],
                 ],
                 [
                   "Fleet Management",
