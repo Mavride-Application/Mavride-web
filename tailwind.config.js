@@ -1,18 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 
-import fluid, { extract } from "fluid-tailwind";
-
 import fluid, { extract, screens, fontSize } from "fluid-tailwind";
 
 export default {
+  darkMode: ["class"],
   content: { files: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"], extract },
   theme: {
-    screens,
     fontSize,
+    screens,
     extend: {
       fontFamily: {
-        outfit: ['"Outfit"', "sans-serif"],
-        inter: ['"Inter"', "sans-serif"],
+        outfit: ['Outfit"', "sans-serif"],
+        inter: ['Inter"', "sans-serif"],
       },
       colors: {
         "mavride-blue": "#0A1ED9",
@@ -21,6 +20,9 @@ export default {
         "custom-gray": "#EFEFEF",
         "button-gray": "#D3D3D3",
         "light-grey": "#8C8C8C",
+        "grey-97": "#979797",
+        danger: "#FF0000",
+
         customGray: "#FEFEFE",
       },
       backgroundImage: {
@@ -35,5 +37,6 @@ export default {
       nocompatible: true,
       preferredStrategy: "pseudoelements",
     }),
+    require("tailwindcss-animate"),
   ],
 };

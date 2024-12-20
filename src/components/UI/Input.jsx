@@ -16,6 +16,7 @@ const Input = ({
   validations,
   className,
   onChange,
+  registerOptions,
 }) => {
   const {
     register,
@@ -53,6 +54,7 @@ const Input = ({
             validate: validations,
             disabled,
             onChange,
+            ...registerOptions,
           })}
         />
 

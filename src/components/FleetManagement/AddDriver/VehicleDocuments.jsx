@@ -1,4 +1,5 @@
-import FileInput from "../UI/FileInput";
+import { ACCEPT_IMG } from "@/lib/definitions";
+import FileInput from "../../UI/FileInput";
 
 const VehicleDocuments = () => {
   return (
@@ -9,17 +10,19 @@ const VehicleDocuments = () => {
           <FileInput
             label="Vehicle Insurance"
             subtext="Upload your vehicle insurance"
-            name="vehicle_insurance"
+            name="vehicle_ins"
           />
           <FileInput
             label="Exterior photo of vehicle"
             subtext="Upload vehicle’s exterior photo"
-            name="vehicle_exterior"
+            name="exterior_photos"
+            accept={ACCEPT_IMG}
           />
           <FileInput
             label="Interior photo of vehicle"
             subtext="Upload vehicle’s interior photo"
-            name="vehicle_interior"
+            name="interior_photos"
+            accept={ACCEPT_IMG}
           />
         </div>
       </div>
@@ -29,12 +32,12 @@ const VehicleDocuments = () => {
           <FileInput
             label="Proof of car ownership"
             subtext="Upload proof of car ownership"
-            name="car_ownership"
+            name="proof_ownership"
           />
           <FileInput
             label="Road worthiness"
             subtext="Upload road worthiness"
-            name="road_worthiness"
+            name="road_worthy"
           />
         </div>
       </div>

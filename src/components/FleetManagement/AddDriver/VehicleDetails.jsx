@@ -1,5 +1,5 @@
-import Input from "../UI/Input";
-import Select from "../UI/Select";
+import Input from "../../UI/Input";
+import Select from "../../UI/Select";
 
 const VehicleDetails = () => {
   return (
@@ -9,6 +9,12 @@ const VehicleDetails = () => {
         name="license_plate"
         required
         placeholder="Enter License Plate"
+        registerOptions={{
+          maxLength: {
+            value: 10,
+            message: "Maximum of 10 characters allowed",
+          },
+        }}
       />
       <Select
         label="Vehicle Type"

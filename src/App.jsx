@@ -19,8 +19,9 @@ import { AuthProvider } from "./components/OtpAuth/AuthProvider";
 import ProtectedRoute from "./components/OtpAuth/ProtectedRoute";
 import PrivateRoute from "./components/OtpAuth/PrivateRoute";
 import SignIn from "./pages/SignIn";
-import ManageFleet from "./pages/Fleet";
-import AddVehicle from "./pages/AddVehicle";
+import ManageFleet from "./pages/FleetMgmt/Fleet";
+import AddVehicle from "./pages/FleetMgmt/AddVehicle";
+import EditVehicle from "./pages/FleetMgmt/EditVehicle";
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
 
                 <Route path="fleet" element={<ManageFleet />} />
                 <Route path="fleet/add-vehicle" element={<AddVehicle />} />
+                <Route path="fleet/vehicle/:id" element={<EditVehicle />} />
               </Route>
 
               <Route path="createprofile" element={<CreateProfile />} />

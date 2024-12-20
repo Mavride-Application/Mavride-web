@@ -111,13 +111,6 @@ const UserManagementLayout = () => {
                 [
                   "Fleet Management",
                   "",
-                  <SvgIcons number="8" fill="#8C8C8C" />,
-                  <SvgIcons number="7" fill="#8C8C8C" />,
-                  ["Scheduled Trips", "Completed Trips "],
-                ],
-                [
-                  "Fleet Management",
-                  "",
                   <TruckIcon className="stroke-light-grey size-7 flex-shrink-0" />,
                   <SvgIcons number="7" fill="#8C8C8C" />,
                   ["Add Vehicle", "Assign Vehicle"],
