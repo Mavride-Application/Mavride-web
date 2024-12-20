@@ -8,7 +8,6 @@ import EnterPhoneNumber from "./components/EnterPhoneNumber";
 import PersonalInfoSteps from "./pages/PersonalInfoSteps";
 import PhoneVerificationSteps from "./pages/PhoneVerificationSteps";
 import UserManagementLayout from "./layouts/UserManagementLayout";
-import Drivers from "./pages/Drivers";
 import DriverProfile from "./pages/DriverProfile";
 import CreateProfile from "./pages/CreateProfile";
 import SuccessPage from "./pages/Success";
@@ -20,7 +19,9 @@ import { AuthProvider } from "./components/OtpAuth/AuthProvider";
 import ProtectedRoute from "./components/OtpAuth/ProtectedRoute";
 import PrivateRoute from "./components/OtpAuth/PrivateRoute";
 import SignIn from "./pages/SignIn";
-
+import ManageFleet from "./pages/FleetMgmt/Fleet";
+import AddVehicle from "./pages/FleetMgmt/AddVehicle";
+import EditVehicle from "./pages/FleetMgmt/EditVehicle";
 
 function App() {
   return (
@@ -53,8 +54,15 @@ function App() {
               >
                 <Route path="drivers" element={<Registered />} />
                 <Route path="drivers/new-profile" element={<DriverProfile />} />
-                <Route path="drivers/driver-profile" element={<DriverProfileEdit />} />
+                <Route
+                  path="drivers/driver-profile"
+                  element={<DriverProfileEdit />}
+                />
                 <Route path="overview" element={<Dashboard />} />
+
+                <Route path="fleet" element={<ManageFleet />} />
+                <Route path="fleet/add-vehicle" element={<AddVehicle />} />
+                <Route path="fleet/vehicle/:id" element={<EditVehicle />} />
               </Route>
 
               <Route path="createprofile" element={<CreateProfile />} />

@@ -7,9 +7,13 @@ import {
   EyeSlashIcon,
   ArrowLeftIcon,
 } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -42,8 +46,10 @@ const SignIn = () => {
       // Check if access token is present in the result
       if (result.access) {
         setCookies(result.access, "App1"); // Store the access token in cookies
+        Cookies.set("refreshToken_App1", result.refresh, { expires: 1 });
+        Cookies.set("provider_id", result.id, { expires: 1 });
         console.log("Login successful", result);
-        window.location.href = "/userManagement/overview"; // Redirect after successful login
+        navigate("/userManagement/overview"); // Redirect after successful login
       } else {
         throw new Error("Authentication token is missing");
       }
@@ -81,7 +87,10 @@ const SignIn = () => {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex flex-col gap-3"
+            >
               {/* Phone Number Field */}
               <div className="relative mb-5">
                 <label

@@ -1,6 +1,7 @@
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { cn } from "../../lib/utils";
 
 const Input = ({
   label,
@@ -15,6 +16,7 @@ const Input = ({
   validations,
   className,
   onChange,
+  registerOptions,
 }) => {
   const {
     register,
@@ -33,7 +35,11 @@ const Input = ({
       <div className="relative">
         <input
           id={id}
-          className={`block w-full rounded-[0.625rem] border-mavride-blue bg-[#EFEFEF] py-4 pe-5 ps-[1.56rem] text-base outline-none transition duration-300 focus:border ${errors?.[name]?.message ? "border-[#F32121]" : ""} ${className}`}
+          className={cn(
+            "block w-full rounded-[0.625rem] bg-[#EFEFEF] py-4 pe-5 ps-[1.56rem] text-base outline outline-1 -outline-offset-2 outline-transparent transition duration-300 focus:outline-mavride-blue",
+            { "outline-error-red focus:outline-error-red": errors?.[name] },
+            className,
+          )}
           type={inputType}
           placeholder={placeholder}
           {...register(name, {
@@ -48,12 +54,13 @@ const Input = ({
             validate: validations,
             disabled,
             onChange,
+            ...registerOptions,
           })}
         />
 
         {/* Button to show or hide password input value */}
         {type === "password" && (
-          <span className="absolute inset-y-0 mt-2.5 text-[#B0B0B0] right-[8%] content-center">
+          <span className="absolute inset-y-0 right-[8%] mt-2.5 content-center text-[#B0B0B0]">
             <button
               onClick={() =>
                 toggleInputType((prev) => {
@@ -79,7 +86,7 @@ const Input = ({
       </div>
 
       {errors?.[name]?.message && (
-        <p className="mt-[0.88rem] text-sm text-[#D42620]">
+        <p className="mt-[0.88rem] text-sm text-error-red">
           {errors[name].message}
         </p>
       )}

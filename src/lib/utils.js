@@ -1,3 +1,10 @@
+import { clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs) {
+  return twMerge(clsx(inputs));
+}
+
 /**
  * Replaces FileList properties in the given object with the first file in the list
  * or null if the FileList is empty.
@@ -10,6 +17,18 @@ export const replaceFileListWithFile = (data) => {
     if (data[key] instanceof FileList) {
       // Replace the FileList with the actual file or null if the FileList is empty
       data[key] = data[key].length > 0 ? data[key][0] : null;
+    }
+  }
+  return data;
+};
+
+export const replaceFileWithFileList = (data) => {
+  for (const key in data) {
+    if (data[key] instanceof File) {
+      // Replace the File with a FileList containing the file
+      data[key] = new DataTransfer(); // Create a DataTransfer object to hold the FileList
+      data[key].items.add(data[key]); // Add the file to the FileList
+      data[key] = data[key].files; // Get the FileList
     }
   }
   return data;
@@ -37,4 +56,14 @@ export const convertToFormData = (data) => {
     }
   });
   return formData;
+};
+
+export const getFirstRowIndex = ({ pageSize, pageIndex }) => {
+  return pageIndex * pageSize + 1;
+};
+
+export const getLastRowIndex = ({ pageSize, pageIndex }, rowCount) => {
+  const lastIndex = (pageIndex + 1) * pageSize;
+
+  return Math.min(lastIndex, rowCount);
 };

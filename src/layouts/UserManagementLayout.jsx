@@ -1,21 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import logo_black from "../assets/mavride_black.png";
-import SvgIcons from "../components/SvgIcons";
+import SvgIcons, { TruckIcon } from "../components/SvgIcons";
 import notification from "../assets/notification.jpg";
 import profile from "../assets/profile_img.png";
 import { NavLink, Outlet } from "react-router-dom";
 import arrow_down from "../assets/arrow_down.png";
-import manage_account from "../assets/manage_account.png"
-import change_password from "../assets/change_password.png"
-import logout from "../assets/logout.png"
-import useClickOutside from "../components/Hooks/onClickOutside"
+import manage_account from "../assets/manage_account.png";
+import change_password from "../assets/change_password.png";
+import logout from "../assets/logout.png";
+import useClickOutside from "../components/Hooks/onClickOutside";
 import checkUserToken from "../OAuth2CallbackPage/checkUserToken";
 
-
 const UserManagementLayout = () => {
-  
-    checkUserToken();
+  checkUserToken();
 
   const [openDropdowns, setOpenDropdowns] = useState({});
   const dropdownRefs = useRef({});
@@ -113,9 +111,9 @@ const UserManagementLayout = () => {
                 [
                   "Fleet Management",
                   "",
-                  <SvgIcons number="8" fill="#8C8C8C" />,
+                  <TruckIcon className="stroke-light-grey size-7 flex-shrink-0" />,
                   <SvgIcons number="7" fill="#8C8C8C" />,
-                  ["Scheduled Trips", "Completed Trips "],
+                  ["Add Vehicle", "Assign Vehicle"],
                 ],
                 [
                   "Transactions",
@@ -165,7 +163,7 @@ const UserManagementLayout = () => {
                       {subItems.map((subItem) => (
                         <li key={subItem} className="py-1 font-outfit">
                           <NavLink
-                            to={`${subItem.toLowerCase()}`}
+                            to={`${subItem.replace(" ", "-").toLowerCase()}`}
                             className="block text-[0.881rem] text-[#A6AAB7] hover:text-black"
                           >
                             {subItem}
