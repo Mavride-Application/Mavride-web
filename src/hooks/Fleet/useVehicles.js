@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPrivate from "./useAxiosPrivate";
 import Cookies from "js-cookie";
 import { PROVIDER_ID } from "@/lib/definitions";
+import useAxiosPrivate from "../useAxiosPrivate";
 
 const useVehicles = () => {
   const axiosPrivate = useAxiosPrivate();

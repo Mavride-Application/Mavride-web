@@ -1,4 +1,4 @@
-import FileInput from "../UI/FileInput";
+import FileInput from "@/components/UI/FileInput";
 
 const FormStepThree = () => {
   return (

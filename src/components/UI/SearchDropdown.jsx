@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import Input from "./Input";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const SearchDropdown = ({
   label,
@@ -56,26 +57,38 @@ const SearchDropdown = ({
         errorMsg={errorMsg}
         validations={validations}
         onChange={toggleDropdown}
+        autoComplete="off"
       />
 
       {/* Dropdown with the different options */}
-      <motion.div
-        key={name}
-        className={`absolute inset-x-0 ${errors[name]?.message ? "top-[calc(100%-1.5rem)]" : "top-[calc(100%+0.44rem)]"} z-10 max-h-[15rem] divide-y overflow-y-auto rounded-[0.625rem] bg-white px-6 py-2 shadow ${selectOpen && filteredOptions.length > 0 ? "block" : "hidden"} scrollbar-thin scrollbar-thumb-gray-400 scrollbar-thumb-rounded-3xl`}
-      >
-        {filteredOptions.map((option, index) => (
-          <div
-            key={`${option}_${index}`}
-            onClick={(event) => {
-              event.stopPropagation();
-              handleSelect(option);
-            }}
-            className="block cursor-pointer rounded py-2 ps-3 hover:bg-[#f6f8ff]"
-          >
-            {option}
-          </div>
-        ))}
-      </motion.div>
+      <AnimatePresence>
+        <motion.div
+          key={selectOpen}
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          className={cn(
+            "absolute inset-x-0 top-[calc(100%+0.44rem)] z-10 hidden max-h-[15rem] divide-y overflow-y-auto rounded-[0.625rem] bg-white px-6 py-2 shadow scrollbar-thin scrollbar-thumb-gray-400 scrollbar-thumb-rounded-3xl",
+            {
+              "top-[calc(100%-1.5rem)]": errors[name]?.message,
+              block: selectOpen && filteredOptions.length > 0,
+            },
+          )}
+        >
+          {filteredOptions.map((option, index) => (
+            <div
+              key={`${option}_${index}`}
+              onClick={(event) => {
+                event.stopPropagation();
+                handleSelect(option);
+              }}
+              className="block cursor-pointer rounded py-2 ps-3 hover:bg-[#f6f8ff]"
+            >
+              {option}
+            </div>
+          ))}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };

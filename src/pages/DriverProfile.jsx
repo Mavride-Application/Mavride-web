@@ -1,6 +1,6 @@
 // Component Imports
-import DriverImage from "../components/Drivers/DriverImage";
-import FormStepOne from "../components/Drivers/FormStepOne";
+import DriverImage from "../components/Drivers/AddDriver/DriverImage";
+import FormStepOne from "../components/Drivers/AddDriver/FormStepOne";
 
 //Library Imports
 import { FormProvider, useForm } from "react-hook-form";
@@ -9,8 +9,10 @@ import SuccessModal from "../components/UI/SuccessModal";
 import { replaceFileListWithFile } from "../lib/utils";
 import Button from "../components/UI/Button";
 import BackLink from "../components/UI/BackLink";
+import useAddDriver from "@/hooks/Drivers/useAddDriver";
 
 const DriverProfile = () => {
+  const { mutateAsync: createProfile } = useAddDriver();
   const [modal, setModal] = useState(false);
 
   const [draft, setDraft] = useState(
@@ -34,11 +36,16 @@ const DriverProfile = () => {
   };
 
   //handle form submission
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     data = replaceFileListWithFile(data);
     console.log(data);
-    localStorage.removeItem("driver-profile");
-    setModal(true);
+    await createProfile(data, {
+      onSuccess: () => {
+        localStorage.removeItem("driver-profile");
+        setModal(true);
+      },
+      onError: (error) => console.error(error),
+    });
   };
 
   useEffect(() => {
@@ -84,8 +91,8 @@ const DriverProfile = () => {
               {modal && (
                 <SuccessModal
                   message="Your ticket has been submitted successfully"
-                  href="/userManagement/drivers/driver-profile"
-                  linkTextContent="Done"
+                  to="/userManagement/drivers/driver-profile"
+                  children="Done"
                   onClick={() => setModal(false)}
                   state={formData}
                 />

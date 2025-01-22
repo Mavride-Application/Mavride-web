@@ -1,4 +1,4 @@
-import camera from "../../assets/camera.svg";
+import camera from "@/assets/camera.svg";
 import { useFormContext } from "react-hook-form";
 
 const DriverImage = ({ className }) => {

@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form";
 import dropdown_icon from "../../assets/dropdown_icon.svg";
 import Input from "./Input";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "../../lib/utils";
 
 const Select = ({
@@ -105,39 +105,47 @@ const Select = ({
 
         {/* Dropdown with the different options */}
 
-        <motion.div
-          className={`absolute inset-x-0 top-[calc(100%+0.44rem)] z-10 max-h-[15rem] divide-y overflow-y-auto rounded-[0.625rem] bg-white px-6 py-2 shadow ${selectOpen ? "block" : "hidden"} scrollbar-thin scrollbar-thumb-gray-400 scrollbar-thumb-rounded-3xl`}
-        >
-          {options.map((option, index) => (
-            <label
-              key={`${option}_${index}`}
-              onClick={(event) => {
-                event.stopPropagation();
-              }}
-              className="block cursor-pointer rounded py-2 ps-3 hover:bg-[#f6f8ff]"
-            >
-              {option}{" "}
-              {option === "Others" && (
-                <span className="text-[#B0B0B0]">(Please Specify)</span>
-              )}
-              <input
+        <AnimatePresence key={selectOpen}>
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            className={cn(
+              "absolute inset-x-0 top-[calc(100%+0.44rem)] z-10 max-h-[15rem] divide-y overflow-y-auto rounded-[0.625rem] bg-white px-6 py-2 shadow scrollbar-thin scrollbar-thumb-gray-400 scrollbar-thumb-rounded-3xl",
+              selectOpen ? "block" : "hidden",
+            )}
+          >
+            {options.map((option, index) => (
+              <label
+                key={`${option}_${index}`}
                 onClick={(event) => {
                   event.stopPropagation();
-                  handleSelect(option);
                 }}
-                hidden
-                type="radio"
-                value={option}
-                {...register(name, {
-                  required: {
-                    value: required,
-                    message: errorMsg,
-                  },
-                })}
-              />
-            </label>
-          ))}
-        </motion.div>
+                className="block cursor-pointer rounded py-2 ps-3 hover:bg-[#f6f8ff]"
+              >
+                {option}{" "}
+                {option === "Others" && (
+                  <span className="text-[#B0B0B0]">(Please Specify)</span>
+                )}
+                <input
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    handleSelect(option);
+                  }}
+                  hidden
+                  type="radio"
+                  value={option}
+                  {...register(name, {
+                    required: {
+                      value: required,
+                      message: errorMsg,
+                    },
+                  })}
+                />
+              </label>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
       {errors?.[name]?.message && (
         <p className="mt-[0.88rem] text-sm text-[#D42620]">

@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import Button from "../../components/UI/Button";
-import VehicleDetails from "../../components/FleetManagement/AddDriver/VehicleDetails";
-import VehicleDocuments from "../../components/FleetManagement/AddDriver/VehicleDocuments";
+import VehicleDetails from "../../components/FleetManagement/AddVehicle/VehicleDetails";
+import VehicleDocuments from "../../components/FleetManagement/AddVehicle/VehicleDocuments";
 import BackLink from "../../components/UI/BackLink";
 import SuccessModal from "../../components/UI/SuccessModal";
 import { replaceFileListWithFile } from "@/lib/utils";
 import { useNavigate, useParams } from "react-router-dom";
-import useUpdateVehicle from "@/hooks/useUpdateVehicle";
-import useAddVehicle from "@/hooks/useAddVehicle";
+import useUpdateVehicle from "@/hooks/Fleet/useUpdateVehicle";
+import useAddVehicle from "@/hooks/Fleet/useAddVehicle";
 
 const VehicleForm = ({ defaultValues }) => {
   const { id } = useParams();
@@ -132,8 +132,8 @@ const VehicleForm = ({ defaultValues }) => {
           {modal && (
             <SuccessModal
               message={successMessage}
-              href="/userManagement/fleet"
-              linkTextContent="Done"
+              to="/userManagement/fleet"
+              children="Done"
               onClick={() => setModal(false)}
             />
           )}

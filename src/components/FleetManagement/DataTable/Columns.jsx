@@ -5,9 +5,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/UI/dropdown-menu";
-import useDeleteVehicle from "@/hooks/useDeleteVehicle";
 import { EllipsisVertical } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Dialog, DialogTrigger } from "@/components/UI/dialog";
+import AssignVehicleDialogContent from "../Fleet/AssignVehicleDialogContent";
+import useDeleteVehicle from "@/hooks/Fleet/useDeleteVehicle";
+import useUnassignVehicle from "@/hooks/Fleet/useUnassignDriver";
 
 export const columns = [
   {
@@ -34,100 +37,53 @@ export const columns = [
       const id = row?.original?.interior_photos?.[0]?.vehicle;
 
       const { mutateAsync: deleteVehicle } = useDeleteVehicle();
+      const { mutateAsync: unassignVehicle } = useUnassignVehicle();
 
       return (
         <div className="flex items-center justify-center">
           <span className="ml-auto">
             {driver ? driver : <AddUserIcon className="size-5 fill-white" />}
           </span>
-          <DropdownMenu modal={false}>
-            <DropdownMenuTrigger className="ml-auto">
-              <EllipsisVertical />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" side="left">
-              <DropdownMenuItem className="text-mavride-blue">
-                Assign Vehicle
-              </DropdownMenuItem>
-              <DropdownMenuItem className="text-mavride-blue">
-                <Link to={`vehicle/${id}`}>Edit Vehicle Details</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={async () => await deleteVehicle(id)}
-                className="text-danger"
+          <Dialog>
+            <DropdownMenu modal={false}>
+              <DropdownMenuTrigger className="ml-auto">
+                <EllipsisVertical />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                className="text-mavride-blue"
+                align="start"
+                side="left"
               >
-                Delete Vehicle
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+                {driver ? (
+                  <DropdownMenuItem
+                    onClick={async () =>
+                      await unassignVehicle({ vehicle_id: id })
+                    }
+                  >
+                    Unassign Vehicle
+                  </DropdownMenuItem>
+                ) : (
+                  <DialogTrigger asChild>
+                    <DropdownMenuItem>Assign Vehicle</DropdownMenuItem>
+                  </DialogTrigger>
+                )}
+                <DropdownMenuItem>
+                  <Link to={`vehicle/${id}`}>Edit Vehicle Details</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={async () => await deleteVehicle(id)}
+                  className="text-danger"
+                >
+                  Delete Vehicle
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <AssignVehicleDialogContent vehicleId={id} />
+          </Dialog>
         </div>
       );
     },
     filterFn: "customIncludesString",
-  },
-];
-
-export const data = [
-  {
-    licensePlate: "4K - 667 - WL",
-    color: "Blue",
-    model: "Toyota Sienna",
-    type: "Sedan",
-    driver: "Collins Moolin",
-  },
-  {
-    licensePlate: "4K - 667 - WL",
-    color: "Black",
-    model: "Toyota Sienna",
-    type: "Ambulatory Van",
-    driver: "John Fisher",
-  },
-  {
-    licensePlate: "4K - 667 - WL",
-    color: "Grey",
-    model: "Wheelchair-Accessible Van",
-    type: "Stretcher Van",
-    driver: undefined,
-  },
-  {
-    licensePlate: "4K - 667 - WL",
-    color: "Black",
-    model: "Ford Transit",
-    type: "Shuttle Bus",
-    driver: "Tim Daniel",
-  },
-  {
-    licensePlate: "4K - 667 - WL",
-    color: "Black",
-    model: "Honda Odyssey",
-    type: "Minivans",
-    driver: undefined,
-  },
-  {
-    licensePlate: "4K - 667 - WL",
-    color: "Grey",
-    model: "Ford Transit",
-    type: "Stretcher Van",
-    driver: "Green Hayley",
-  },
-  {
-    licensePlate: "4K - 667 - WL",
-    color: "Black",
-    model: "Dodge Grand Caravan",
-    type: "Minivans",
-    driver: "Green Hayley",
-  },
-  {
-    licensePlate: "4K - 667 - WL",
-    color: "Black",
-    model: "Ram ProMaster",
-    type: "Stretcher Van",
-    driver: "Tim Daniel",
-  },
-  {
-    licensePlate: "4K - 667 - WL",
-    color: "Blue",
-    model: "Nissan NV200",
-    type: "Shuttle Bus",
-    driver: undefined,
   },
 ];
