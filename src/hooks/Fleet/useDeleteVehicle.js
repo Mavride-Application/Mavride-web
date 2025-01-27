@@ -1,34 +1,28 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useAxiosPrivate from "./useAxiosPrivate";
 import Cookies from "js-cookie";
 import { PROVIDER_ID } from "@/lib/definitions";
+import useAxiosPrivate from "../useAxiosPrivate";
 
-const useAddVehicle = () => {
+const useDeleteVehicle = () => {
   const axiosPrivate = useAxiosPrivate();
 
   const providerId = Cookies.get(PROVIDER_ID);
 
   const queryClient = useQueryClient();
 
-  const addVehicle = async (data) => {
-    const response = await axiosPrivate.post(
-      `providers/${providerId}/fleets`,
-      data,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      },
+  const deleteVehicle = async (id) => {
+    const response = await axiosPrivate.delete(
+      `providers/${providerId}/fleets/${id}`,
     );
 
     return response.data;
   };
 
   return useMutation({
-    mutationFn: addVehicle,
+    mutationFn: deleteVehicle,
     onSuccess: () => {
       queryClient.invalidateQueries(["vehicles"]);
     },
   });
 };
-export default useAddVehicle;
+export default useDeleteVehicle;

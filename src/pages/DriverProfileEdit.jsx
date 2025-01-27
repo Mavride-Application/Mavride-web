@@ -1,9 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
-import DriverImage from "../components/Drivers/DriverImage";
-import FormStepOne from "../components/Drivers/FormStepOne";
+import DriverImage from "../components/Drivers/AddDriver/DriverImage";
+import FormStepOne from "../components/Drivers/AddDriver/FormStepOne";
 import { BackArrowIcon } from "../components/SvgIcons";
 import { FormProvider, useForm } from "react-hook-form";
-import FormStepTwo from "../components/Drivers/FormStepTwo";
+import FormStepTwo from "../components/Drivers/AddDriver/FormStepTwo";
 import FileInput from "../components/UI/FileInput";
 
 // const DriverDocuments = ({ documents }) => {

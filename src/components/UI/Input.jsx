@@ -5,10 +5,8 @@ import { cn } from "../../lib/utils";
 
 const Input = ({
   label,
-  id,
   name,
   type,
-  placeholder,
   required,
   disabled,
   errorMsg,
@@ -17,6 +15,7 @@ const Input = ({
   className,
   onChange,
   registerOptions,
+  ...props
 }) => {
   const {
     register,
@@ -29,19 +28,17 @@ const Input = ({
 
   return (
     <div>
-      <label className="mb-2 block" htmlFor={id}>
+      <label className="mb-2 block" htmlFor={props.id}>
         {label} {required && label && <span className="text-[#E45270]">*</span>}
       </label>
       <div className="relative">
         <input
-          id={id}
           className={cn(
             "block w-full rounded-[0.625rem] bg-[#EFEFEF] py-4 pe-5 ps-[1.56rem] text-base outline outline-1 -outline-offset-2 outline-transparent transition duration-300 focus:outline-mavride-blue",
             { "outline-error-red focus:outline-error-red": errors?.[name] },
             className,
           )}
           type={inputType}
-          placeholder={placeholder}
           {...register(name, {
             required: {
               value: required,
@@ -56,6 +53,7 @@ const Input = ({
             onChange,
             ...registerOptions,
           })}
+          {...props}
         />
 
         {/* Button to show or hide password input value */}

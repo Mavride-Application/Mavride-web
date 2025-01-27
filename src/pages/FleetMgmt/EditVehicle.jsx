@@ -1,7 +1,7 @@
-import useVehicle from "@/hooks/useVehicle";
 import AddVehicle from "./AddVehicle";
 import { useParams } from "react-router-dom";
 import { replaceFileWithFileList } from "@/lib/utils";
+import useVehicle from "@/hooks/Fleet/useVehicle";
 
 const EditVehicle = () => {
   const { id } = useParams();

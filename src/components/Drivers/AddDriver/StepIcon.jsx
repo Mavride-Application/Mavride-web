@@ -2,7 +2,7 @@ import {
   ActiveStepIcon,
   CompleteStepIcon,
   IncompleteStepIcon,
-} from "../SvgIcons";
+} from "@components/SvgIcons";
 
 const StepIcon = ({ step, currentStep }) => {
   if (currentStep > step) {

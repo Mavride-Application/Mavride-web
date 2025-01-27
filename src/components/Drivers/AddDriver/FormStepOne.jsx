@@ -1,8 +1,8 @@
 import { State, City } from "country-state-city";
-import Input from "../UI/Input";
-import SearchDropdown from "../UI/SearchDropdown";
-import Select from "../UI/Select";
-import { nonStates } from "../../lib/data";
+import Input from "@/components/UI/Input";
+import SearchDropdown from "@/components/UI/SearchDropdown";
+import Select from "@/components/UI/Select";
+import { nonStates } from "@/lib/data";
 import { useFormContext } from "react-hook-form";
 
 const FormStepOne = () => {
@@ -26,13 +26,13 @@ const FormStepOne = () => {
     <>
       <Input
         label="Full Name"
-        name="fullName"
+        name="fullname"
         required={true}
         placeholder="John Doe"
       />
       <Input
         label="Phone"
-        name="phone"
+        name="phone_number"
         type="tel"
         required={true}
         placeholder="Enter Phone number"
@@ -81,7 +81,7 @@ const FormStepOne = () => {
       />
       <Input
         label="Driver License"
-        name="driverLicense"
+        name="license"
         required={true}
         placeholder="Enter Driver’s License"
       />
